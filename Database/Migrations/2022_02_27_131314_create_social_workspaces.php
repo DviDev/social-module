@@ -16,7 +16,9 @@ class CreateSocialWorkspaces extends Migration
         Schema::create('social_workspaces', function (Blueprint $table) {
             $table->id();
 
-            $table->timestamps();
+            $table->string('name', 70);
+            $table->enum('visibility', ['public','private'])->default('public');
+            $table->bigInteger('owner_user_id');
         });
     }
 

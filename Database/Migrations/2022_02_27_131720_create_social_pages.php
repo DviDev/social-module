@@ -16,7 +16,12 @@ class CreateSocialPages extends Migration
         Schema::create('social_pages', function (Blueprint $table) {
             $table->id();
 
-            $table->timestamps();
+            $table->bigInteger('workspace_id');
+            $table->bigInteger('created_by_user_id');
+            $table->enum('visibility', ['public','private'])->default('public');
+            $table->string('name', 150);
+            $table->string('image_cover_path', 150);
+            $table->timestamp('created_at');
         });
     }
 

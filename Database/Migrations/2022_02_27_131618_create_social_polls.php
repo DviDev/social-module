@@ -16,7 +16,8 @@ class CreateSocialPolls extends Migration
         Schema::create('social_polls', function (Blueprint $table) {
             $table->id();
 
-            $table->timestamps();
+            $table->string('description');
+            $table->timestamp('created_at');
         });
     }
 

@@ -16,7 +16,8 @@ class CreateSocialPostTags extends Migration
         Schema::create('social_post_tags', function (Blueprint $table) {
             $table->id();
 
-            $table->timestamps();
+            $table->bigInteger('post_id');
+            $table->string('tag', 50);
         });
     }
 

@@ -16,7 +16,9 @@ class CreateSocialPageFollowers extends Migration
         Schema::create('social_page_followers', function (Blueprint $table) {
             $table->id();
 
-            $table->timestamps();
+            $table->bigInteger('page_id');
+            $table->bigInteger('user_id');
+            $table->timestamp('created_at');
         });
     }
 

@@ -16,7 +16,8 @@ class CreateSocialPollItems extends Migration
         Schema::create('social_poll_items', function (Blueprint $table) {
             $table->id();
 
-            $table->timestamps();
+            $table->string('poll_id');
+            $table->string('name', 80);
         });
     }
 

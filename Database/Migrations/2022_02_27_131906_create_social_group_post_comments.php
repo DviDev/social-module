@@ -16,7 +16,10 @@ class CreateSocialGroupPostComments extends Migration
         Schema::create('social_group_post_comments', function (Blueprint $table) {
             $table->id();
 
-            $table->timestamps();
+            $table->bigInteger('group_post_id');
+            $table->text('comment');
+            $table->bigInteger('user_id');
+            $table->timestamp('created_at');
         });
     }
 

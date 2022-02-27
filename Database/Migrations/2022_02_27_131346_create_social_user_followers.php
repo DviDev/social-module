@@ -16,7 +16,10 @@ class CreateSocialUserFollowers extends Migration
         Schema::create('social_user_followers', function (Blueprint $table) {
             $table->id();
 
-            $table->timestamps();
+            $table->bigInteger('user_id');
+            $table->bigInteger('follower_id');
+            $table->boolean('notification_enabled');
+            $table->timestamp('created_at');
         });
     }
 

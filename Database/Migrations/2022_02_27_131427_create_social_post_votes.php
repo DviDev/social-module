@@ -16,7 +16,10 @@ class CreateSocialPostVotes extends Migration
         Schema::create('social_post_votes', function (Blueprint $table) {
             $table->id();
 
-            $table->timestamps();
+            $table->bigInteger('post_id');
+            $table->bigInteger('user_id');
+            $table->char('up_vote', 1);
+            $table->char('down_vote', 1);
         });
     }
 

@@ -16,7 +16,9 @@ class CreateSocialGroupUsers extends Migration
         Schema::create('social_group_users', function (Blueprint $table) {
             $table->id();
 
-            $table->timestamps();
+            $table->bigInteger('group_id');
+            $table->bigInteger('user_id');
+            $table->timestamp('created_at');
         });
     }
 

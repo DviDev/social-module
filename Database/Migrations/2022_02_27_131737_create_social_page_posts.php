@@ -16,7 +16,8 @@ class CreateSocialPagePosts extends Migration
         Schema::create('social_page_posts', function (Blueprint $table) {
             $table->id();
 
-            $table->timestamps();
+            $table->bigInteger('page_id');
+            $table->bigInteger('post_id');
         });
     }
 

@@ -16,7 +16,8 @@ class CreateSocialPostCategories extends Migration
         Schema::create('social_post_categories', function (Blueprint $table) {
             $table->id();
 
-            $table->timestamps();
+            $table->string('name', 50);
+            $table->string('description');
         });
     }
 
