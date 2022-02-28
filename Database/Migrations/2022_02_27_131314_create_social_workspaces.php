@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Modules\Social\Entities\SocialWorkspaceEntityModel;
 
 class CreateSocialWorkspaces extends Migration
 {
@@ -16,9 +17,10 @@ class CreateSocialWorkspaces extends Migration
         Schema::create('social_workspaces', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name', 70);
-            $table->enum('visibility', ['public','private'])->default('public');
-            $table->bigInteger('owner_user_id')->unsigned();
+            $prop = SocialWorkspaceEntityModel::props(null, true);
+            $table->string($prop->name, 70);
+            $table->enum($prop->visibility, ['public','private'])->default('public');
+            $table->bigInteger($prop->owner_user_id)->unsigned();
         });
     }
 

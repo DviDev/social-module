@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Modules\Social\Entities\SocialGroupEntityModel;
 
 class CreateSocialGroup extends Migration
 {
@@ -16,10 +17,11 @@ class CreateSocialGroup extends Migration
         Schema::create('social_group', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('workspace_id')->unsigned();
-            $table->enum('visibility', ['public','private'])->default('public');
-            $table->string('name', 100);
-            $table->string('cover_image_path')->nullable();
+            $prop = SocialGroupEntityModel::props(null, true);
+            $table->bigInteger($prop->workspace_id)->unsigned();
+            $table->enum($prop->visibility, ['public','private'])->default('public');
+            $table->string($prop->name, 100);
+            $table->string($prop->cover_image_path)->nullable();
         });
     }
 

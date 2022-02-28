@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Modules\Social\Entities\SocialPageFollowerEntityModel;
 
 class CreateSocialPageFollowers extends Migration
 {
@@ -16,9 +17,10 @@ class CreateSocialPageFollowers extends Migration
         Schema::create('social_page_followers', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('page_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
-            $table->timestamp('created_at')->useCurrent();
+            $prop = SocialPageFollowerEntityModel::props(null, true);
+            $table->bigInteger($prop->page_id)->unsigned();
+            $table->bigInteger($prop->user_id)->unsigned();
+            $table->timestamp($prop->created_at)->useCurrent();
         });
     }
 

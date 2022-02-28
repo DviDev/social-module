@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Modules\Social\Entities\SocialPollEntityModel;
 
 class CreateSocialPolls extends Migration
 {
@@ -16,8 +17,9 @@ class CreateSocialPolls extends Migration
         Schema::create('social_polls', function (Blueprint $table) {
             $table->id();
 
-            $table->string('description');
-            $table->timestamp('created_at')->useCurrent();
+            $prop = SocialPollEntityModel::props(null, true);
+            $table->string($prop->description);
+            $table->timestamp($prop->created_at)->useCurrent();
         });
     }
 

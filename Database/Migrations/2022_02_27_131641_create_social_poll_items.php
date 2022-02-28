@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Modules\Social\Entities\SocialPollItemEntityModel;
 
 class CreateSocialPollItems extends Migration
 {
@@ -16,8 +17,9 @@ class CreateSocialPollItems extends Migration
         Schema::create('social_poll_items', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('poll_id')->unsigned();
-            $table->string('name', 80);
+            $prop = SocialPollItemEntityModel::props(null, true);
+            $table->bigInteger($prop->poll_id)->unsigned();
+            $table->string($prop->name, 80);
         });
     }
 

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Modules\Social\Entities\SocialPostCommentEntityModel;
 
 class CreateSocialPostComments extends Migration
 {
@@ -16,11 +17,12 @@ class CreateSocialPostComments extends Migration
         Schema::create('social_post_comments', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('post_id')->unsigned();
-            $table->bigInteger('parent_id')->unsigned()->nullable();
-            $table->text('content');
-            $table->bigInteger('user_id')->unsigned();
-            $table->timestamp('created_at')->useCurrent();
+            $prop = SocialPostCommentEntityModel::props(null, true);
+            $table->bigInteger($prop->post_id)->unsigned();
+            $table->bigInteger($prop->parent_id)->unsigned()->nullable();
+            $table->text($prop->content);
+            $table->bigInteger($prop->user_id)->unsigned();
+            $table->timestamp($prop->created_at)->useCurrent();
         });
     }
 

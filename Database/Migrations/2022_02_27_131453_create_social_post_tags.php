@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Modules\Social\Entities\SocialPostTagEntityModel;
 
 class CreateSocialPostTags extends Migration
 {
@@ -16,8 +17,9 @@ class CreateSocialPostTags extends Migration
         Schema::create('social_post_tags', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('post_id')->unsigned();
-            $table->string('tag', 50);
+            $prop = SocialPostTagEntityModel::props(null, true);
+            $table->bigInteger($prop->post_id)->unsigned();
+            $table->string($prop->tag, 50);
         });
     }
 

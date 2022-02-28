@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Modules\Social\Entities\SocialPollItemDownVoteEntityModel;
 
 class CreatePollItemDownVotes extends Migration
 {
@@ -13,12 +14,13 @@ class CreatePollItemDownVotes extends Migration
      */
     public function up()
     {
-        Schema::create('poll_item_down_votes', function (Blueprint $table) {
+        Schema::create('social_poll_item_down_votes', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('poll_item_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
-            $table->timestamp('created_at')->useCurrent();
+            $prop = SocialPollItemDownVoteEntityModel::props(null, true);
+            $table->bigInteger($prop->poll_item_id)->unsigned();
+            $table->bigInteger($prop->user_id)->unsigned();
+            $table->timestamp($prop->created_at)->useCurrent();
         });
     }
 
@@ -29,6 +31,6 @@ class CreatePollItemDownVotes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('poll_item_down_votes');
+        Schema::dropIfExists('social_poll_item_down_votes');
     }
 }

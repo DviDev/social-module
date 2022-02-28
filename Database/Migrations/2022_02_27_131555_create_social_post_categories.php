@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Modules\Social\Entities\SocialPostCategoryEntityModel;
 
 class CreateSocialPostCategories extends Migration
 {
@@ -16,8 +17,9 @@ class CreateSocialPostCategories extends Migration
         Schema::create('social_post_categories', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name', 50);
-            $table->string('description')->nullable();
+            $prop = SocialPostCategoryEntityModel::props(null, true);
+            $table->string($prop->name, 50);
+            $table->string($prop->description)->nullable();
         });
     }
 

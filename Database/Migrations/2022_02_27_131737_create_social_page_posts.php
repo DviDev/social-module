@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Modules\Social\Entities\SocialPagePostEntityModel;
 
 class CreateSocialPagePosts extends Migration
 {
@@ -16,8 +17,9 @@ class CreateSocialPagePosts extends Migration
         Schema::create('social_page_posts', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('page_id')->unsigned();
-            $table->bigInteger('post_id')->unsigned();
+            $prop = SocialPagePostEntityModel::props(null, true);
+            $table->bigInteger($prop->page_id)->unsigned();
+            $table->bigInteger($prop->post_id)->unsigned();
         });
     }
 

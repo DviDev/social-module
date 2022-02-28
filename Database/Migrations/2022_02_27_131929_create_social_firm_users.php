@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Modules\Social\Entities\SocialFirmUserEntityModel;
 
 class CreateSocialFirmUsers extends Migration
 {
@@ -16,10 +17,11 @@ class CreateSocialFirmUsers extends Migration
         Schema::create('social_firm_users', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('firm_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
-            $table->boolean('active')->unsigned()->nullable();
-            $table->bigInteger('owner_id')->unsigned()->nullable();
+            $prop = SocialFirmUserEntityModel::props(null, true);
+            $table->bigInteger($prop->firm_id)->unsigned();
+            $table->bigInteger($prop->user_id)->unsigned();
+            $table->boolean($prop->active)->unsigned()->nullable();
+            $table->bigInteger($prop->owner_id)->unsigned()->nullable();
         });
     }
 

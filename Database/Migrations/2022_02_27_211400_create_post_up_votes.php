@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Modules\Social\Entities\SocialPostUpVoteEntityModel;
 
 class CreatePostUpVotes extends Migration
 {
@@ -13,12 +14,13 @@ class CreatePostUpVotes extends Migration
      */
     public function up()
     {
-        Schema::create('post_up_votes', function (Blueprint $table) {
+        Schema::create('social_post_up_votes', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('post_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
-            $table->timestamp('created_at')->useCurrent();
+            $prop = SocialPostUpVoteEntityModel::props(null, true);
+            $table->bigInteger($prop->post_id)->unsigned();
+            $table->bigInteger($prop->user_id)->unsigned();
+            $table->timestamp($prop->created_at)->useCurrent();
         });
     }
 
@@ -29,6 +31,6 @@ class CreatePostUpVotes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_up_votes');
+        Schema::dropIfExists('social_post_up_votes');
     }
 }
