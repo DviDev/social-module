@@ -16,10 +16,10 @@ class CreateSocialFirmUsers extends Migration
         Schema::create('social_firm_users', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('firm_id');
-            $table->bigInteger('user_id');
-            $table->boolean('active')->nullable();
-            $table->bigInteger('owner_id')->nullable();
+            $table->bigInteger('firm_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
+            $table->boolean('active')->unsigned()->nullable();
+            $table->bigInteger('owner_id')->unsigned()->nullable();
         });
     }
 

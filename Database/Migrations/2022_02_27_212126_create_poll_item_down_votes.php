@@ -16,8 +16,8 @@ class CreatePollItemDownVotes extends Migration
         Schema::create('poll_item_down_votes', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('poll_item_id');
-            $table->bigInteger('user_id');
+            $table->bigInteger('poll_item_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->timestamp('created_at')->useCurrent();
         });
     }

@@ -16,12 +16,12 @@ class CreateSocialPosts extends Migration
         Schema::create('social_posts', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('user_id');
-            $table->bigInteger('category_id')->nullable();
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('category_id')->unsigned()->nullable();
             $table->string('title');
             $table->text('content');
             $table->string('thumbnail_image_path')->nullable();
-            $table->bigInteger('poll_id')->nullable();
+            $table->bigInteger('poll_id')->unsigned()->nullable();
             $table->timestamp('created_at')->useCurrent();
         });
     }

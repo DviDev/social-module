@@ -16,8 +16,8 @@ class CreatePostCommentUpVotes extends Migration
         Schema::create('post_comment_up_votes', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('comment_id');
-            $table->bigInteger('user_id');
+            $table->bigInteger('comment_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->timestamp('created_at')->useCurrent();
         });
     }

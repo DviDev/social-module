@@ -16,7 +16,7 @@ class CreateSocialFirmUserConfirmations extends Migration
         Schema::create('social_firm_user_confirmations', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('social_firm_user_id');
+            $table->bigInteger('social_firm_user_id')->unsigned();
             $table->string('hash');
             $table->timestamp('confirmed_at')->nullable();
             $table->timestamp('created_at')->useCurrent();

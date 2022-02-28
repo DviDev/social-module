@@ -16,8 +16,8 @@ class CreateSocialGroupPosts extends Migration
         Schema::create('social_group_posts', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('group_id');
-            $table->bigInteger('post_id');
+            $table->bigInteger('group_id')->unsigned();
+            $table->bigInteger('post_id')->unsigned();
         });
     }
 

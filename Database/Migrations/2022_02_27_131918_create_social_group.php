@@ -16,7 +16,7 @@ class CreateSocialGroup extends Migration
         Schema::create('social_group', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('workspace_id');
+            $table->bigInteger('workspace_id')->unsigned();
             $table->enum('visibility', ['public','private'])->default('public');
             $table->string('name', 100);
             $table->string('cover_image_path')->nullable();

@@ -16,8 +16,8 @@ class CreatePostDownVotes extends Migration
         Schema::create('post_down_votes', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('post_id');
-            $table->bigInteger('user_id');
+            $table->bigInteger('post_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->timestamp('created_at')->useCurrent();
         });
     }

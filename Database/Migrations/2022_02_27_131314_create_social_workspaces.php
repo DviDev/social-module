@@ -18,7 +18,7 @@ class CreateSocialWorkspaces extends Migration
 
             $table->string('name', 70);
             $table->enum('visibility', ['public','private'])->default('public');
-            $table->bigInteger('owner_user_id');
+            $table->bigInteger('owner_user_id')->unsigned();
         });
     }
 
