@@ -18,7 +18,7 @@ class CreateSocialPageFollowers extends Migration
 
             $table->bigInteger('page_id');
             $table->bigInteger('user_id');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

@@ -18,8 +18,8 @@ class CreateSocialFirmUsers extends Migration
 
             $table->bigInteger('firm_id');
             $table->bigInteger('user_id');
-            $table->boolean('active');
-            $table->bigInteger('owner_id');
+            $table->boolean('active')->nullable();
+            $table->bigInteger('owner_id')->nullable();
         });
     }
 

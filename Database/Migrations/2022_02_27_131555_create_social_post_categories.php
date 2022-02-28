@@ -17,7 +17,7 @@ class CreateSocialPostCategories extends Migration
             $table->id();
 
             $table->string('name', 50);
-            $table->string('description');
+            $table->string('description')->nullable();
         });
     }
 

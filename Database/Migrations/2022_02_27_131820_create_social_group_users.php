@@ -18,7 +18,7 @@ class CreateSocialGroupUsers extends Migration
 
             $table->bigInteger('group_id');
             $table->bigInteger('user_id');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

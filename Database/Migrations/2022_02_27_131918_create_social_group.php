@@ -19,7 +19,7 @@ class CreateSocialGroup extends Migration
             $table->bigInteger('workspace_id');
             $table->enum('visibility', ['public','private'])->default('public');
             $table->string('name', 100);
-            $table->string('cover_image_path');
+            $table->string('cover_image_path')->nullable();
         });
     }
 

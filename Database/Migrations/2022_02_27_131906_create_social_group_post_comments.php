@@ -19,7 +19,7 @@ class CreateSocialGroupPostComments extends Migration
             $table->bigInteger('group_post_id');
             $table->text('comment');
             $table->bigInteger('user_id');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

@@ -17,10 +17,10 @@ class CreateSocialPostComments extends Migration
             $table->id();
 
             $table->bigInteger('post_id');
-            $table->bigInteger('parent_id');
+            $table->bigInteger('parent_id')->nullable();
             $table->text('content');
             $table->bigInteger('user_id');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

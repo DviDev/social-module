@@ -18,8 +18,8 @@ class CreateSocialUserFollowers extends Migration
 
             $table->bigInteger('user_id');
             $table->bigInteger('follower_id');
-            $table->boolean('notification_enabled');
-            $table->timestamp('created_at');
+            $table->boolean('notification_enabled')->nullable()->default(1);
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

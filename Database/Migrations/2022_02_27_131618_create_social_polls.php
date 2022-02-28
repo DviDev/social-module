@@ -17,7 +17,7 @@ class CreateSocialPolls extends Migration
             $table->id();
 
             $table->string('description');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

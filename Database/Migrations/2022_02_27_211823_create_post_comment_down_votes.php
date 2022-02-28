@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSocialPostCommentVotes extends Migration
+class CreatePostCommentDownVotes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateSocialPostCommentVotes extends Migration
      */
     public function up()
     {
-        Schema::create('social_post_comment_votes', function (Blueprint $table) {
+        Schema::create('post_comment_down_votes', function (Blueprint $table) {
             $table->id();
 
             $table->bigInteger('comment_id');
             $table->bigInteger('user_id');
-            $table->tinyInteger('up_vote');
-            $table->tinyInteger('down_vote');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
@@ -30,6 +29,6 @@ class CreateSocialPostCommentVotes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('social_post_comment_votes');
+        Schema::dropIfExists('post_comment_down_votes');
     }
 }

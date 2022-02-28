@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSocialPostVotes extends Migration
+class CreatePollItemUpVotes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateSocialPostVotes extends Migration
      */
     public function up()
     {
-        Schema::create('social_post_votes', function (Blueprint $table) {
+        Schema::create('poll_item_up_votes', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('post_id');
+            $table->bigInteger('poll_item_id');
             $table->bigInteger('user_id');
-            $table->char('up_vote', 1);
-            $table->char('down_vote', 1);
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
@@ -30,6 +29,6 @@ class CreateSocialPostVotes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('social_post_votes');
+        Schema::dropIfExists('poll_item_up_votes');
     }
 }

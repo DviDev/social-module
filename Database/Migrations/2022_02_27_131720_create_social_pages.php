@@ -20,8 +20,8 @@ class CreateSocialPages extends Migration
             $table->bigInteger('created_by_user_id');
             $table->enum('visibility', ['public','private'])->default('public');
             $table->string('name', 150);
-            $table->string('image_cover_path', 150);
-            $table->timestamp('created_at');
+            $table->string('image_cover_path', 150)->nullable();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

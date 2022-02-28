@@ -18,8 +18,8 @@ class CreateSocialFirmUserConfirmations extends Migration
 
             $table->bigInteger('social_firm_user_id');
             $table->string('hash');
-            $table->timestamp('confirmed_at');
-            $table->timestamp('created_at');
+            $table->timestamp('confirmed_at')->nullable();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
