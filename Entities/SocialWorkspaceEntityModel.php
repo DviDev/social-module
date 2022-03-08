@@ -9,7 +9,7 @@ use Modules\Social\Repositories\SocialWorkspaceRepository;
  * @author Davi Menezes (davimenezes.dev@gmail.com)
  * @link https://github.com/DaviMenezes
  * @property $id
- * @property $name
+ * @property $workspace_id
  * @property $visibility
  * @property $owner_user_id
  * @method static self props($alias = null, $force = null)

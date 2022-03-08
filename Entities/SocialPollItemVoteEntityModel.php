@@ -3,7 +3,7 @@
 namespace Modules\Social\Entities;
 
 use Modules\Base\Entities\BaseEntityModel;
-use Modules\Social\Repositories\SocialPollItemUpVoteRepository;
+use Modules\Social\Repositories\SocialPollItemVoteRepository;
 
 /**
  * @author Davi Menezes (davimenezes.dev@gmail.com)
@@ -13,13 +13,13 @@ use Modules\Social\Repositories\SocialPollItemUpVoteRepository;
  * @property $user_id
  * @property $created_at
  * @method static self props($alias = null, $force = null)
- * @method SocialPollItemUpVoteRepository repository()
+ * @method SocialPollItemVoteRepository repository()
  */
-class SocialPollItemUpVoteEntityModel extends BaseEntityModel
+class SocialPollItemVoteEntityModel extends BaseEntityModel
 {
     protected function repositoryClass(): string
     {
-        return SocialPollItemUpVoteRepository::class;
+        return SocialPollItemVoteRepository::class;
     }
 
     /**
@@ -27,7 +27,7 @@ class SocialPollItemUpVoteEntityModel extends BaseEntityModel
      */
     public static function dbTable($alias = null)
     {
-        return self::setTable('social_poll_item_up_votes', $alias);
+        return self::setTable('social_poll_item_down_votes', $alias);
     }
 }
 

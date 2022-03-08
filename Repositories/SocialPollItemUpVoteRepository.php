@@ -3,7 +3,7 @@
 namespace Modules\Social\Repositories;
 
 use Modules\Base\Repository\BaseRepository;
-use Modules\Social\Entities\SocialPollItemUpVoteEntityModel;
+use Modules\Social\Entities\SocialPollInterationsEntityModel;
 use Modules\Social\Models\SocialPollItemUpVoteModel;
 
 /**
@@ -11,11 +11,11 @@ use Modules\Social\Models\SocialPollItemUpVoteModel;
  * @link https://github.com/DaviMenezes
  * @method self obj()
  * @method SocialPollItemUpVoteModel model()
- * @method SocialPollItemUpVoteEntityModel find($id)
+ * @method SocialPollInterationsEntityModel find($id)
  * @method SocialPollItemUpVoteModel first()
  * @method SocialPollItemUpVoteModel findOrNew($id)
  * @method SocialPollItemUpVoteModel firstOrNew($query)
- * @method SocialPollItemUpVoteEntityModel findOrFail($id)
+ * @method SocialPollInterationsEntityModel findOrFail($id)
  */
 class SocialPollItemUpVoteRepository extends BaseRepository
 {

@@ -3,24 +3,24 @@
 namespace Modules\Social\Entities;
 
 use Modules\Base\Entities\BaseEntityModel;
-use Modules\Social\Repositories\SocialFirmUserConfirmationRepository;
+use Modules\Social\Repositories\SocialPollItemUpVoteRepository;
 
 /**
  * @author Davi Menezes (davimenezes.dev@gmail.com)
  * @link https://github.com/DaviMenezes
  * @property $id
- * @property $social_firm_user_id
- * @property $hash
- * @property $confirmed_at
+ * @property $poll_id
+ * @property $type_id
+ * @property $user_id
  * @property $created_at
  * @method static self props($alias = null, $force = null)
- * @method SocialFirmUserConfirmationRepository repository()
+ * @method SocialPollItemUpVoteRepository repository()
  */
-class SocialFirmUserConfirmationEntityModel extends BaseEntityModel
+class SocialPollInterationsEntityModel extends BaseEntityModel
 {
     protected function repositoryClass(): string
     {
-        return SocialFirmUserConfirmationRepository::class;
+        return SocialPollItemUpVoteRepository::class;
     }
 
     /**
@@ -28,6 +28,7 @@ class SocialFirmUserConfirmationEntityModel extends BaseEntityModel
      */
     public static function dbTable($alias = null)
     {
-        return self::setTable('social_firm_user_confirmations', $alias);
+        return self::setTable('social_poll_interations', $alias);
     }
 }
+

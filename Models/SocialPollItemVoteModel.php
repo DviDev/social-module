@@ -3,17 +3,17 @@
 namespace Modules\Social\Models;
 
 use Modules\Base\Models\BaseModel;
-use Modules\Social\Entities\SocialFirmUserEntityModel;
+use Modules\Social\Entities\SocialPollItemVoteEntityModel;
 
 /**
  * @author Davi Menezes (davimenezes.dev@gmail.com)
  * @link https://github.com/DaviMenezes
- * @method SocialFirmUserEntityModel toEntity()
+ * @method SocialPollItemVoteEntityModel toEntity()
  */
-class SocialFirmUserModel extends BaseModel
+class SocialPollItemVoteModel extends BaseModel
 {
     function modelEntity()
     {
-        return SocialFirmUserEntityModel::class;
+        return SocialPollItemVoteEntityModel::class;
     }
 }

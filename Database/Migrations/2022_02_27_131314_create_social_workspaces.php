@@ -18,7 +18,7 @@ class CreateSocialWorkspaces extends Migration
             $table->id();
 
             $prop = SocialWorkspaceEntityModel::props(null, true);
-            $table->string($prop->name, 70);
+            $table->bigInteger($prop->workspace_id);
             $table->enum($prop->visibility, ['public','private'])->default('public');
             $table->bigInteger($prop->owner_user_id)->unsigned();
         });
