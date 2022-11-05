@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Modules\Social\Entities\SocialGroupUserEntityModel;
 
 class CreateSocialGroupUsers extends Migration
 {
@@ -16,9 +17,10 @@ class CreateSocialGroupUsers extends Migration
         Schema::create('social_group_users', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('group_id');
-            $table->bigInteger('user_id');
-            $table->timestamp('created_at');
+            $prop = SocialGroupUserEntityModel::props(null, true);
+            $table->bigInteger($prop->group_id)->unsigned();
+            $table->bigInteger($prop->user_id)->unsigned();
+            $table->timestamp($prop->created_at)->useCurrent();
         });
     }
 

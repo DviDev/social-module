@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Modules\Social\Entities\SocialUserFollowerEntityModel;
 
 class CreateSocialUserFollowers extends Migration
 {
@@ -16,10 +17,11 @@ class CreateSocialUserFollowers extends Migration
         Schema::create('social_user_followers', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('user_id');
-            $table->bigInteger('follower_id');
-            $table->boolean('notification_enabled');
-            $table->timestamp('created_at');
+            $prop = SocialUserFollowerEntityModel::props(null, true);
+            $table->bigInteger($prop->user_id)->unsigned();
+            $table->bigInteger($prop->follower_id)->unsigned();
+            $table->boolean($prop->notification_enabled)->nullable()->default(1);
+            $table->timestamp($prop->created_at)->useCurrent();
         });
     }
 
