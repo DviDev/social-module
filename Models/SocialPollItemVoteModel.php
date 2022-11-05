@@ -2,18 +2,35 @@
 
 namespace Modules\Social\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Base\Models\BaseModel;
-use Modules\Social\Entities\SocialPollItemVoteEntityModel;
+use Modules\Social\Database\Factories\SocialPollItemVoteFactory;
+use Modules\Social\Entities\SocialPollItemVote\SocialPollItemVoteEntityModel;
+use Modules\Social\Entities\SocialPollItemVote\SocialPollItemVoteProps;
 
 /**
  * @author Davi Menezes (davimenezes.dev@gmail.com)
  * @link https://github.com/DaviMenezes
  * @method SocialPollItemVoteEntityModel toEntity()
+ * @method SocialPollItemVoteFactory factory()
  */
 class SocialPollItemVoteModel extends BaseModel
 {
-    function modelEntity()
+    use HasFactory;
+    use SocialPollItemVoteProps;
+
+    public function modelEntity(): string
     {
         return SocialPollItemVoteEntityModel::class;
+    }
+
+    protected static function newFactory(): SocialPollItemVoteFactory
+    {
+        return new SocialPollItemVoteFactory();
+    }
+
+    public static function table($alias = null): string
+    {
+        return self::dbTable('social_poll_item_votes', $alias);
     }
 }

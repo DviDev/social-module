@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Modules\Social\Entities\SocialPollEntityModel;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Modules\Social\Entities\SocialPoll\SocialPollEntityModel;
 
 class CreateSocialPolls extends Migration
 {
@@ -19,7 +19,7 @@ class CreateSocialPolls extends Migration
 
             $prop = SocialPollEntityModel::props(null, true);
             $table->string($prop->description);
-            $table->timestamp($prop->created_at)->useCurrent();
+            $table->timestamp($prop->created_at);
         });
     }
 

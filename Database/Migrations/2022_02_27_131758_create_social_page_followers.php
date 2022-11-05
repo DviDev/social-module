@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Modules\Social\Entities\SocialPageFollowerEntityModel;
+use Modules\Social\Entities\SocialPageFollower\SocialPageFollowerEntityModel;
 
 class CreateSocialPageFollowers extends Migration
 {
@@ -20,7 +20,7 @@ class CreateSocialPageFollowers extends Migration
             $prop = SocialPageFollowerEntityModel::props(null, true);
             $table->bigInteger($prop->page_id)->unsigned();
             $table->bigInteger($prop->user_id)->unsigned();
-            $table->timestamp($prop->created_at)->useCurrent();
+            $table->timestamp($prop->created_at);
         });
     }
 

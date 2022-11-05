@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Modules\Social\Entities\SocialUserFollowerEntityModel;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Modules\Social\Entities\SocialUserFollower\SocialUserFollowerEntityModel;
 
 class CreateSocialUserFollowers extends Migration
 {
@@ -21,7 +21,7 @@ class CreateSocialUserFollowers extends Migration
             $table->bigInteger($prop->user_id)->unsigned();
             $table->bigInteger($prop->follower_id)->unsigned();
             $table->boolean($prop->notification_enabled)->nullable()->default(1);
-            $table->timestamp($prop->created_at)->useCurrent();
+            $table->timestamp($prop->created_at);
         });
     }
 

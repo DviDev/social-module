@@ -3,7 +3,7 @@
 namespace Modules\Social\Repositories;
 
 use Modules\Base\Repository\BaseRepository;
-use Modules\Social\Entities\SocialUserFollowerEntityModel;
+use Modules\Social\Entities\SocialUserFollower\SocialUserFollowerEntityModel;
 use Modules\Social\Models\SocialUserFollowerModel;
 
 /**

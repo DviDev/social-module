@@ -3,17 +3,17 @@
 namespace Modules\Social\Models;
 
 use Modules\Base\Models\BaseModel;
-use Modules\Social\Entities\SocialPollInterationsEntityModel;
+use Modules\Social\Entities\SocialPollItemVote\SocialPollItemVoteEntityModel;
 
 /**
  * @author Davi Menezes (davimenezes.dev@gmail.com)
  * @link https://github.com/DaviMenezes
- * @method SocialPollInterationsEntityModel toEntity()
+ * @method SocialPollItemVoteEntityModel toEntity()
  */
 class SocialPollItemUpVoteModel extends BaseModel
 {
     function modelEntity()
     {
-        return SocialPollInterationsEntityModel::class;
+        return SocialPollItemVoteEntityModel::class;
     }
 }

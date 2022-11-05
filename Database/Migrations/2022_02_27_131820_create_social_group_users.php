@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Modules\Social\Entities\SocialGroupUserEntityModel;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Modules\Social\Entities\SocialGroupUser\SocialGroupUserEntityModel;
 
 class CreateSocialGroupUsers extends Migration
 {
@@ -20,7 +20,7 @@ class CreateSocialGroupUsers extends Migration
             $prop = SocialGroupUserEntityModel::props(null, true);
             $table->bigInteger($prop->group_id)->unsigned();
             $table->bigInteger($prop->user_id)->unsigned();
-            $table->timestamp($prop->created_at)->useCurrent();
+            $table->timestamp($prop->created_at);
         });
     }
 

@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Modules\Social\Entities\SocialPageEntityModel;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Modules\Social\Entities\SocialPage\SocialPageEntityModel;
 
 class CreateSocialPages extends Migration
 {
@@ -23,7 +23,7 @@ class CreateSocialPages extends Migration
             $table->enum($prop->visibility, ['public','private'])->default('public');
             $table->string($prop->name, 150);
             $table->string($prop->image_cover_path, 150)->nullable();
-            $table->timestamp($prop->created_at)->useCurrent();
+            $table->timestamp($prop->created_at);
         });
     }
 
