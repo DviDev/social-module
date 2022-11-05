@@ -23,7 +23,7 @@ class CreateSocialPages extends Migration
             $table->enum($prop->visibility, ['public','private'])->default('public');
             $table->string($prop->name, 150);
             $table->string($prop->image_cover_path, 150)->nullable();
-            $table->timestamp($prop->created_at)->useCurrent();
+            $table->timestamp($prop->created_at);
         });
     }
 

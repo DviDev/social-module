@@ -19,7 +19,7 @@ class CreateSocialPolls extends Migration
 
             $prop = SocialPollEntityModel::props(null, true);
             $table->string($prop->description);
-            $table->timestamp($prop->created_at)->useCurrent();
+            $table->timestamp($prop->created_at);
         });
     }
 

@@ -20,7 +20,7 @@ class CreateSocialGroupUsers extends Migration
             $prop = SocialGroupUserEntityModel::props(null, true);
             $table->bigInteger($prop->group_id)->unsigned();
             $table->bigInteger($prop->user_id)->unsigned();
-            $table->timestamp($prop->created_at)->useCurrent();
+            $table->timestamp($prop->created_at);
         });
     }
 

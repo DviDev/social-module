@@ -21,7 +21,7 @@ return new class extends Migration
             $table->bigInteger($prop->poll_id)->unsigned();
             $table->tinyInteger($prop->type_id)->unsigned();
             $table->bigInteger($prop->user_id)->unsigned();
-            $table->timestamp($prop->created_at)->useCurrent();
+            $table->timestamp($prop->created_at);
         });
     }
 

@@ -20,8 +20,8 @@ class CreatePersonFollowUsers extends Migration
             $prop = PersonFollowUserEntityModel::props(null, true);
             $table->bigInteger($prop->user_id)->unsigned();
             $table->bigInteger($prop->following_user_id)->unsigned();
-            $table->timestamp($prop->created_at)->useCurrent();
-            $table->timestamp($prop->updated_at)->useCurrent();
+            $table->timestamp($prop->created_at);
+            $table->timestamp($prop->updated_at)->nullable();
             $table->timestamp($prop->deleted_at)->nullable();
         });
     }
