@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Modules\Social\Entities\SocialPollItemVoteEntityModel;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Modules\Social\Entities\SocialPollItemVote\SocialPollItemVoteEntityModel;
 
 return new class extends Migration
 {
@@ -18,7 +18,8 @@ return new class extends Migration
             $table->id();
 
             $prop = SocialPollItemVoteEntityModel::props(null, true);
-            $table->bigInteger($prop->poll_item_id)->unsigned();
+            $table->bigInteger($prop->poll_id)->unsigned();
+            $table->tinyInteger($prop->type_id)->unsigned();
             $table->bigInteger($prop->user_id)->unsigned();
             $table->timestamp($prop->created_at);
         });
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('social_poll_item_down_votes');
+        Schema::dropIfExists('social_poll_item_votes');
     }
 };

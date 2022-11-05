@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Modules\Social\Entities\SocialGroupEntityModel;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Modules\Social\Entities\SocialGroup\SocialGroupEntityModel;
 
 class CreateSocialGroup extends Migration
 {
@@ -14,7 +14,7 @@ class CreateSocialGroup extends Migration
      */
     public function up()
     {
-        Schema::create('social_group', function (Blueprint $table) {
+        Schema::create('social_groups', function (Blueprint $table) {
             $table->id();
 
             $prop = SocialGroupEntityModel::props(null, true);
@@ -32,6 +32,6 @@ class CreateSocialGroup extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('social_group');
+        Schema::dropIfExists('social_groups');
     }
 }

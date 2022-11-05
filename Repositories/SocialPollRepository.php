@@ -3,7 +3,7 @@
 namespace Modules\Social\Repositories;
 
 use Modules\Base\Repository\BaseRepository;
-use Modules\Social\Entities\SocialPollEntityModel;
+use Modules\Social\Entities\SocialPoll\SocialPollEntityModel;
 use Modules\Social\Models\SocialPollModel;
 
 /**

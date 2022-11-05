@@ -3,7 +3,7 @@
 namespace Modules\Social\Repositories;
 
 use Modules\Base\Repository\BaseRepository;
-use Modules\Social\Entities\SocialWorkspaceEntityModel;
+use Modules\Social\Entities\SocialWorkspace\SocialWorkspaceEntityModel;
 use Modules\Social\Models\SocialWorkspaceModel;
 
 /**

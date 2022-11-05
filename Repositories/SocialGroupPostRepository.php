@@ -1,8 +1,9 @@
 <?php
+
 namespace Modules\Social\Repositories;
 
 use Modules\Base\Repository\BaseRepository;
-use Modules\Social\Entities\SocialGroupPostEntityModel;
+use Modules\Social\Entities\SocialGroupPost\SocialGroupPostEntityModel;
 use Modules\Social\Models\SocialGroupPostModel;
 
 /**
@@ -18,7 +19,6 @@ use Modules\Social\Models\SocialGroupPostModel;
  */
 class SocialGroupPostRepository extends BaseRepository
 {
-
     /**
      * @inheritDoc
      */

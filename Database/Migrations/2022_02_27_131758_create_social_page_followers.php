@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Modules\Social\Entities\SocialPageFollowerEntityModel;
+use Modules\Social\Entities\SocialPageFollower\SocialPageFollowerEntityModel;
 
 class CreateSocialPageFollowers extends Migration
 {
