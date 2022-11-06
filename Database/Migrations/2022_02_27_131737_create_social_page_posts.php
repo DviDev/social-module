@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialPagePost\SocialPagePostEntityModel;
 
-class CreateSocialPagePosts extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -32,4 +32,4 @@ class CreateSocialPagePosts extends Migration
     {
         Schema::dropIfExists('social_page_posts');
     }
-}
+};

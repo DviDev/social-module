@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialGroup\SocialGroupEntityModel;
 
-class CreateSocialGroup extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -22,6 +22,9 @@ class CreateSocialGroup extends Migration
             $table->enum($prop->visibility, ['public','private'])->default('public');
             $table->string($prop->name, 100);
             $table->string($prop->cover_image_path)->nullable();
+
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -34,4 +37,4 @@ class CreateSocialGroup extends Migration
     {
         Schema::dropIfExists('social_groups');
     }
-}
+};

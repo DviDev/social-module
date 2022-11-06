@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialPage\SocialPageEntityModel;
 
-class CreateSocialPages extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -23,7 +23,9 @@ class CreateSocialPages extends Migration
             $table->enum($prop->visibility, ['public','private'])->default('public');
             $table->string($prop->name, 150);
             $table->string($prop->image_cover_path, 150)->nullable();
-            $table->timestamp($prop->created_at);
+
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -36,4 +38,4 @@ class CreateSocialPages extends Migration
     {
         Schema::dropIfExists('social_pages');
     }
-}
+};

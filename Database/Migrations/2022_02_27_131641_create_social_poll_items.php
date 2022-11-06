@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialPollItem\SocialPollItemEntityModel;
 
-class CreateSocialPollItems extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -32,4 +32,4 @@ class CreateSocialPollItems extends Migration
     {
         Schema::dropIfExists('social_poll_items');
     }
-}
+};

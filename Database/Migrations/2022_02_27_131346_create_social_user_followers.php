@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialUserFollower\SocialUserFollowerEntityModel;
 
-class CreateSocialUserFollowers extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -34,4 +34,4 @@ class CreateSocialUserFollowers extends Migration
     {
         Schema::dropIfExists('social_user_followers');
     }
-}
+};

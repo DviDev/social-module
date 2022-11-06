@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialWorkspace\SocialWorkspaceEntityModel;
 
-class CreateSocialWorkspaces extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -33,4 +33,4 @@ class CreateSocialWorkspaces extends Migration
     {
         Schema::dropIfExists('social_workspaces');
     }
-}
+};

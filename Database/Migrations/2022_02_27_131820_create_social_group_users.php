@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialGroupUser\SocialGroupUserEntityModel;
 
-class CreateSocialGroupUsers extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -20,7 +20,9 @@ class CreateSocialGroupUsers extends Migration
             $prop = SocialGroupUserEntityModel::props(null, true);
             $table->bigInteger($prop->group_id)->unsigned();
             $table->bigInteger($prop->user_id)->unsigned();
-            $table->timestamp($prop->created_at);
+
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -33,4 +35,4 @@ class CreateSocialGroupUsers extends Migration
     {
         Schema::dropIfExists('social_group_users');
     }
-}
+};

@@ -10,6 +10,8 @@ namespace Modules\Social\Entities\SocialPage;
  * @property $name
  * @property $image_cover_path
  * @property $created_at
+ * @property $updated_at
+ * @property $deleted_at
  */
 trait SocialPageProps
 {

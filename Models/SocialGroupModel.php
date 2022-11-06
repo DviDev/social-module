@@ -3,6 +3,7 @@
 namespace Modules\Social\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Base\Models\BaseModel;
 use Modules\Social\Database\Factories\SocialGroupFactory;
 use Modules\Social\Entities\SocialGroup\SocialGroupEntityModel;
@@ -18,6 +19,7 @@ class SocialGroupModel extends BaseModel
 {
     use HasFactory;
     use SocialGroupProps;
+    use SoftDeletes;
 
     public function modelEntity(): string
     {
