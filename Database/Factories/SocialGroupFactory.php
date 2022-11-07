@@ -4,6 +4,7 @@ namespace Modules\Social\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Social\Entities\SocialGroup\SocialGroupEntityModel;
+use Modules\Social\Entities\SocialGroup\SocialGroupVisibilityEnum;
 use Modules\Social\Models\SocialGroupModel;
 
 /**
@@ -28,7 +29,10 @@ class SocialGroupFactory extends Factory
     {
         $p = SocialGroupEntityModel::props(null, true);
         return [
-
+            $p->workspace_id => null,
+            $p->visibility => collect(SocialGroupVisibilityEnum::toArray())->random(),
+            $p->name => $this->faker->words(3, true),
+            $p->cover_image_path => null,
         ];
     }
 }

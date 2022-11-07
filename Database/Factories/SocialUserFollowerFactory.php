@@ -28,7 +28,9 @@ class SocialUserFollowerFactory extends Factory
     {
         $p = SocialUserFollowerEntityModel::props(null, true);
         return [
-
+            $p->user_id => null,
+            $p->follower_id => null,
+            $p->notification_enabled => $this->faker->boolean(),
         ];
     }
 }

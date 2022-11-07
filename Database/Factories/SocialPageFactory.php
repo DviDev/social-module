@@ -4,6 +4,7 @@ namespace Modules\Social\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Social\Entities\SocialPage\SocialPageEntityModel;
+use Modules\Social\Entities\SocialPage\SocialPageVisibilityEnum;
 use Modules\Social\Models\SocialPageModel;
 
 /**
@@ -28,7 +29,11 @@ class SocialPageFactory extends Factory
     {
         $p = SocialPageEntityModel::props(null, true);
         return [
-
+            $p->workspace_id => null,
+            $p->created_by_user_id => null,
+            $p->visibility => collect(SocialPageVisibilityEnum::toArray())->random(),
+            $p->name => $this->faker->words(3, true),
+            $p->image_cover_path => null,
         ];
     }
 }

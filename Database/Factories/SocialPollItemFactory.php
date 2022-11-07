@@ -28,7 +28,8 @@ class SocialPollItemFactory extends Factory
     {
         $p = SocialPollItemEntityModel::props(null, true);
         return [
-
+            $p->poll_id => null,
+            $p->name => $this->faker->words(3, true),
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace Modules\Social\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Social\Entities\SocialWorkspace\SocialWorkspaceEntityModel;
+use Modules\Social\Entities\SocialWorkspace\SocialWorkspaceVisibilityEnum;
 use Modules\Social\Models\SocialWorkspaceModel;
 
 /**
@@ -28,7 +29,9 @@ class SocialWorkspaceFactory extends Factory
     {
         $p = SocialWorkspaceEntityModel::props(null, true);
         return [
-
+            $p->workspace_id => null,
+            $p->visibility => collect(SocialWorkspaceVisibilityEnum::toArray())->random(),
+            $p->owner_user_id => null,
         ];
     }
 }

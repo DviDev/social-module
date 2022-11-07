@@ -28,7 +28,7 @@ class SocialPollFactory extends Factory
     {
         $p = SocialPollEntityModel::props(null, true);
         return [
-
+            $p->description => $this->faker->sentence()
         ];
     }
 }
