@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialGroup\SocialGroupEntityModel;
+use Modules\Social\Entities\SocialGroup\SocialGroupVisibilityEnum;
 
 return new class extends Migration
 {
@@ -19,7 +20,7 @@ return new class extends Migration
 
             $prop = SocialGroupEntityModel::props(null, true);
             $table->bigInteger($prop->workspace_id)->unsigned();
-            $table->enum($prop->visibility, ['public','private'])->default('public');
+            $table->enum($prop->visibility, SocialGroupVisibilityEnum::toArray())->default('public');
             $table->string($prop->name, 100);
             $table->string($prop->cover_image_path)->nullable();
 
