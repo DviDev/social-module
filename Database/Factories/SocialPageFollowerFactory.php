@@ -28,7 +28,8 @@ class SocialPageFollowerFactory extends Factory
     {
         $p = SocialPageFollowerEntityModel::props(null, true);
         return [
-
+            $p->page_id => null,
+            $p->user_id => null,
         ];
     }
 }

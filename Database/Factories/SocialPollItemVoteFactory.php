@@ -28,8 +28,7 @@ class SocialPollItemVoteFactory extends Factory
     {
         $p = SocialPollItemVoteEntityModel::props(null, true);
         return [
-            $p->poll_id => null,
-            $p->type_id => null,
+            $p->item_id => null,
             $p->user_id => null,
         ];
     }

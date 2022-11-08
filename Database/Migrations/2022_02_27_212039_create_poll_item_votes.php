@@ -18,8 +18,7 @@ return new class extends Migration
             $table->id();
 
             $prop = SocialPollItemVoteEntityModel::props(null, true);
-            $table->bigInteger($prop->poll_id)->unsigned();
-            $table->tinyInteger($prop->type_id)->unsigned();
+            $table->bigInteger($prop->item_id)->unsigned();
             $table->bigInteger($prop->user_id)->unsigned();
             $table->timestamp($prop->created_at);
         });

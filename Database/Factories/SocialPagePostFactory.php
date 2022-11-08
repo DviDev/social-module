@@ -28,7 +28,8 @@ class SocialPagePostFactory extends Factory
     {
         $p = SocialPagePostEntityModel::props(null, true);
         return [
-
+            $p->page_id => null,
+            $p->post_id => null,
         ];
     }
 }

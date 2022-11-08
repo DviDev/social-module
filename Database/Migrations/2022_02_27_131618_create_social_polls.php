@@ -19,6 +19,7 @@ return new class extends Migration
 
             $prop = SocialPollEntityModel::props(null, true);
             $table->string($prop->description);
+            $table->bigInteger($prop->user_id);
             $table->timestamp($prop->created_at);
         });
     }

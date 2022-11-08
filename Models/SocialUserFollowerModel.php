@@ -12,7 +12,7 @@ use Modules\Social\Entities\SocialUserFollower\SocialUserFollowerProps;
  * @author Davi Menezes (davimenezes.dev@gmail.com)
  * @link https://github.com/DaviMenezes
  * @method SocialUserFollowerEntityModel toEntity()
- * @method SocialUserFollowerFactory factory()
+ * @method static SocialUserFollowerFactory factory()
  */
 class SocialUserFollowerModel extends BaseModel
 {

@@ -28,7 +28,8 @@ class SocialGroupUserFactory extends Factory
     {
         $p = SocialGroupUserEntityModel::props(null, true);
         return [
-
+            $p->group_id => null,
+            $p->user_id => null,
         ];
     }
 }

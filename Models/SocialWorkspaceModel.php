@@ -12,7 +12,7 @@ use Modules\Social\Entities\SocialWorkspace\SocialWorkspaceProps;
  * @author Davi Menezes (davimenezes.dev@gmail.com)
  * @link https://github.com/DaviMenezes
  * @method SocialWorkspaceEntityModel toEntity()
- * @method SocialWorkspaceFactory factory()
+ * @method static SocialWorkspaceFactory factory()
  */
 class SocialWorkspaceModel extends BaseModel
 {

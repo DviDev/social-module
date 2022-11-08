@@ -28,7 +28,8 @@ class SocialGroupPostFactory extends Factory
     {
         $p = SocialGroupPostEntityModel::props(null, true);
         return [
-
+            $p->group_id => null,
+            $p->post_id => null,
         ];
     }
 }

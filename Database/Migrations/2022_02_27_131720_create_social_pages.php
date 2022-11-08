@@ -20,7 +20,7 @@ return new class extends Migration
 
             $prop = SocialPageEntityModel::props(null, true);
             $table->bigInteger($prop->workspace_id)->unsigned();
-            $table->bigInteger($prop->created_by_user_id)->unsigned();
+            $table->bigInteger($prop->user_id)->unsigned();
             $table->enum($prop->visibility, SocialPageVisibilityEnum::toArray())->default('public');
             $table->string($prop->name, 150);
             $table->string($prop->image_cover_path, 150)->nullable();
