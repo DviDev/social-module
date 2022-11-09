@@ -3,10 +3,10 @@
 namespace Modules\Social\Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
+use Modules\Post\Database\Seeders\PostCommentTableSeeder;
 use Modules\Post\Models\PostModel;
-use Modules\Social\Entities\SocialGroup\SocialGroupEntityModel;
 use Modules\Social\Models\SocialGroupModel;
 use Modules\Social\Models\SocialGroupPostModel;
 use Modules\Social\Models\SocialGroupUserModel;
@@ -16,7 +16,6 @@ use Modules\Social\Models\SocialPagePostModel;
 use Modules\Social\Models\SocialPollItemModel;
 use Modules\Social\Models\SocialPollItemVoteModel;
 use Modules\Social\Models\SocialPollModel;
-use Modules\Workspace\Entities\Workspace\WorkspaceEntityModel;
 use Modules\Workspace\Models\WorkspaceModel;
 
 class SocialDatabaseSeeder extends Seeder
@@ -30,9 +29,7 @@ class SocialDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $social = SocialGroupEntityModel::props();
         User::query()->each(function (User $user) {
-
             SocialGroupModel::factory()->count(11)->create([
                 'user_id' => $user->id,
                 'workspace_id' => $user->workspaces()->inRandomOrder()->first()->id,
@@ -41,11 +38,13 @@ class SocialDatabaseSeeder extends Seeder
                 $group->save();
 
                 PostModel::factory()->for($user, 'user')->count(11)->create()
-                    ->each(function (PostModel $post) use ($group) {
+                    ->each(function (PostModel $post) use ($group, $user) {
                         SocialGroupPostModel::factory()
                             ->for($group, 'group')
                             ->for($post, 'post')
                             ->create();
+
+                        $this->call(PostCommentTableSeeder::class, true, compact('post', 'user'));
                     });
 
                 User::query()->each(function (User $user) use ($group) {
@@ -79,7 +78,7 @@ class SocialDatabaseSeeder extends Seeder
 
             SocialPollModel::factory()->count(11)->for($user, 'user')->create()
             ->each(function (SocialPollModel $poll) use ($user) {
-                SocialPollItemModel::factory()->count(3)->for($poll, 'poll')->create()
+                SocialPollItemModel::factory()->count(11)->for($poll, 'poll')->create()
                 ->each(function (SocialPollItemModel $item) use ($user) {
                     SocialPollItemVoteModel::factory()
                         ->for($item, 'item')
