@@ -30,14 +30,14 @@ class SocialDatabaseSeeder extends Seeder
         Model::unguard();
 
         User::query()->each(function (User $user) {
-            SocialGroupModel::factory()->count(11)->create([
+            SocialGroupModel::factory()->count(config('app.MODULE_SEED_COUNT'))->create([
                 'user_id' => $user->id,
                 'workspace_id' => $user->workspaces()->inRandomOrder()->first()->id,
             ])->each(function (SocialGroupModel $group) use ($user) {
                 $group->workspace_id = $user->workspaces()->inRandomOrder()->first()->id;
                 $group->save();
 
-                PostModel::factory()->for($user, 'user')->count(11)->create()
+                PostModel::factory()->for($user, 'user')->count(config('app.MODULE_SEED_COUNT'))->create()
                     ->each(function (PostModel $post) use ($group, $user) {
                         SocialGroupPostModel::factory()
                             ->for($group, 'group')
@@ -55,11 +55,11 @@ class SocialDatabaseSeeder extends Seeder
                 });
 
                 $user->workspaces()->each(function (WorkspaceModel $workspace) use ($user) {
-                    SocialPageModel::factory()->count(11)
+                    SocialPageModel::factory()->count(config('app.MODULE_SEED_COUNT'))
                         ->for($user, 'user')
                         ->for($workspace, 'workspace')
                         ->create()->each(function (SocialPageModel $page) use ($user) {
-                            PostModel::factory()->for($user, 'user')->count(11)->create()
+                            PostModel::factory()->for($user, 'user')->count(config('app.MODULE_SEED_COUNT'))->create()
                             ->each(function (PostModel $post) use ($page, $user) {
                                 SocialPagePostModel::factory()
                                     ->for($page, 'page')
@@ -76,9 +76,9 @@ class SocialDatabaseSeeder extends Seeder
 
             });
 
-            SocialPollModel::factory()->count(11)->for($user, 'user')->create()
+            SocialPollModel::factory()->count(config('app.MODULE_SEED_COUNT'))->for($user, 'user')->create()
             ->each(function (SocialPollModel $poll) use ($user) {
-                SocialPollItemModel::factory()->count(11)->for($poll, 'poll')->create()
+                SocialPollItemModel::factory()->count(config('app.MODULE_SEED_COUNT'))->for($poll, 'poll')->create()
                 ->each(function (SocialPollItemModel $item) use ($user) {
                     SocialPollItemVoteModel::factory()
                         ->for($item, 'item')
