@@ -29,71 +29,11 @@ class SocialDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        User::query()->each(function (User $user) {
-            SocialGroupModel::factory()->count(config('app.MODULE_SEED_COUNT'))->create([
-                'user_id' => $user->id,
-                'workspace_id' => $user->workspaces()->inRandomOrder()->first()->id,
-            ])->each(function (SocialGroupModel $group) use ($user) {
-                ds("social group $group->id");
-                $group->workspace_id = $user->workspaces()->inRandomOrder()->first()->id;
-                $group->save();
+        $workspace = User::find(1)->workspaces()->first();
+        $workspace->participants->each(function (User $user) use ($workspace) {
+            $this->createGroups($user, $workspace);
 
-                PostModel::factory()->for($user, 'user')->count(config('app.MODULE_SEED_COUNT'))->create()
-                    ->each(function (PostModel $post) use ($group, $user) {
-                        SocialGroupPostModel::factory()
-                            ->for($group, 'group')
-                            ->for($post, 'post')
-                            ->create();
-                        ds("social group $group->id post $post->id");
-
-                        $this->call(PostCommentTableSeeder::class, true, compact('post', 'user'));
-                    });
-
-                User::query()->each(function (User $user) use ($group) {
-                    SocialGroupUserModel::factory()
-                        ->for($group, 'group')
-                        ->for($user, 'user')
-                        ->create();
-                    ds("social group $group->id user $user->id");
-                });
-
-                $user->workspaces()->each(function (WorkspaceModel $workspace) use ($user) {
-                    SocialPageModel::factory()->count(config('app.MODULE_SEED_COUNT'))
-                        ->for($user, 'user')
-                        ->for($workspace, 'workspace')
-                        ->create()->each(function (SocialPageModel $page) use ($user, $workspace) {
-                            ds("social page $page->id");
-                            PostModel::factory()->for($user, 'user')->count(config('app.MODULE_SEED_COUNT'))->create()
-                            ->each(function (PostModel $post) use ($page, $user, $workspace) {
-                                SocialPagePostModel::factory()
-                                    ->for($page, 'page')
-                                    ->for($post, 'post')
-                                    ->create();
-                                ds("social page $page->id post $post->id");
-                                $workspace->participants()->each(function (User $user) use ($page) {
-                                    SocialPageFollowerModel::factory()
-                                        ->for($page, 'page')
-                                        ->for($user, 'user')
-                                        ->create();
-                                    ds("social page $page->id follower $user->id");
-                                });
-                            });
-                        });
-                });
-
-            });
-
-            SocialPollModel::factory()->count(config('app.MODULE_SEED_COUNT'))->for($user, 'user')->create()
-            ->each(function (SocialPollModel $poll) use ($user) {
-                SocialPollItemModel::factory()->count(config('app.MODULE_SEED_COUNT'))->for($poll, 'poll')->create()
-                ->each(function (SocialPollItemModel $item) use ($poll, $user) {
-                    ds("social poll $poll->id item $item->id");
-                    SocialPollItemVoteModel::factory()
-                        ->for($item, 'item')
-                        ->for($user, 'user')
-                        ->create();
-                });
-            });
+            $this->createSocialPollModel($user);
 
         });
 
@@ -108,5 +48,156 @@ class SocialDatabaseSeeder extends Seeder
         //esportes
 
         //loja
+    }
+
+    function createPosts(SocialGroupModel $group, User $user): void
+    {
+        $seed_total = config('app.MODULE_SEED_COUNT');
+        $seeded = 0;
+        PostModel::factory()
+            ->afterCreating(function (PostModel $post) use ($group, $user, $seed_total, &$seeded) {
+                SocialGroupPostModel::factory()
+                    ->for($group, 'group')
+                    ->for($post, 'post')
+                    ->create();
+
+                $seeded++;
+                ds("social group $group->id post $seeded / $seed_total");
+
+                $this->call(PostCommentTableSeeder::class, true, compact('post', 'user'));
+            })
+            ->for($user, 'user')->count($seed_total)->create();
+    }
+
+    function createGroupUsers(WorkspaceModel $workspace, SocialGroupModel $group): void
+    {
+        $seed_total = $workspace->participants()->count();
+        $seeded = 0;
+        $workspace->participants->each(function (User $user) use ($group, $seed_total, &$seeded) {
+            SocialGroupUserModel::factory()
+                ->for($group, 'group')
+                ->for($user, 'user')
+                ->create();
+
+            $seeded++;
+            ds("social group $group->id user $seeded / $seed_total");
+        });
+    }
+
+    function createSocialPage(User $user, WorkspaceModel $workspace): void
+    {
+        $user->workspaces->each(function (WorkspaceModel $workspace) use ($user) {
+            $seed_total = config('app.MODULE_SEED_COUNT');
+            $seeded = 0;
+            SocialPageModel::factory()
+                ->afterCreating(function (SocialPageModel $page) use (
+                    $user, $workspace, $seed_total,
+                    &$seeded
+                ) {
+                    $seeded++;
+                    ds("social page $seeded / $seed_total");
+
+                    $this->createPagePosts($page, $user, $workspace);
+                })
+                ->count($seed_total)
+                ->for($user, 'user')
+                ->for($workspace, 'workspace')
+                ->create();
+        });
+    }
+
+    /**
+     * @param SocialPageModel $page
+     * @param User $user
+     * @param WorkspaceModel $workspace
+     * @return int
+     */
+    function createPagePosts(SocialPageModel $page, User $user, WorkspaceModel $workspace): int
+    {
+        $seed_total = config('app.MODULE_SEED_COUNT');
+        $seeded = 0;
+        PostModel::factory()
+            ->afterCreating(function (PostModel $post) use (
+                $page, $user, $workspace,
+                $seed_total, &$seeded
+            ) {
+                SocialPagePostModel::factory()
+                    ->for($page, 'page')
+                    ->for($post, 'post')
+                    ->create();
+                ds("social page $page->id post $seeded / $seed_total");
+
+                $this->socialPageFollowed($workspace, $page);
+            })
+            ->for($user, 'user')->count($seed_total)->create();
+        return $seeded;
+    }
+
+    /**
+     * @param WorkspaceModel $workspace
+     * @param SocialPageModel $page
+     * @return void
+     */
+    function socialPageFollowed(WorkspaceModel $workspace, SocialPageModel $page): void
+    {
+        $workspace->participants->each(function (User $user) use ($page) {
+            SocialPageFollowerModel::factory()
+                ->for($page, 'page')
+                ->for($user, 'user')
+                ->create();
+            ds("social page $page->id follower $user->id");
+        });
+    }
+
+    function createGroups(User $user, WorkspaceModel $workspace): void
+    {
+        $seed_total = config('app.MODULE_SEED_COUNT');
+        $seeded = 0;
+        SocialGroupModel::factory()
+            ->afterCreating(function (SocialGroupModel $group) use ($user, $workspace, $seed_total, &$seeded) {
+                $seeded++;
+                ds("social group $seeded / $seed_total");
+
+                $this->createPosts($group, $user);
+
+                $this->createGroupUsers($workspace, $group);
+
+                $this->createSocialPage($user, $workspace);
+
+            })
+            ->count($seed_total)->create([
+                'user_id' => $user->id,
+                'workspace_id' => $workspace->id,
+            ]);
+    }
+
+    function createSocialPollItem(SocialPollModel $poll, User $user): void
+    {
+        $seed_total = config('app.MODULE_SEED_COUNT');
+        $seeded = 0;
+        SocialPollItemModel::factory()
+            ->afterCreating(function (SocialPollItemModel $item) use ($poll, $user, $seed_total, &$seeded) {
+                $seeded++;
+                ds("social poll $poll->id item $seeded / $seed_total");
+
+                SocialPollItemVoteModel::factory()
+                    ->for($item, 'item')
+                    ->for($user, 'user')
+                    ->create();
+            })
+            ->count($seed_total)->for($poll, 'poll')->create();
+    }
+
+    function createSocialPollModel(User $user): void
+    {
+        $seed_total = config('app.MODULE_SEED_COUNT');
+        $seeded = 0;
+        SocialPollModel::factory()
+            ->afterCreating(function (SocialPollModel $poll) use ($user, $seed_total, &$seeded) {
+                $seeded++;
+                ds("poll $seeded / $seed_total");
+                $this->createSocialPollItem($poll, $user);
+            })
+            ->count($seed_total)->for($user, 'user')->create();
     }
 }
