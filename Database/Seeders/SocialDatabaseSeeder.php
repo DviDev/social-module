@@ -52,7 +52,7 @@ class SocialDatabaseSeeder extends Seeder
 
     function createPosts(SocialGroupModel $group, User $user): void
     {
-        $seed_total = config('app.MODULE_SEED_COUNT');
+        $seed_total = config('app.SEED_MODULE_COUNT');
         $seeded = 0;
         PostModel::factory()
             ->afterCreating(function (PostModel $post) use ($group, $user, $seed_total, &$seeded) {
@@ -87,7 +87,7 @@ class SocialDatabaseSeeder extends Seeder
     function createSocialPage(User $user, WorkspaceModel $workspace): void
     {
         $user->workspaces->each(function (WorkspaceModel $workspace) use ($user) {
-            $seed_total = config('app.MODULE_SEED_COUNT');
+            $seed_total = config('app.SEED_MODULE_COUNT');
             $seeded = 0;
             SocialPageModel::factory()
                 ->afterCreating(function (SocialPageModel $page) use (
@@ -114,7 +114,7 @@ class SocialDatabaseSeeder extends Seeder
      */
     function createPagePosts(SocialPageModel $page, User $user, WorkspaceModel $workspace): int
     {
-        $seed_total = config('app.MODULE_SEED_COUNT');
+        $seed_total = config('app.SEED_MODULE_COUNT');
         $seeded = 0;
         PostModel::factory()
             ->afterCreating(function (PostModel $post) use (
@@ -151,7 +151,7 @@ class SocialDatabaseSeeder extends Seeder
 
     function createGroups(User $user, WorkspaceModel $workspace): void
     {
-        $seed_total = config('app.MODULE_SEED_COUNT');
+        $seed_total = config('app.SEED_MODULE_COUNT');
         $seeded = 0;
         SocialGroupModel::factory()
             ->afterCreating(function (SocialGroupModel $group) use ($user, $workspace, $seed_total, &$seeded) {
@@ -173,7 +173,7 @@ class SocialDatabaseSeeder extends Seeder
 
     function createSocialPollItem(SocialPollModel $poll, User $user): void
     {
-        $seed_total = config('app.MODULE_SEED_COUNT');
+        $seed_total = config('app.SEED_MODULE_COUNT');
         $seeded = 0;
         SocialPollItemModel::factory()
             ->afterCreating(function (SocialPollItemModel $item) use ($poll, $user, $seed_total, &$seeded) {
@@ -190,7 +190,7 @@ class SocialDatabaseSeeder extends Seeder
 
     function createSocialPollModel(User $user): void
     {
-        $seed_total = config('app.MODULE_SEED_COUNT');
+        $seed_total = config('app.SEED_MODULE_COUNT');
         $seeded = 0;
         SocialPollModel::factory()
             ->afterCreating(function (SocialPollModel $poll) use ($user, $seed_total, &$seeded) {
