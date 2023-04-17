@@ -5,8 +5,10 @@ namespace Modules\Social\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Base\Models\BaseModel;
+use Modules\Post\Models\PostModel;
 use Modules\Social\Database\Factories\SocialGroupFactory;
 use Modules\Social\Entities\SocialGroup\SocialGroupEntityModel;
 use Modules\Social\Entities\SocialGroup\SocialGroupProps;
@@ -49,5 +51,15 @@ class SocialGroupModel extends BaseModel
     public function workspace(): BelongsTo
     {
         return $this->belongsTo(WorkspaceModel::class, 'workspace_id');
+    }
+
+    public function posts(): BelongsToMany
+    {
+        return $this->belongsToMany(PostModel::class, SocialGroupPostModel::class, 'post_id', 'group_id');
+    }
+
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, SocialGroupUserModel::class, 'user_id', 'group_id');
     }
 }

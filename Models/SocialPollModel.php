@@ -5,6 +5,7 @@ namespace Modules\Social\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Base\Models\BaseModel;
 use Modules\Social\Database\Factories\SocialPollFactory;
 use Modules\Social\Entities\SocialPoll\SocialPollEntityModel;
@@ -39,5 +40,10 @@ class SocialPollModel extends BaseModel
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(SocialPollItemModel::class, 'poll_id');
     }
 }

@@ -5,8 +5,10 @@ namespace Modules\Social\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Base\Models\BaseModel;
+use Modules\Post\Models\PostModel;
 use Modules\Social\Database\Factories\SocialPageFactory;
 use Modules\Social\Entities\SocialPage\SocialPageEntityModel;
 use Modules\Social\Entities\SocialPage\SocialPageProps;
@@ -49,5 +51,15 @@ class SocialPageModel extends BaseModel
     public function workspace(): BelongsTo
     {
         return $this->belongsTo(WorkspaceModel::class, 'workspace_id');
+    }
+
+    public function followers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, SocialPageFollowerModel::class, 'user_id', 'page_id');
+    }
+
+    public function posts(): BelongsToMany
+    {
+        return $this->belongsToMany(PostModel::class, SocialPagePostModel::class, 'post_id', 'page_id');
     }
 }

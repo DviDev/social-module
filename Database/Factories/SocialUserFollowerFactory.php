@@ -3,6 +3,7 @@
 namespace Modules\Social\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Base\Factories\BaseFactory;
 use Modules\Social\Entities\SocialUserFollower\SocialUserFollowerEntityModel;
 use Modules\Social\Models\SocialUserFollowerModel;
 
@@ -10,7 +11,7 @@ use Modules\Social\Models\SocialUserFollowerModel;
  * @method SocialUserFollowerModel create(array $attributes = [])
  * @method SocialUserFollowerModel make(array $attributes = [])
  */
-class SocialUserFollowerFactory extends Factory
+class SocialUserFollowerFactory extends BaseFactory
 {
     /**
      * The name of the factory's corresponding model.
@@ -27,10 +28,6 @@ class SocialUserFollowerFactory extends Factory
     public function definition(): array
     {
         $p = SocialUserFollowerEntityModel::props(null, true);
-        return [
-            $p->user_id => null,
-            $p->follower_id => null,
-            $p->notification_enabled => $this->faker->boolean(),
-        ];
+        return $this->getValues();
     }
 }
