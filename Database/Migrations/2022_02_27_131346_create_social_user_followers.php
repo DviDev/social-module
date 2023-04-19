@@ -18,8 +18,12 @@ return new class extends Migration
             $table->id();
 
             $prop = SocialUserFollowerEntityModel::props(null, true);
-            $table->bigInteger($prop->user_id)->unsigned();
-            $table->bigInteger($prop->follower_id)->unsigned();
+            $table->foreignId($prop->user_id)
+                ->references('id')->on('users')
+                ->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId($prop->follower_id)
+                ->references('id')->on('users')
+                ->cascadeOnUpdate()->restrictOnDelete();
             $table->boolean($prop->notification_enabled)->nullable()->default(1);
             $table->timestamp($prop->created_at);
         });

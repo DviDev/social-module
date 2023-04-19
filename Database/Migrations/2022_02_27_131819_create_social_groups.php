@@ -19,8 +19,12 @@ return new class extends Migration
             $table->id();
 
             $prop = SocialGroupEntityModel::props(null, true);
-            $table->bigInteger($prop->workspace_id)->unsigned();
-            $table->bigInteger($prop->user_id)->unsigned();
+            $table->foreignId($prop->workspace_id)
+                ->references('id')->on('workspaces')
+                ->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId($prop->user_id)
+                ->references('id')->on('users')
+                ->cascadeOnUpdate()->restrictOnDelete();
             $table->enum($prop->visibility, SocialGroupVisibilityEnum::toArray())->default('public');
             $table->string($prop->name, 100);
             $table->string($prop->cover_image_path)->nullable();

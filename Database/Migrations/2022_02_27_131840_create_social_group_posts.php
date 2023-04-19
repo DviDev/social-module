@@ -18,8 +18,12 @@ return new class extends Migration
             $table->id();
 
             $prop = SocialGroupPostEntityModel::props(null, true);
-            $table->bigInteger($prop->group_id)->unsigned();
-            $table->bigInteger($prop->post_id)->unsigned();
+            $table->foreignId($prop->group_id)
+                ->references('id')->on('social_groups')
+                ->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId($prop->post_id)
+                ->references('id')->on('posts')
+                ->cascadeOnUpdate()->restrictOnDelete();
         });
     }
 

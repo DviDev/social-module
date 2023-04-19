@@ -19,9 +19,13 @@ return new class extends Migration
             $table->id();
 
             $prop = SocialWorkspaceEntityModel::props(null, true);
-            $table->bigInteger($prop->workspace_id);
+            $table->foreignId($prop->workspace_id)
+                ->references('id')->on('workspaces')
+                ->cascadeOnUpdate()->restrictOnDelete();
             $table->enum($prop->visibility, SocialWorkspaceVisibilityEnum::toArray())->default('public');
-            $table->bigInteger($prop->owner_user_id)->unsigned();
+            $table->foreignId($prop->owner_user_id)
+                ->references('id')->on('users')
+                ->cascadeOnUpdate()->restrictOnDelete();
         });
     }
 

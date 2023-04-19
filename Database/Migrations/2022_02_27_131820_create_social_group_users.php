@@ -18,8 +18,12 @@ return new class extends Migration
             $table->id();
 
             $prop = SocialGroupUserEntityModel::props(null, true);
-            $table->bigInteger($prop->group_id)->unsigned();
-            $table->bigInteger($prop->user_id)->unsigned();
+            $table->foreignId($prop->group_id)
+                ->references('id')->on('social_groups')
+                ->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId($prop->user_id)
+                ->references('id')->on('users')
+                ->cascadeOnUpdate()->restrictOnDelete();
 
             $table->timestamps();
             $table->softDeletes();

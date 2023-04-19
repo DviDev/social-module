@@ -18,8 +18,12 @@ return new class extends Migration
             $table->id();
 
             $prop = SocialPagePostEntityModel::props(null, true);
-            $table->bigInteger($prop->page_id)->unsigned();
-            $table->bigInteger($prop->post_id)->unsigned();
+            $table->foreignId($prop->page_id)
+                ->references('id')->on('social_pages')
+                ->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId($prop->post_id)
+                ->references('id')->on('posts')
+                ->cascadeOnUpdate()->restrictOnDelete();
         });
     }
 
