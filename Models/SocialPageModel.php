@@ -55,11 +55,11 @@ class SocialPageModel extends BaseModel
 
     public function followers(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, SocialPageFollowerModel::class, 'user_id', 'page_id');
+        return $this->belongsToMany(User::class, SocialPageFollowerModel::class, 'page_id', 'user_id');
     }
 
     public function posts(): BelongsToMany
     {
-        return $this->belongsToMany(PostModel::class, SocialPagePostModel::class, 'post_id', 'page_id');
+        return $this->belongsToMany(PostModel::class, SocialPagePostModel::class, 'page_id', 'post_id');
     }
 }

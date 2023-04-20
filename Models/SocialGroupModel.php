@@ -55,11 +55,11 @@ class SocialGroupModel extends BaseModel
 
     public function posts(): BelongsToMany
     {
-        return $this->belongsToMany(PostModel::class, SocialGroupPostModel::class, 'post_id', 'group_id');
+        return $this->belongsToMany(PostModel::class, SocialGroupPostModel::class, 'group_id', 'post_id');
     }
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, SocialGroupUserModel::class, 'user_id', 'group_id');
+        return $this->belongsToMany(User::class, SocialGroupUserModel::class, 'group_id', 'user_id');
     }
 }
