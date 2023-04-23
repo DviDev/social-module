@@ -12,6 +12,7 @@
 */
 
 use App\Models\User;
+use Illuminate\Support\Facades\Route;
 use Modules\Social\Models\SocialGroupModel;
 use Modules\Social\Models\SocialPageModel;
 use Modules\Social\Models\SocialPollItemModel;
