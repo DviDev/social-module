@@ -18,19 +18,21 @@ return new class extends Migration
         Schema::create('social_groups', function (Blueprint $table) {
             $table->id();
 
-            $prop = SocialGroupEntityModel::props(null, true);
-            $table->foreignId($prop->workspace_id)
+            $p = SocialGroupEntityModel::props(null, true);
+            $table->foreignId($p->workspace_id)
                 ->references('id')->on('workspaces')
                 ->cascadeOnUpdate()->restrictOnDelete();
-            $table->foreignId($prop->user_id)
+            $table->foreignId($p->user_id)
                 ->references('id')->on('users')
                 ->cascadeOnUpdate()->restrictOnDelete();
-            $table->enum($prop->visibility, SocialGroupVisibilityEnum::toArray())->default('public');
-            $table->string($prop->name, 100);
-            $table->string($prop->cover_image_path)->nullable();
+            $table->enum($p->visibility, SocialGroupVisibilityEnum::toArray())->default('public');
+            $table->string($p->name, 100);
+            $table->string($p->cover_image_path)->nullable();
 
-            $table->timestamps();
-            $table->softDeletes();
+            $table->timestamp($p->created_at)->useCurrent();
+            $table->timestamp($p->updated_at)->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp($p->deleted_at)->nullable();
+
         });
     }
 

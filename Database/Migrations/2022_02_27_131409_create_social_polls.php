@@ -17,12 +17,15 @@ return new class extends Migration
         Schema::create('social_polls', function (Blueprint $table) {
             $table->id();
 
-            $prop = SocialPollEntityModel::props(null, true);
-            $table->string($prop->description);
-            $table->foreignId($prop->user_id)
+            $p = SocialPollEntityModel::props(null, true);
+            $table->string($p->description);
+            $table->foreignId($p->user_id)
                 ->references('id')->on('users')
                 ->cascadeOnUpdate()->restrictOnDelete();
-            $table->timestamp($prop->created_at);
+            $table->timestamp($p->created_at)->useCurrent();
+            $table->timestamp($p->updated_at)->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp($p->deleted_at)->nullable();
+
         });
     }
 

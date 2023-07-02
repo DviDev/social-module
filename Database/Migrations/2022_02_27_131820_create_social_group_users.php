@@ -17,16 +17,18 @@ return new class extends Migration
         Schema::create('social_group_users', function (Blueprint $table) {
             $table->id();
 
-            $prop = SocialGroupUserEntityModel::props(null, true);
-            $table->foreignId($prop->group_id)
+            $p = SocialGroupUserEntityModel::props(null, true);
+            $table->foreignId($p->group_id)
                 ->references('id')->on('social_groups')
                 ->cascadeOnUpdate()->restrictOnDelete();
-            $table->foreignId($prop->user_id)
+            $table->foreignId($p->user_id)
                 ->references('id')->on('users')
                 ->cascadeOnUpdate()->restrictOnDelete();
 
-            $table->timestamps();
-            $table->softDeletes();
+            $table->timestamp($p->created_at)->useCurrent();
+            $table->timestamp($p->updated_at)->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp($p->deleted_at)->nullable();
+
         });
     }
 

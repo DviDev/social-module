@@ -17,14 +17,17 @@ return new class extends Migration
         Schema::create('social_page_followers', function (Blueprint $table) {
             $table->id();
 
-            $prop = SocialPageFollowerEntityModel::props(null, true);
-            $table->foreignId($prop->page_id)
+            $p = SocialPageFollowerEntityModel::props(null, true);
+            $table->foreignId($p->page_id)
                 ->references('id')->on('social_pages')
                 ->cascadeOnUpdate()->restrictOnDelete();
-            $table->foreignId($prop->user_id)
+            $table->foreignId($p->user_id)
                 ->references('id')->on('users')
                 ->cascadeOnUpdate()->restrictOnDelete();
-            $table->timestamp($prop->created_at);
+            $table->timestamp($p->created_at)->useCurrent();
+            $table->timestamp($p->updated_at)->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp($p->deleted_at)->nullable();
+
         });
     }
 

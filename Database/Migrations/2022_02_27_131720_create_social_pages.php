@@ -18,19 +18,21 @@ return new class extends Migration
         Schema::create('social_pages', function (Blueprint $table) {
             $table->id();
 
-            $prop = SocialPageEntityModel::props(null, true);
-            $table->foreignId($prop->workspace_id)
+            $p = SocialPageEntityModel::props(null, true);
+            $table->foreignId($p->workspace_id)
                 ->references('id')->on('workspaces')
                 ->cascadeOnUpdate()->restrictOnDelete();
-            $table->foreignId($prop->user_id)
+            $table->foreignId($p->user_id)
                 ->references('id')->on('users')
                 ->cascadeOnUpdate()->restrictOnDelete();
-            $table->enum($prop->visibility, SocialPageVisibilityEnum::toArray())->default('public');
-            $table->string($prop->name, 150);
-            $table->string($prop->image_cover_path, 150)->nullable();
+            $table->enum($p->visibility, SocialPageVisibilityEnum::toArray())->default('public');
+            $table->string($p->name, 150);
+            $table->string($p->image_cover_path, 150)->nullable();
 
-            $table->timestamps();
-            $table->softDeletes();
+            $table->timestamp($p->created_at)->useCurrent();
+            $table->timestamp($p->updated_at)->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp($p->deleted_at)->nullable();
+
         });
     }
 

@@ -11,6 +11,7 @@ namespace Modules\Social\Entities\SocialUserProfile;
  * @property $image_cover
  * @property $created_at
  * @property $updated_at
+ * @property $deleted_at
  */
 trait SocialUserProfileProps
 {
