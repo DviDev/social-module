@@ -33,7 +33,7 @@ class SocialDatabaseSeeder extends Seeder
         Model::unguard();
 
         /**@var WorkspaceModel $workspace */
-        $me = User::find(1);
+        $me = User::query()->with('workspaces.participants.workspaces')->find(1);
         $workspaces = $me->workspaces;
         $workspace = $workspaces->first();
         $workspace->participants->each(function (User $user) use ($workspace) {
@@ -65,12 +65,8 @@ class SocialDatabaseSeeder extends Seeder
     function createGroups(User $user, WorkspaceModel $workspace): void
     {
         $seed_total = config('app.SEED_MODULE_COUNT');
-        $seeded = 0;
         SocialGroupModel::factory()
             ->afterCreating(function (SocialGroupModel $group) use ($user, $workspace, $seed_total, &$seeded) {
-                $seeded++;
-                ds("social group $seeded / $seed_total");
-
                 $this->createPosts($group, $user);
 
                 $this->createGroupUsers($workspace, $group);
