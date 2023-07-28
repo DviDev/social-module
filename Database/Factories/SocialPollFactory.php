@@ -3,6 +3,7 @@
 namespace Modules\Social\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Base\Factories\BaseFactory;
 use Modules\Social\Entities\SocialPoll\SocialPollEntityModel;
 use Modules\Social\Models\SocialPollModel;
 
@@ -10,7 +11,7 @@ use Modules\Social\Models\SocialPollModel;
  * @method SocialPollModel create(array $attributes = [])
  * @method SocialPollModel make(array $attributes = [])
  */
-class SocialPollFactory extends Factory
+class SocialPollFactory extends BaseFactory
 {
     /**
      * The name of the factory's corresponding model.

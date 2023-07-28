@@ -3,6 +3,7 @@
 namespace Modules\Social\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Base\Factories\BaseFactory;
 use Modules\Social\Entities\SocialPageFollower\SocialPageFollowerEntityModel;
 use Modules\Social\Models\SocialPageFollowerModel;
 
@@ -10,7 +11,7 @@ use Modules\Social\Models\SocialPageFollowerModel;
  * @method SocialPageFollowerModel create(array $attributes = [])
  * @method SocialPageFollowerModel make(array $attributes = [])
  */
-class SocialPageFollowerFactory extends Factory
+class SocialPageFollowerFactory extends BaseFactory
 {
     /**
      * The name of the factory's corresponding model.

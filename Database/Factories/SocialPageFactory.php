@@ -3,6 +3,7 @@
 namespace Modules\Social\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Base\Factories\BaseFactory;
 use Modules\Social\Entities\SocialPage\SocialPageEntityModel;
 use Modules\Social\Entities\SocialPage\SocialPageVisibilityEnum;
 use Modules\Social\Models\SocialPageModel;
@@ -11,7 +12,7 @@ use Modules\Social\Models\SocialPageModel;
  * @method SocialPageModel create(array $attributes = [])
  * @method SocialPageModel make(array $attributes = [])
  */
-class SocialPageFactory extends Factory
+class SocialPageFactory extends BaseFactory
 {
     /**
      * The name of the factory's corresponding model.

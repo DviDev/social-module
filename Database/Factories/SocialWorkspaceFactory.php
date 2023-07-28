@@ -3,6 +3,7 @@
 namespace Modules\Social\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Base\Factories\BaseFactory;
 use Modules\Social\Entities\SocialWorkspace\SocialWorkspaceEntityModel;
 use Modules\Social\Entities\SocialWorkspace\SocialWorkspaceVisibilityEnum;
 use Modules\Social\Models\SocialWorkspaceModel;
@@ -11,7 +12,7 @@ use Modules\Social\Models\SocialWorkspaceModel;
  * @method SocialWorkspaceModel create(array $attributes = [])
  * @method SocialWorkspaceModel make(array $attributes = [])
  */
-class SocialWorkspaceFactory extends Factory
+class SocialWorkspaceFactory extends BaseFactory
 {
     /**
      * The name of the factory's corresponding model.

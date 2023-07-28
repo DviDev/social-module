@@ -3,6 +3,7 @@
 namespace Modules\Social\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Base\Factories\BaseFactory;
 use Modules\Social\Entities\SocialPagePost\SocialPagePostEntityModel;
 use Modules\Social\Models\SocialPagePostModel;
 
@@ -10,7 +11,7 @@ use Modules\Social\Models\SocialPagePostModel;
  * @method SocialPagePostModel create(array $attributes = [])
  * @method SocialPagePostModel make(array $attributes = [])
  */
-class SocialPagePostFactory extends Factory
+class SocialPagePostFactory extends BaseFactory
 {
     /**
      * The name of the factory's corresponding model.

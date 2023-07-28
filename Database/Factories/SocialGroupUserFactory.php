@@ -3,6 +3,7 @@
 namespace Modules\Social\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Base\Factories\BaseFactory;
 use Modules\Social\Entities\SocialGroupUser\SocialGroupUserEntityModel;
 use Modules\Social\Models\SocialGroupUserModel;
 
@@ -10,7 +11,7 @@ use Modules\Social\Models\SocialGroupUserModel;
  * @method SocialGroupUserModel create(array $attributes = [])
  * @method SocialGroupUserModel make(array $attributes = [])
  */
-class SocialGroupUserFactory extends Factory
+class SocialGroupUserFactory extends BaseFactory
 {
     /**
      * The name of the factory's corresponding model.
@@ -26,10 +27,7 @@ class SocialGroupUserFactory extends Factory
      */
     public function definition(): array
     {
-        $p = SocialGroupUserEntityModel::props(null, true);
-        return [
-            $p->group_id => null,
-            $p->user_id => null,
-        ];
+        //$p = SocialGroupUserEntityModel::props(null, true);
+        return parent::getValues();
     }
 }

@@ -2,7 +2,6 @@
 namespace Modules\Social\Database\Factories;
 
 use Modules\Base\Factories\BaseFactory;
-use Modules\Social\Entities\SocialUserProfile\SocialUserProfileEntityModel;
 use Modules\Social\Models\SocialUserProfileModel;
 
 /**
@@ -25,7 +24,7 @@ class SocialUserProfileFactory extends BaseFactory
      */
     public function definition(): array
     {
-        $p = SocialUserProfileEntityModel::props(null, true);
+        //$p = SocialUserProfileEntityModel::props(null, true);
         return $this->getValues();
     }
 }

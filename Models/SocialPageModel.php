@@ -20,7 +20,7 @@ use Modules\Workspace\Models\WorkspaceModel;
  * @property-read User $user
  * @property-read WorkspaceModel $workspace
  * @method SocialPageEntityModel toEntity()
- * @method static SocialPageFactory factory()
+ * @method static SocialPageFactory factory($count = null, $state = [])
  */
 class SocialPageModel extends BaseModel
 {

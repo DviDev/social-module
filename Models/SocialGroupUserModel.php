@@ -17,7 +17,7 @@ use Modules\Social\Entities\SocialGroupUser\SocialGroupUserProps;
  * @property-read SocialGroupModel $group
  * @property-read User $user
  * @method SocialGroupUserEntityModel toEntity()
- * @method static SocialGroupUserFactory factory()
+ * @method static SocialGroupUserFactory factory($count = null, $state = [])
  */
 class SocialGroupUserModel extends BaseModel
 {

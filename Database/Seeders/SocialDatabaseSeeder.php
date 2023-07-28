@@ -5,8 +5,12 @@ namespace Modules\Social\Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Modules\DBMap\Domains\ScanTableDomain;
+use Modules\Permission\Database\Seeders\PermissionTableSeeder;
 use Modules\Post\Database\Seeders\PostCommentTableSeeder;
 use Modules\Post\Models\PostModel;
+use Modules\Project\Database\Seeders\ProjectTableSeeder;
+use Modules\Project\Models\ProjectModuleModel;
 use Modules\Social\Models\SocialGroupModel;
 use Modules\Social\Models\SocialGroupPostModel;
 use Modules\Social\Models\SocialGroupUserModel;
@@ -20,6 +24,7 @@ use Modules\Social\Models\SocialUserFollowerModel;
 use Modules\Social\Models\SocialUserProfileModel;
 use Modules\Social\Models\SocialWorkspaceModel;
 use Modules\Workspace\Models\WorkspaceModel;
+use Nwidart\Modules\Facades\Module;
 
 class SocialDatabaseSeeder extends Seeder
 {
@@ -32,14 +37,25 @@ class SocialDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+        $this->command->warn(PHP_EOL.' 🤖 Social database scanning ...');
+        (new ScanTableDomain())->scan('social');
+
+        $module = ProjectModuleModel::query()->where('name', 'Social')->first();
+        $project = $module->project;
+
+        $this->command->warn(PHP_EOL.' 🤖 Social Permission data creating ...');
+        $this->call(class: PermissionTableSeeder::class, parameters: ['module' => $module]);
+
+        $this->command->warn(PHP_EOL.' 🤖 Social Project data creating ...');
+        $this->call(ProjectTableSeeder::class, parameters: ['project' => $project, 'module' => $module]);
+
+        $this->command->warn(PHP_EOL.' 🤖🪴Social data seeding ...');
         /**@var WorkspaceModel $workspace */
         $me = User::query()->with('workspaces.participants.workspaces')->find(1);
         $workspaces = $me->workspaces;
         $workspace = $workspaces->first();
         $workspace->participants->each(function (User $user) use ($workspace) {
-            SocialUserProfileModel::factory()
-                ->for($user)
-                ->create();
+            SocialUserProfileModel::factory()->for($user)->create();
 
             $this->createGroups($user, $workspace);
 
@@ -69,9 +85,9 @@ class SocialDatabaseSeeder extends Seeder
             ->afterCreating(function (SocialGroupModel $group) use ($user, $workspace, $seed_total, &$seeded) {
                 $this->createPosts($group, $user);
 
-                $this->createGroupUsers($workspace, $group);
+                $group->participants()->attach($workspace->participants->modelKeys());
 
-                $this->createSocialPage($user, $workspace);
+                $this->createSocialPage($user);
 
             })
             ->count($seed_total)->create([
@@ -82,6 +98,9 @@ class SocialDatabaseSeeder extends Seeder
 
     function createPosts(SocialGroupModel $group, User $user): void
     {
+        if (!collect(Module::allEnabled())->contains('Post')) {
+            return;
+        }
         $seed_total = config('app.SEED_MODULE_COUNT');
         $seeded = 0;
         PostModel::factory()
@@ -99,87 +118,46 @@ class SocialDatabaseSeeder extends Seeder
             ->for($user, 'user')->count($seed_total)->create();
     }
 
-    function createGroupUsers(WorkspaceModel $workspace, SocialGroupModel $group): void
-    {
-        $seed_total = $workspace->participants()->count();
-        $seeded = 0;
-        $workspace->participants->each(function (User $user) use ($group, $seed_total, &$seeded) {
-            SocialGroupUserModel::factory()
-                ->for($group, 'group')
-                ->for($user, 'user')
-                ->create();
-
-            $seeded++;
-            ds("social group $group->id user $seeded / $seed_total");
-        });
-    }
-
-    function createSocialPage(User $user, WorkspaceModel $workspace): void
+    function createSocialPage(User $user): void
     {
         $user->workspaces->each(function (WorkspaceModel $workspace) use ($user) {
-            $seed_total = config('app.SEED_MODULE_COUNT');
-            $seeded = 0;
-            SocialPageModel::factory()
-                ->afterCreating(function (SocialPageModel $page) use (
-                    $user, $workspace, $seed_total,
-                    &$seeded
-                ) {
-                    $seeded++;
-                    ds("social page $seeded / $seed_total");
-
+            SocialPageModel::factory(config('social.SEED_SOCIAL_PAGES_COUNT'))
+                ->afterCreating(function (SocialPageModel $page) use ($user, $workspace) {
                     $this->createPagePosts($page, $user, $workspace);
+
+                    $page->followers()->sync(User::get()->modelKeys());
                 })
-                ->count($seed_total)
-                ->for($user, 'user')
-                ->for($workspace, 'workspace')
+                ->for($user)
+                ->for($workspace)
                 ->create();
         });
     }
 
-    /**
-     * @param SocialPageModel $page
-     * @param User $user
-     * @param WorkspaceModel $workspace
-     * @return int
-     */
-    function createPagePosts(SocialPageModel $page, User $user, WorkspaceModel $workspace): int
+
+    function createPagePosts(SocialPageModel $page, User $user, WorkspaceModel $workspace)
     {
-        $seed_total = config('app.SEED_MODULE_COUNT');
-        $seeded = 0;
-        PostModel::factory()
-            ->afterCreating(function (PostModel $post) use (
-                $page, $user, $workspace,
-                $seed_total, &$seeded
-            ) {
-                SocialPagePostModel::factory()
-                    ->for($page, 'page')
-                    ->for($post, 'post')
-                    ->create();
-                ds("social page $page->id post $seeded / $seed_total");
+        if (!collect(Module::allEnabled())->contains('Posts')) {
+            return;
+        }
+        $seed_total = config('social.SEED_SOCIAL_PAGE_POSTS_COUNT');
+        PostModel::factory($seed_total)
+            ->for($user)
+            ->afterCreating(function (PostModel $post) use ($page, $user, $workspace) {
+                SocialPagePostModel::factory()->for($page)->for($post)->create();
 
                 $this->socialPageFollowed($workspace, $page);
             })
-            ->for($user, 'user')->count($seed_total)->create();
-        return $seeded;
+            ->create();
     }
 
-    /**
-     * @param WorkspaceModel $workspace
-     * @param SocialPageModel $page
-     * @return void
-     */
-    function socialPageFollowed(WorkspaceModel $workspace, SocialPageModel $page): void
+    public function socialPageFollowed(WorkspaceModel $workspace, SocialPageModel $page): void
     {
         $workspace->participants->each(function (User $user) use ($page) {
-            SocialPageFollowerModel::factory()
-                ->for($page, 'page')
-                ->for($user, 'user')
-                ->create();
-            ds("social page $page->id follower $user->id");
+            SocialPageFollowerModel::factory()->for($page)->for($user)->create();
         });
     }
 
-    function createSocialPollModel(User $user): void
+    public function createSocialPollModel(User $user): void
     {
         $seed_total = config('app.SEED_MODULE_COUNT');
         $seeded = 0;
@@ -192,7 +170,7 @@ class SocialDatabaseSeeder extends Seeder
             ->count($seed_total)->for($user, 'user')->create();
     }
 
-    function createSocialPollItem(SocialPollModel $poll, User $user): void
+    public function createSocialPollItem(SocialPollModel $poll, User $user): void
     {
         $seed_total = config('app.SEED_MODULE_COUNT');
         $seeded = 0;
@@ -214,7 +192,7 @@ class SocialDatabaseSeeder extends Seeder
      * @param User $user
      * @return void
      */
-    function createUserFollowers(WorkspaceModel $workspace, User $user): void
+    public function createUserFollowers(WorkspaceModel $workspace, User $user): void
     {
         $workspace->participants()->whereNot('user_id', $user->id)
             ->each(function (User $follower) use ($user) {

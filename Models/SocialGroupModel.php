@@ -62,4 +62,9 @@ class SocialGroupModel extends BaseModel
     {
         return $this->belongsToMany(User::class, SocialGroupUserModel::class, 'group_id', 'user_id');
     }
+
+    public function participants(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, SocialGroupUserModel::table(), 'group_id', 'user_id');
+    }
 }

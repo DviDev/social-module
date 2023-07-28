@@ -29,6 +29,7 @@ return new class extends Migration
             $table->timestamp($p->updated_at)->useCurrent()->useCurrentOnUpdate();
             $table->timestamp($p->deleted_at)->nullable();
 
+            $table->unique([$p->group_id, $p->user_id]);
         });
     }
 
