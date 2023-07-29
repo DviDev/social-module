@@ -5,6 +5,7 @@ namespace Modules\Social\Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Modules\App\Models\EntityItemModel;
 use Modules\DBMap\Domains\ScanTableDomain;
 use Modules\Permission\Database\Seeders\PermissionTableSeeder;
 use Modules\App\Database\Seeders\MessageTableSeeder;
@@ -50,9 +51,22 @@ class SocialDatabaseSeeder extends Seeder
         $this->call(ProjectTableSeeder::class, parameters: ['project' => $project, 'module' => $module]);
 
         $this->command->warn(PHP_EOL.' 🤖🪴Social data seeding ...');
+
+        //criar workspace with visibility
         /**@var WorkspaceModel $workspace */
         $me = User::query()->with('workspaces.participants.workspaces')->find(1);
         $workspaces = $me->workspaces;
+        $workspaces->each(function(WorkspaceModel $workspace) {
+            SocialWorkspaceModel::factory()
+                ->for($workspace, 'workspace')
+                ->for($workspace->user, 'owner')
+                ->sequence(collect([
+                    ['visibility' => 'public'],
+                    ['visibility' => 'private']
+                ])->random())
+                ->create();
+        });
+
         $workspace = $workspaces->first();
         $workspace->participants->each(function (User $user) use ($workspace) {
             SocialUserProfileModel::factory()->for($user)->create();
@@ -65,17 +79,7 @@ class SocialDatabaseSeeder extends Seeder
 
         });
 
-        //criar workspace with visibility
-        $workspaces->each(function(WorkspaceModel $workspace) {
-            SocialWorkspaceModel::factory()
-                ->for($workspace, 'workspace')
-                ->for($workspace->user, 'owner')
-                ->sequence(collect([
-                    ['visibility' => 'public'],
-                    ['visibility' => 'private']
-                ])->random())
-                ->create();
-        });
+
     }
 
     function createGroups(User $user, WorkspaceModel $workspace): void
@@ -102,25 +106,26 @@ class SocialDatabaseSeeder extends Seeder
             return;
         }
         $seed_total = config('app.SEED_MODULE_COUNT');
-        $seeded = 0;
-        PostModel::factory()
+
+        $entities = EntityItemModel::factory($seed_total)->create()->all()->map(fn($m) => ['entity_item_id' => $m->id]);
+        PostModel::factory($seed_total)
+            ->for($user, 'user')
+            ->sequence(...$entities)
             ->afterCreating(function (PostModel $post) use ($group, $user, $seed_total, &$seeded) {
+                $entity = EntityItemModel::factory()->create();
+                $post->entity_item_id = $entity->id;
                 SocialGroupPostModel::factory()
                     ->for($group, 'group')
                     ->for($post, 'post')
                     ->create();
 
-                $seeded++;
-                ds("social group $group->id post $seeded / $seed_total");
-
-                $this->call(MessageTableSeeder::class, true, compact('post', 'user'));
-            })
-            ->for($user, 'user')->count($seed_total)->create();
+                $this->call(MessageTableSeeder::class, parameters: compact('entity', 'user'));
+            })->create();
     }
 
     function createSocialPage(User $user): void
     {
-        $user->workspaces->each(function (WorkspaceModel $workspace) use ($user) {
+        User::find(1)->workspaces()->with('participants')->each(function (WorkspaceModel $workspace) use ($user) {
             SocialPageModel::factory(config('social.SEED_SOCIAL_PAGES_COUNT'))
                 ->afterCreating(function (SocialPageModel $page) use ($user, $workspace) {
                     $this->createPagePosts($page, $user, $workspace);
@@ -136,7 +141,7 @@ class SocialDatabaseSeeder extends Seeder
 
     function createPagePosts(SocialPageModel $page, User $user, WorkspaceModel $workspace)
     {
-        if (!collect(Module::allEnabled())->contains('Posts')) {
+        if (!collect(Module::allEnabled())->contains('Post')) {
             return;
         }
         $seed_total = config('social.SEED_SOCIAL_PAGE_POSTS_COUNT');
