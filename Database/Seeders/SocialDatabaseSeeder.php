@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Modules\DBMap\Domains\ScanTableDomain;
 use Modules\Permission\Database\Seeders\PermissionTableSeeder;
-use Modules\Base\Database\Seeders\CommentTableSeeder;
+use Modules\App\Database\Seeders\MessageTableSeeder;
 use Modules\Post\Models\PostModel;
 use Modules\Project\Database\Seeders\ProjectTableSeeder;
 use Modules\Project\Models\ProjectModuleModel;
@@ -113,7 +113,7 @@ class SocialDatabaseSeeder extends Seeder
                 $seeded++;
                 ds("social group $group->id post $seeded / $seed_total");
 
-                $this->call(CommentTableSeeder::class, true, compact('post', 'user'));
+                $this->call(MessageTableSeeder::class, true, compact('post', 'user'));
             })
             ->for($user, 'user')->count($seed_total)->create();
     }
