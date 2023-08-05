@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
-use Modules\Social\Database\Factories\SocialGroupUserFactory;
 use Modules\Social\Entities\SocialGroupUser\SocialGroupUserEntityModel;
 use Modules\Social\Entities\SocialGroupUser\SocialGroupUserProps;
 
@@ -18,7 +17,6 @@ use Modules\Social\Entities\SocialGroupUser\SocialGroupUserProps;
  * @property-read SocialGroupModel $group
  * @property-read User $user
  * @method SocialGroupUserEntityModel toEntity()
- * @method static SocialGroupUserFactory factory($count = null, $state = [])
  */
 class SocialGroupUserModel extends BaseModel
 {

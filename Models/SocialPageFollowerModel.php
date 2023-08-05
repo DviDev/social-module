@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
-use Modules\Social\Database\Factories\SocialPageFollowerFactory;
 use Modules\Social\Entities\SocialPageFollower\SocialPageFollowerEntityModel;
 use Modules\Social\Entities\SocialPageFollower\SocialPageFollowerProps;
 
@@ -17,7 +16,6 @@ use Modules\Social\Entities\SocialPageFollower\SocialPageFollowerProps;
  * @property-read SocialPageModel $page
  * @property-read User $user
  * @method SocialPageFollowerEntityModel toEntity()
- * @method static SocialPageFollowerFactory factory()
  */
 class SocialPageFollowerModel extends BaseModel
 {

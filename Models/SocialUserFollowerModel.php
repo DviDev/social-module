@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
-use Modules\Social\Database\Factories\SocialUserFollowerFactory;
 use Modules\Social\Entities\SocialUserFollower\SocialUserFollowerEntityModel;
 use Modules\Social\Entities\SocialUserFollower\SocialUserFollowerProps;
 
@@ -15,7 +14,6 @@ use Modules\Social\Entities\SocialUserFollower\SocialUserFollowerProps;
  * @author Davi Menezes (davimenezes.dev@gmail.com)
  * @link https://github.com/DaviMenezes
  * @method SocialUserFollowerEntityModel toEntity()
- * @method static SocialUserFollowerFactory factory()
  */
 class SocialUserFollowerModel extends BaseModel
 {

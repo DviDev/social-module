@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
-use Modules\Social\Database\Factories\SocialWorkspaceFactory;
 use Modules\Social\Entities\SocialWorkspace\SocialWorkspaceEntityModel;
 use Modules\Social\Entities\SocialWorkspace\SocialWorkspaceProps;
 use Modules\Workspace\Models\WorkspaceModel;
@@ -16,7 +15,6 @@ use Modules\Workspace\Models\WorkspaceModel;
  * @author Davi Menezes (davimenezes.dev@gmail.com)
  * @link https://github.com/DaviMenezes
  * @method SocialWorkspaceEntityModel toEntity()
- * @method static SocialWorkspaceFactory factory()
  */
 class SocialWorkspaceModel extends BaseModel
 {

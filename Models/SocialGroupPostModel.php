@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
 use Modules\Post\Models\PostModel;
-use Modules\Social\Database\Factories\SocialGroupPostFactory;
 use Modules\Social\Entities\SocialGroupPost\SocialGroupPostEntityModel;
 use Modules\Social\Entities\SocialGroupPost\SocialGroupPostProps;
 
@@ -17,7 +16,6 @@ use Modules\Social\Entities\SocialGroupPost\SocialGroupPostProps;
  * @property-read SocialGroupModel $group
  * @property-read PostModel $post
  * @method SocialGroupPostEntityModel toEntity()
- * @method static SocialGroupPostFactory factory()
  */
 class SocialGroupPostModel extends BaseModel
 {

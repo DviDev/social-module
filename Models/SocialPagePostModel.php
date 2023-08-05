@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
 use Modules\Post\Models\PostModel;
-use Modules\Social\Database\Factories\SocialPagePostFactory;
 use Modules\Social\Entities\SocialPagePost\SocialPagePostEntityModel;
 use Modules\Social\Entities\SocialPagePost\SocialPagePostProps;
 
@@ -17,7 +16,6 @@ use Modules\Social\Entities\SocialPagePost\SocialPagePostProps;
  * @property-read SocialPageModel $page
  * @property-read PostModel $post
  * @method SocialPagePostEntityModel toEntity()
- * @method static SocialPagePostFactory factory()
  */
 class SocialPagePostModel extends BaseModel
 {

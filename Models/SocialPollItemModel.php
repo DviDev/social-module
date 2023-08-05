@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
-use Modules\Social\Database\Factories\SocialPollItemFactory;
 use Modules\Social\Entities\SocialPollItem\SocialPollItemEntityModel;
 use Modules\Social\Entities\SocialPollItem\SocialPollItemProps;
 
@@ -15,7 +14,6 @@ use Modules\Social\Entities\SocialPollItem\SocialPollItemProps;
  * @author Davi Menezes (davimenezes.dev@gmail.com)
  * @link https://github.com/DaviMenezes
  * @method SocialPollItemEntityModel toEntity()
- * @method static SocialPollItemFactory factory()
  */
 class SocialPollItemModel extends BaseModel
 {

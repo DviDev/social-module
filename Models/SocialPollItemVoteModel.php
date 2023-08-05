@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
-use Modules\Social\Database\Factories\SocialPollItemVoteFactory;
 use Modules\Social\Entities\SocialPollItemVote\SocialPollItemVoteEntityModel;
 use Modules\Social\Entities\SocialPollItemVote\SocialPollItemVoteProps;
 
@@ -15,7 +14,6 @@ use Modules\Social\Entities\SocialPollItemVote\SocialPollItemVoteProps;
  * @author Davi Menezes (davimenezes.dev@gmail.com)
  * @link https://github.com/DaviMenezes
  * @method SocialPollItemVoteEntityModel toEntity()
- * @method static SocialPollItemVoteFactory factory()
  */
 class SocialPollItemVoteModel extends BaseModel
 {

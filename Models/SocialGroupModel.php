@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
 use Modules\Post\Models\PostModel;
-use Modules\Social\Database\Factories\SocialGroupFactory;
 use Modules\Social\Entities\SocialGroup\SocialGroupEntityModel;
 use Modules\Social\Entities\SocialGroup\SocialGroupProps;
 use Modules\Workspace\Models\WorkspaceModel;
@@ -21,7 +20,6 @@ use Modules\Workspace\Models\WorkspaceModel;
  * @property-read User $user
  * @property-read WorkspaceModel $workspace
  * @method SocialGroupEntityModel toEntity()
- * @method static SocialGroupFactory factory()
  */
 class SocialGroupModel extends BaseModel
 {
