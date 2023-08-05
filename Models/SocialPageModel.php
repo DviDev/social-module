@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
 use Modules\Post\Models\PostModel;
 use Modules\Social\Database\Factories\SocialPageFactory;
@@ -33,11 +34,12 @@ class SocialPageModel extends BaseModel
         return SocialPageEntityModel::class;
     }
 
-    protected static function newFactory(): SocialPageFactory
+    protected static function newFactory(): BaseFactory
     {
-        return new SocialPageFactory();
+        return new class extends BaseFactory {
+            protected $model = SocialPageModel::class;
+        };
     }
-
     public static function table($alias = null): string
     {
         return self::dbTable('social_pages', $alias);

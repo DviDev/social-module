@@ -5,6 +5,7 @@ namespace Modules\Social\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
 use Modules\Social\Database\Factories\SocialWorkspaceFactory;
 use Modules\Social\Entities\SocialWorkspace\SocialWorkspaceEntityModel;
@@ -27,11 +28,12 @@ class SocialWorkspaceModel extends BaseModel
         return SocialWorkspaceEntityModel::class;
     }
 
-    protected static function newFactory(): SocialWorkspaceFactory
+    protected static function newFactory(): BaseFactory
     {
-        return new SocialWorkspaceFactory();
+        return new class extends BaseFactory {
+            protected $model = SocialWorkspaceModel::class;
+        };
     }
-
     public static function table($alias = null): string
     {
         return self::dbTable('social_workspaces', $alias);

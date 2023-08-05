@@ -5,6 +5,7 @@ namespace Modules\Social\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
 use Modules\Social\Database\Factories\SocialUserProfileFactory;
 use Modules\Social\Entities\SocialUserProfile\SocialUserProfileEntityModel;
@@ -26,11 +27,12 @@ class SocialUserProfileModel extends BaseModel
         return SocialUserProfileEntityModel::class;
     }
 
-    protected static function newFactory(): SocialUserProfileFactory
+    protected static function newFactory(): BaseFactory
     {
-        return new SocialUserProfileFactory();
+        return new class extends BaseFactory {
+            protected $model = SocialUserProfileModel::class;
+        };
     }
-
     public static function table($alias = null): string
     {
         return self::dbTable('social_user_profiles', $alias);

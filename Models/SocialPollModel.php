@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
 use Modules\Social\Database\Factories\SocialPollFactory;
 use Modules\Social\Entities\SocialPoll\SocialPollEntityModel;
@@ -27,11 +28,12 @@ class SocialPollModel extends BaseModel
         return SocialPollEntityModel::class;
     }
 
-    protected static function newFactory(): SocialPollFactory
+    protected static function newFactory(): BaseFactory
     {
-        return new SocialPollFactory();
+        return new class extends BaseFactory {
+            protected $model = SocialPollModel::class;
+        };
     }
-
     public static function table($alias = null): string
     {
         return self::dbTable('social_polls', $alias);

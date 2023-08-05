@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialGroup\SocialGroupEntityModel;
-use Modules\Social\Entities\SocialGroup\SocialGroupVisibilityEnum;
 
 return new class extends Migration
 {
@@ -25,7 +24,7 @@ return new class extends Migration
             $table->foreignId($p->user_id)
                 ->references('id')->on('users')
                 ->cascadeOnUpdate()->restrictOnDelete();
-            $table->enum($p->visibility, SocialGroupVisibilityEnum::toArray())->default('public');
+            $table->char($p->visibility)->default('public'); //, SocialGroupVisibilityEnum::toArray())
             $table->string($p->name, 100);
             $table->string($p->cover_image_path)->nullable();
 

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
 use Modules\Post\Models\PostModel;
 use Modules\Social\Database\Factories\SocialGroupFactory;
@@ -33,11 +34,12 @@ class SocialGroupModel extends BaseModel
         return SocialGroupEntityModel::class;
     }
 
-    protected static function newFactory(): SocialGroupFactory
+    protected static function newFactory(): BaseFactory
     {
-        return new SocialGroupFactory();
+        return new class extends BaseFactory {
+            protected $model = SocialGroupModel::class;
+        };
     }
-
     public static function table($alias = null): string
     {
         return self::dbTable('social_groups', $alias);

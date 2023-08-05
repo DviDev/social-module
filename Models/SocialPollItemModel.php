@@ -5,6 +5,7 @@ namespace Modules\Social\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
 use Modules\Social\Database\Factories\SocialPollItemFactory;
 use Modules\Social\Entities\SocialPollItem\SocialPollItemEntityModel;
@@ -26,11 +27,12 @@ class SocialPollItemModel extends BaseModel
         return SocialPollItemEntityModel::class;
     }
 
-    protected static function newFactory(): SocialPollItemFactory
+    protected static function newFactory(): BaseFactory
     {
-        return new SocialPollItemFactory();
+        return new class extends BaseFactory {
+            protected $model = SocialPollItemModel::class;
+        };
     }
-
     public static function table($alias = null): string
     {
         return self::dbTable('social_poll_items', $alias);

@@ -4,6 +4,7 @@ namespace Modules\Social\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
 use Modules\Post\Models\PostModel;
 use Modules\Social\Database\Factories\SocialPagePostFactory;
@@ -28,11 +29,12 @@ class SocialPagePostModel extends BaseModel
         return SocialPagePostEntityModel::class;
     }
 
-    protected static function newFactory(): SocialPagePostFactory
+    protected static function newFactory(): BaseFactory
     {
-        return new SocialPagePostFactory();
+        return new class extends BaseFactory {
+            protected $model = SocialPagePostModel::class;
+        };
     }
-
     public static function table($alias = null): string
     {
         return self::dbTable('social_page_posts', $alias);

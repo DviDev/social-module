@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
 use Modules\Social\Database\Factories\SocialGroupUserFactory;
 use Modules\Social\Entities\SocialGroupUser\SocialGroupUserEntityModel;
@@ -30,11 +31,12 @@ class SocialGroupUserModel extends BaseModel
         return SocialGroupUserEntityModel::class;
     }
 
-    protected static function newFactory(): SocialGroupUserFactory
+    protected static function newFactory(): BaseFactory
     {
-        return new SocialGroupUserFactory();
+        return new class extends BaseFactory {
+            protected $model = SocialGroupUserModel::class;
+        };
     }
-
     public static function table($alias = null): string
     {
         return self::dbTable('social_group_users', $alias);

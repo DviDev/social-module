@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialWorkspace\SocialWorkspaceEntityModel;
-use Modules\Social\Entities\SocialWorkspace\SocialWorkspaceVisibilityEnum;
 
 return new class extends Migration
 {
@@ -22,7 +21,7 @@ return new class extends Migration
             $table->foreignId($prop->workspace_id)
                 ->references('id')->on('workspaces')
                 ->cascadeOnUpdate()->restrictOnDelete();
-            $table->enum($prop->visibility, SocialWorkspaceVisibilityEnum::toArray())->default('public');
+            $table->char($prop->visibility)->default('public');// SocialWorkspaceVisibilityEnum::toArray())
             $table->foreignId($prop->owner_user_id)
                 ->references('id')->on('users')
                 ->cascadeOnUpdate()->restrictOnDelete();
