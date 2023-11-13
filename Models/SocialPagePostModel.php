@@ -3,16 +3,19 @@
 namespace Modules\Social\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Base\Factories\BaseFactory;
 use Modules\Base\Models\BaseModel;
-use Modules\Social\Database\Factories\SocialPagePostFactory;
+use Modules\Post\Models\PostModel;
 use Modules\Social\Entities\SocialPagePost\SocialPagePostEntityModel;
 use Modules\Social\Entities\SocialPagePost\SocialPagePostProps;
 
 /**
  * @author Davi Menezes (davimenezes.dev@gmail.com)
  * @link https://github.com/DaviMenezes
+ * @property-read SocialPageModel $page
+ * @property-read PostModel $post
  * @method SocialPagePostEntityModel toEntity()
- * @method SocialPagePostFactory factory()
  */
 class SocialPagePostModel extends BaseModel
 {
@@ -24,13 +27,24 @@ class SocialPagePostModel extends BaseModel
         return SocialPagePostEntityModel::class;
     }
 
-    protected static function newFactory(): SocialPagePostFactory
+    protected static function newFactory(): BaseFactory
     {
-        return new SocialPagePostFactory();
+        return new class extends BaseFactory {
+            protected $model = SocialPagePostModel::class;
+        };
     }
-
     public static function table($alias = null): string
     {
         return self::dbTable('social_page_posts', $alias);
+    }
+
+    public function page(): BelongsTo
+    {
+        return $this->belongsTo(SocialPageModel::class, 'page_id');
+    }
+
+    public function post(): BelongsTo
+    {
+        return $this->belongsTo(PostModel::class, 'post_id');
     }
 }

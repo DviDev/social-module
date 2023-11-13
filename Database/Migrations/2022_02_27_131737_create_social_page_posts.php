@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialPagePost\SocialPagePostEntityModel;
 
-class CreateSocialPagePosts extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,20 @@ class CreateSocialPagePosts extends Migration
      */
     public function up()
     {
+        if (!collect(\Nwidart\Modules\Facades\Module::allEnabled())->contains('Post')) {
+            return;
+        }
+
         Schema::create('social_page_posts', function (Blueprint $table) {
             $table->id();
 
             $prop = SocialPagePostEntityModel::props(null, true);
-            $table->bigInteger($prop->page_id)->unsigned();
-            $table->bigInteger($prop->post_id)->unsigned();
+            $table->foreignId($prop->page_id)
+                ->references('id')->on('social_pages')
+                ->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId($prop->post_id)
+                ->references('id')->on('posts')
+                ->cascadeOnUpdate()->restrictOnDelete();
         });
     }
 
@@ -32,4 +40,4 @@ class CreateSocialPagePosts extends Migration
     {
         Schema::dropIfExists('social_page_posts');
     }
-}
+};

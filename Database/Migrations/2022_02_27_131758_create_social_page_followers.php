@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialPageFollower\SocialPageFollowerEntityModel;
 
-class CreateSocialPageFollowers extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -17,10 +17,17 @@ class CreateSocialPageFollowers extends Migration
         Schema::create('social_page_followers', function (Blueprint $table) {
             $table->id();
 
-            $prop = SocialPageFollowerEntityModel::props(null, true);
-            $table->bigInteger($prop->page_id)->unsigned();
-            $table->bigInteger($prop->user_id)->unsigned();
-            $table->timestamp($prop->created_at);
+            $p = SocialPageFollowerEntityModel::props(null, true);
+            $table->foreignId($p->page_id)
+                ->references('id')->on('social_pages')
+                ->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId($p->user_id)
+                ->references('id')->on('users')
+                ->cascadeOnUpdate()->restrictOnDelete();
+            $table->timestamp($p->created_at)->useCurrent();
+            $table->timestamp($p->updated_at)->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp($p->deleted_at)->nullable();
+
         });
     }
 
@@ -33,4 +40,4 @@ class CreateSocialPageFollowers extends Migration
     {
         Schema::dropIfExists('social_page_followers');
     }
-}
+};

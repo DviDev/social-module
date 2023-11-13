@@ -17,11 +17,17 @@ return new class extends Migration
         Schema::create('social_poll_item_votes', function (Blueprint $table) {
             $table->id();
 
-            $prop = SocialPollItemVoteEntityModel::props(null, true);
-            $table->bigInteger($prop->poll_id)->unsigned();
-            $table->tinyInteger($prop->type_id)->unsigned();
-            $table->bigInteger($prop->user_id)->unsigned();
-            $table->timestamp($prop->created_at);
+            $p = SocialPollItemVoteEntityModel::props(null, true);
+            $table->foreignId($p->item_id)
+                ->references('id')->on('social_poll_items')
+                ->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId($p->user_id)
+                ->references('id')->on('users')
+                ->cascadeOnUpdate()->restrictOnDelete();
+            $table->timestamp($p->created_at)->useCurrent();
+            $table->timestamp($p->updated_at)->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp($p->deleted_at)->nullable();
+
         });
     }
 

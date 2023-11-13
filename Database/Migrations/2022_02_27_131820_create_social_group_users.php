@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialGroupUser\SocialGroupUserEntityModel;
 
-class CreateSocialGroupUsers extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -17,10 +17,19 @@ class CreateSocialGroupUsers extends Migration
         Schema::create('social_group_users', function (Blueprint $table) {
             $table->id();
 
-            $prop = SocialGroupUserEntityModel::props(null, true);
-            $table->bigInteger($prop->group_id)->unsigned();
-            $table->bigInteger($prop->user_id)->unsigned();
-            $table->timestamp($prop->created_at);
+            $p = SocialGroupUserEntityModel::props(null, true);
+            $table->foreignId($p->group_id)
+                ->references('id')->on('social_groups')
+                ->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId($p->user_id)
+                ->references('id')->on('users')
+                ->cascadeOnUpdate()->restrictOnDelete();
+
+            $table->timestamp($p->created_at)->useCurrent();
+            $table->timestamp($p->updated_at)->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp($p->deleted_at)->nullable();
+
+            $table->unique([$p->group_id, $p->user_id]);
         });
     }
 
@@ -33,4 +42,4 @@ class CreateSocialGroupUsers extends Migration
     {
         Schema::dropIfExists('social_group_users');
     }
-}
+};

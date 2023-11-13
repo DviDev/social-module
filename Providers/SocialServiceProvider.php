@@ -4,6 +4,17 @@ namespace Modules\Social\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Social\Http\Livewire\SocialGroupPostTable;
+use Modules\Social\Http\Livewire\SocialGroupTable;
+use Modules\Social\Http\Livewire\SocialGroupUsertable;
+use Modules\Social\Http\Livewire\SocialPageFollowerTable;
+use Modules\Social\Http\Livewire\SocialPagePostTable;
+use Modules\Social\Http\Livewire\SocialPollItemTable;
+use Modules\Social\Http\Livewire\SocialPollItemVoteTable;
+use Modules\Social\Http\Livewire\SocialPollTable;
+use Modules\Social\Http\Livewire\SocialUserFollowerTable;
+use Modules\Social\Http\Livewire\SocialWorkspacePageTable;
+use Modules\Social\Http\Livewire\SocialWorkspaceTable;
 
 class SocialServiceProvider extends ServiceProvider
 {
@@ -37,6 +48,18 @@ class SocialServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        \Livewire::component('social::group-post-table', SocialGroupPostTable::class);
+        \Livewire::component('social::group-table', SocialGroupTable::class);
+        \Livewire::component('social::group-user-table', SocialGroupUsertable::class);
+        \Livewire::component('social::page-follower-table', SocialPageFollowerTable::class);
+        \Livewire::component('social::page-post-table', SocialPagePostTable::class);
+        \Livewire::component('social::poll-item-table', SocialPollItemTable::class);
+        \Livewire::component('social::poll-item-vote-table', SocialPollItemVoteTable::class);
+        \Livewire::component('social::poll-table', SocialPollTable::class);
+        \Livewire::component('social::user-follower-table', SocialUserFollowerTable::class);
+        \Livewire::component('social::workspace-page-table', SocialWorkspacePageTable::class);
+        \Livewire::component('social::workspace--table', SocialWorkspaceTable::class);
+
         $this->app->register(RouteServiceProvider::class);
     }
 

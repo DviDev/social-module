@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialUserFollower\SocialUserFollowerEntityModel;
 
-class CreateSocialUserFollowers extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -17,11 +17,18 @@ class CreateSocialUserFollowers extends Migration
         Schema::create('social_user_followers', function (Blueprint $table) {
             $table->id();
 
-            $prop = SocialUserFollowerEntityModel::props(null, true);
-            $table->bigInteger($prop->user_id)->unsigned();
-            $table->bigInteger($prop->follower_id)->unsigned();
-            $table->boolean($prop->notification_enabled)->nullable()->default(1);
-            $table->timestamp($prop->created_at);
+            $p = SocialUserFollowerEntityModel::props(null, true);
+            $table->foreignId($p->user_id)
+                ->references('id')->on('users')
+                ->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId($p->follower_id)
+                ->references('id')->on('users')
+                ->cascadeOnUpdate()->restrictOnDelete();
+            $table->boolean($p->notification_enabled)->nullable()->default(1);
+            $table->timestamp($p->created_at)->useCurrent();
+            $table->timestamp($p->updated_at)->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp($p->deleted_at)->nullable();
+
         });
     }
 
@@ -34,4 +41,4 @@ class CreateSocialUserFollowers extends Migration
     {
         Schema::dropIfExists('social_user_followers');
     }
-}
+};

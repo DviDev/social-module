@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialPoll\SocialPollEntityModel;
 
-class CreateSocialPolls extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -17,9 +17,15 @@ class CreateSocialPolls extends Migration
         Schema::create('social_polls', function (Blueprint $table) {
             $table->id();
 
-            $prop = SocialPollEntityModel::props(null, true);
-            $table->string($prop->description);
-            $table->timestamp($prop->created_at);
+            $p = SocialPollEntityModel::props(null, true);
+            $table->string($p->description);
+            $table->foreignId($p->user_id)
+                ->references('id')->on('users')
+                ->cascadeOnUpdate()->restrictOnDelete();
+            $table->timestamp($p->created_at)->useCurrent();
+            $table->timestamp($p->updated_at)->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp($p->deleted_at)->nullable();
+
         });
     }
 
@@ -32,4 +38,4 @@ class CreateSocialPolls extends Migration
     {
         Schema::dropIfExists('social_polls');
     }
-}
+};

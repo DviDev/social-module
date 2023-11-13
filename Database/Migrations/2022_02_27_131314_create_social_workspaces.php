@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialWorkspace\SocialWorkspaceEntityModel;
 
-class CreateSocialWorkspaces extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -18,9 +18,13 @@ class CreateSocialWorkspaces extends Migration
             $table->id();
 
             $prop = SocialWorkspaceEntityModel::props(null, true);
-            $table->bigInteger($prop->workspace_id);
-            $table->enum($prop->visibility, ['public','private'])->default('public');
-            $table->bigInteger($prop->owner_user_id)->unsigned();
+            $table->foreignId($prop->workspace_id)
+                ->references('id')->on('workspaces')
+                ->cascadeOnUpdate()->restrictOnDelete();
+            $table->char($prop->visibility)->default('public');// SocialWorkspaceVisibilityEnum::toArray())
+            $table->foreignId($prop->owner_user_id)
+                ->references('id')->on('users')
+                ->cascadeOnUpdate()->restrictOnDelete();
         });
     }
 
@@ -33,4 +37,4 @@ class CreateSocialWorkspaces extends Migration
     {
         Schema::dropIfExists('social_workspaces');
     }
-}
+};
