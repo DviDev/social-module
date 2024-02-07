@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Modules\App\Database\Seeders\MessageTableSeeder;
-use Modules\App\Models\EntityItemModel;
+use Modules\App\Models\RecordModel;
 use Modules\DBMap\Domains\ScanTableDomain;
 use Modules\Permission\Database\Seeders\PermissionTableSeeder;
 use Modules\Post\Models\PostModel;
@@ -107,13 +107,13 @@ class SocialDatabaseSeeder extends Seeder
         }
         $seed_total = config('app.SEED_MODULE_COUNT');
 
-        $entities = EntityItemModel::factory($seed_total)->create()->all()->map(fn($m) => ['entity_item_id' => $m->id]);
+        $entities = RecordModel::factory($seed_total)->create()->all()->map(fn($m) => ['record_id' => $m->id]);
         PostModel::factory($seed_total)
             ->for($user, 'user')
             ->sequence(...$entities)
             ->afterCreating(function (PostModel $post) use ($group, $user, $seed_total, &$seeded) {
-                $entity = EntityItemModel::factory()->create();
-                $post->entity_item_id = $entity->id;
+                $entity = RecordModel::factory()->create();
+                $post->record_id = $entity->id;
                 SocialGroupPostModel::factory()
                     ->for($group, 'group')
                     ->for($post, 'post')
