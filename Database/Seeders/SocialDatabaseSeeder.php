@@ -10,7 +10,6 @@ use Modules\App\Models\RecordModel;
 use Modules\DBMap\Domains\ScanTableDomain;
 use Modules\Permission\Database\Seeders\PermissionTableSeeder;
 use Modules\Post\Models\PostModel;
-use Modules\Project\Database\Seeders\ProjectTableSeeder;
 use Modules\Project\Models\ProjectModuleModel;
 use Modules\Social\Models\SocialGroupModel;
 use Modules\Social\Models\SocialGroupPostModel;
@@ -37,25 +36,26 @@ class SocialDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->command->warn(PHP_EOL.' 🤖 Social database scanning ...');
+        $this->command->warn(PHP_EOL . ' 🤖 Social database scanning ...');
         (new ScanTableDomain())->scan('social');
 
         $module = ProjectModuleModel::byName('Social');
         $project = $module->project;
 
-        $this->command->warn(PHP_EOL.' 🤖 Social Permission data creating ...');
+        $this->command->warn(PHP_EOL . ' 🤖 Social Permission data creating ...');
         $this->call(class: PermissionTableSeeder::class, parameters: ['module' => $module]);
 
-        $this->command->warn(PHP_EOL.' 🤖 Social Project data creating ...');
-        $this->call(ProjectTableSeeder::class, parameters: ['project' => $project, 'module' => $module]);
+        //Todo remove after test
+//        $this->command->warn(PHP_EOL.' 🤖 Social Project data creating ...');
+//        $this->call(ProjectTableSeeder::class, parameters: ['project' => $project, 'module' => $module]);
 
-        $this->command->warn(PHP_EOL.' 🤖🪴Social data seeding ...');
+        $this->command->warn(PHP_EOL . ' 🤖🪴Social data seeding ...');
 
         //criar workspace with visibility
         /**@var WorkspaceModel $workspace */
         $me = User::find(1);
         $workspaces = WorkspaceModel::byUserId(1);
-        $workspaces->each(function(WorkspaceModel $workspace) {
+        $workspaces->each(function (WorkspaceModel $workspace) {
             SocialWorkspaceModel::factory()
                 ->for($workspace, 'workspace')
                 ->for($workspace->user, 'owner')
@@ -76,10 +76,7 @@ class SocialDatabaseSeeder extends Seeder
             $this->createUserFollowers($workspace, $user);
 
             $this->createSocialPollModel($user);
-
         });
-
-
     }
 
     function createGroups(User $user, WorkspaceModel $workspace): void
@@ -92,7 +89,6 @@ class SocialDatabaseSeeder extends Seeder
                 $group->participants()->attach($workspace->participants->modelKeys());
 
                 $this->createSocialPage($user);
-
             })
             ->count($seed_total)->create([
                 'user_id' => $user->id,
@@ -138,7 +134,6 @@ class SocialDatabaseSeeder extends Seeder
         });
     }
 
-
     function createPagePosts(SocialPageModel $page, User $user, WorkspaceModel $workspace)
     {
         if (!collect(Module::allEnabled())->contains('Post')) {
@@ -160,6 +155,22 @@ class SocialDatabaseSeeder extends Seeder
         $workspace->participants->each(function (User $user) use ($page) {
             SocialPageFollowerModel::factory()->for($page)->for($user)->create();
         });
+    }
+
+    /**
+     * @param WorkspaceModel $workspace
+     * @param User $user
+     * @return void
+     */
+    public function createUserFollowers(WorkspaceModel $workspace, User $user): void
+    {
+        $workspace->participants()->whereNot('user_id', $user->id)
+            ->each(function (User $follower) use ($user) {
+                SocialUserFollowerModel::factory()
+                    ->for($user, 'user')
+                    ->for($follower, 'follower')
+                    ->create();
+            });
     }
 
     public function createSocialPollModel(User $user): void
@@ -184,21 +195,5 @@ class SocialDatabaseSeeder extends Seeder
                     ->create();
             })
             ->create();
-    }
-
-    /**
-     * @param WorkspaceModel $workspace
-     * @param User $user
-     * @return void
-     */
-    public function createUserFollowers(WorkspaceModel $workspace, User $user): void
-    {
-        $workspace->participants()->whereNot('user_id', $user->id)
-            ->each(function (User $follower) use ($user) {
-                SocialUserFollowerModel::factory()
-                    ->for($user, 'user')
-                    ->for($follower, 'follower')
-                    ->create();
-            });
     }
 }
