@@ -40,7 +40,7 @@ class SocialDatabaseSeeder extends Seeder
         $this->command->warn(PHP_EOL.' 🤖 Social database scanning ...');
         (new ScanTableDomain())->scan('social');
 
-        $module = ProjectModuleModel::query()->where('name', 'Social')->first();
+        $module = ProjectModuleModel::byName('Social');
         $project = $module->project;
 
         $this->command->warn(PHP_EOL.' 🤖 Social Permission data creating ...');
