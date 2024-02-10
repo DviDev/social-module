@@ -75,7 +75,7 @@ class SocialDatabaseSeeder extends BaseSeeder
             $this->createSocialPollModel($user);
         });
 
-        $this->commandInfo(__CLASS__, '✔️');
+        $this->commandInfo(__CLASS__, '🟢 done');
     }
 
     function createGroups(User $user, WorkspaceModel $workspace): void
