@@ -4,9 +4,9 @@ namespace Modules\Social\Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Seeder;
 use Modules\App\Database\Seeders\MessageTableSeeder;
 use Modules\App\Models\RecordModel;
+use Modules\Base\Database\Seeders\BaseSeeder;
 use Modules\DBMap\Domains\ScanTableDomain;
 use Modules\Permission\Database\Seeders\PermissionTableSeeder;
 use Modules\Post\Models\PostModel;
@@ -25,7 +25,7 @@ use Modules\Social\Models\SocialWorkspaceModel;
 use Modules\Workspace\Models\WorkspaceModel;
 use Nwidart\Modules\Facades\Module;
 
-class SocialDatabaseSeeder extends Seeder
+class SocialDatabaseSeeder extends BaseSeeder
 {
     /**
      * Run the database seeds.
@@ -36,7 +36,8 @@ class SocialDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->command->warn(PHP_EOL . ' 🤖 Social database scanning ...');
+        $this->commandWarn(__CLASS__, "🌱 seeding");
+
         (new ScanTableDomain())->scan('social');
 
         $module = ProjectModuleModel::byName('Social');
@@ -44,10 +45,6 @@ class SocialDatabaseSeeder extends Seeder
 
         $this->command->warn(PHP_EOL . ' 🤖 Social Permission data creating ...');
         $this->call(class: PermissionTableSeeder::class, parameters: ['module' => $module]);
-
-        //Todo remove after test
-//        $this->command->warn(PHP_EOL.' 🤖 Social Project data creating ...');
-//        $this->call(ProjectTableSeeder::class, parameters: ['project' => $project, 'module' => $module]);
 
         $this->command->warn(PHP_EOL . ' 🤖🪴Social data seeding ...');
 
@@ -77,6 +74,8 @@ class SocialDatabaseSeeder extends Seeder
 
             $this->createSocialPollModel($user);
         });
+
+        $this->commandInfo(__CLASS__, '✔️');
     }
 
     function createGroups(User $user, WorkspaceModel $workspace): void
