@@ -1,7 +1,18 @@
 # Social Module
 ### Simple management of Social
 
-###### Post
+#### Module Dependencies
+
+1. [**App**](https://github.com/DviDev/app-module)
+2. [**Base**](https://github.com/DviDev/app-module)
+3. [**Workspace**](https://github.com/DviDev/workspace-module)
+
+#### Module Optional Relations
+
+1. [**DBMap**](https://github.com/DviDev/dbmap-module)
+2. [**Project**](https://github.com/DviDev/project-module)
+
+###### Social
 
 ```mermaid
 graph TD
@@ -16,7 +27,7 @@ graph TD
     Social;
 ```
 
-###### Post Actions
+###### Social Actions
 ```mermaid
 graph TD
     Workspace-->Group;

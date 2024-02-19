@@ -35,45 +35,51 @@ class SocialDatabaseSeeder extends BaseSeeder
     public function run()
     {
         Model::unguard();
-
         $this->commandWarn(__CLASS__, "🌱 seeding");
 
-        (new ScanTableDomain())->scan('social');
+        if (in_array(Module::allEnabled(), ['DMMap', 'Project'])) {
+            (new ScanTableDomain())->scan('social');
+            $module = ProjectModuleModel::byName('Social');
+            $project = $module->project;
+            //interligar o projeto com a rede social atraves da app_record_id
+        }
 
-        $module = ProjectModuleModel::byName('Social');
-        $project = $module->project;
-
-        $this->command->warn(PHP_EOL . ' 🤖 Social Permission data creating ...');
-        $this->call(class: PermissionTableSeeder::class, parameters: ['module' => $module]);
+        $modules = collect(Module::allEnabled());
+        if ($modules->contains('Permission')) {
+            $this->command->warn(PHP_EOL . ' 🤖 Social Permission data creating ...');
+            $this->call(class: PermissionTableSeeder::class, parameters: ['module' => $module]);
+        }
 
         $this->command->warn(PHP_EOL . ' 🤖🪴Social data seeding ...');
 
-        //criar workspace with visibility
-        /**@var WorkspaceModel $workspace */
-        $me = User::find(1);
-        $workspaces = WorkspaceModel::byUserId(1);
-        $workspaces->each(function (WorkspaceModel $workspace) {
-            SocialWorkspaceModel::factory()
-                ->for($workspace, 'workspace')
-                ->for($workspace->user, 'owner')
-                ->sequence(collect([
-                    ['visibility' => 'public'],
-                    ['visibility' => 'private']
-                ])->random())
-                ->create();
-        });
+        if ($modules->contains('Workspace')) {
+            //criar workspace with visibility
+            /**@var WorkspaceModel $workspace */
+            $me = User::find(1);
+            $workspaces = WorkspaceModel::byUserId(1);
+            $workspaces->each(function (WorkspaceModel $workspace) {
+                SocialWorkspaceModel::factory()
+                    ->for($workspace, 'workspace')
+                    ->for($workspace->user, 'owner')
+                    ->sequence(collect([
+                        ['visibility' => 'public'],
+                        ['visibility' => 'private']
+                    ])->random())
+                    ->create();
+            });
 
-        $workspace = $workspaces->first() ?: WorkspaceModel::factory()->for($me)->create();
+            $workspace = $workspaces->first() ?: WorkspaceModel::factory()->for($me)->create();
 
-        $workspace->participants->each(function (User $user) use ($workspace) {
-            SocialUserProfileModel::factory()->for($user)->create();
+            $workspace->participants->each(function (User $user) use ($workspace) {
+                SocialUserProfileModel::factory()->for($user)->create();
 
-            $this->createGroups($user, $workspace);
+                $this->createGroups($user, $workspace);
 
-            $this->createUserFollowers($workspace, $user);
+                $this->createUserFollowers($workspace, $user);
 
-            $this->createSocialPollModel($user);
-        });
+                $this->createSocialPollModel($user);
+            });
+        }
 
         $this->commandInfo(__CLASS__, '🟢 done');
     }

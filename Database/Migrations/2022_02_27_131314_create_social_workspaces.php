@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialWorkspace\SocialWorkspaceEntityModel;
+use Nwidart\Modules\Facades\Module;
 
 return new class extends Migration
 {
@@ -14,6 +15,9 @@ return new class extends Migration
      */
     public function up()
     {
+        if (!collect(Module::allEnabled())->contains('Workspace')) {
+            return;
+        }
         Schema::create('social_workspaces', function (Blueprint $table) {
             $table->id();
 
@@ -28,13 +32,11 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
+        if (!collect(Module::allEnabled())->contains('Workspace')) {
+            return;
+        }
         Schema::dropIfExists('social_workspaces');
     }
 };
