@@ -35,19 +35,19 @@ class SocialDatabaseSeeder extends BaseSeeder
     public function run()
     {
         Model::unguard();
-        $this->commandWarn(__CLASS__, "🌱 seeding");
-
-        if (in_array(Module::allEnabled(), ['DMMap', 'Project'])) {
-            (new ScanTableDomain())->scan('social');
-            $module = ProjectModuleModel::byName('Social');
-            $project = $module->project;
-            //interligar o projeto com a rede social atraves da app_record_id
-        }
+        $this->commandWarn(__CLASS__, "💦🌱 seeding");
 
         $modules = collect(Module::allEnabled());
-        if ($modules->contains('Permission')) {
-            $this->command->warn(PHP_EOL . ' 🤖 Social Permission data creating ...');
-            $this->call(class: PermissionTableSeeder::class, parameters: ['module' => $module]);
+        if ($modules->contains(['DBMap', 'Project'])) {
+            (new ScanTableDomain())->scan('social');
+            $module = ProjectModuleModel::byName('Social');
+
+            //Todo ligar o projeto com a rede social atraves da app_record_id
+
+            if ($modules->contains('Permission')) {
+                $this->command->warn(PHP_EOL . ' 🤖 Social Permission data creating ...');
+                $this->call(class: PermissionTableSeeder::class, parameters: ['module' => $module]);
+            }
         }
 
         $this->command->warn(PHP_EOL . ' 🤖🪴Social data seeding ...');
