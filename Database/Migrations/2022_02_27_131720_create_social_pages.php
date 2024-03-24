@@ -4,23 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialPage\SocialPageEntityModel;
+use Nwidart\Modules\Facades\Module;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+return new class extends Migration {
     public function up()
     {
         Schema::create('social_pages', function (Blueprint $table) {
             $table->id();
 
             $p = SocialPageEntityModel::props(null, true);
-            $table->foreignId($p->workspace_id)
-                ->references('id')->on('workspaces')
-                ->cascadeOnUpdate()->restrictOnDelete();
+            $table->unsignedBigInteger($p->workspace_id);
+            if (collect(Module::allEnabled())->contains('Workspace')) {
+                $table->foreign($p->workspace_id)->references('id')->on('workspaces')
+                    ->cascadeOnUpdate()->restrictOnDelete();
+            }
             $table->foreignId($p->user_id)
                 ->references('id')->on('users')
                 ->cascadeOnUpdate()->restrictOnDelete();
@@ -31,15 +28,9 @@ return new class extends Migration
             $table->timestamp($p->created_at)->useCurrent();
             $table->timestamp($p->updated_at)->useCurrent()->useCurrentOnUpdate();
             $table->timestamp($p->deleted_at)->nullable();
-
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('social_pages');

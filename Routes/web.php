@@ -13,11 +13,14 @@
 
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Modules\Project\Services\DynamicRoutes;
 use Modules\Social\Models\SocialGroupModel;
 use Modules\Social\Models\SocialPageModel;
 use Modules\Social\Models\SocialPollItemModel;
 use Modules\Social\Models\SocialPollModel;
 use Modules\Workspace\Models\WorkspaceModel;
+
+DynamicRoutes::all('Post');
 
 Route::prefix('social')->group(function () {
     Route::get('/{workspace}/groups', fn(WorkspaceModel $workspace) =>

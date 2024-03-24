@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialGroup\SocialGroupEntityModel;
+use Nwidart\Modules\Facades\Module;
 
 return new class extends Migration
 {
@@ -18,12 +19,14 @@ return new class extends Migration
             $table->id();
 
             $p = SocialGroupEntityModel::props(null, true);
-            $table->foreignId($p->workspace_id)
-                ->references('id')->on('workspaces')
+            $table->unsignedBigInteger($p->workspace_id);
+            if (collect(Module::allEnabled())->contains('Workspace')) {
+                $table->foreign($p->workspace_id)->references('id')->on('workspaces')
+                    ->cascadeOnUpdate()->restrictOnDelete();
+            }
+            $table->foreignId($p->user_id)->references('id')->on('users')
                 ->cascadeOnUpdate()->restrictOnDelete();
-            $table->foreignId($p->user_id)
-                ->references('id')->on('users')
-                ->cascadeOnUpdate()->restrictOnDelete();
+
             $table->char($p->visibility)->default('public'); //, SocialGroupVisibilityEnum::toArray())
             $table->string($p->name, 100);
             $table->string($p->cover_image_path)->nullable();

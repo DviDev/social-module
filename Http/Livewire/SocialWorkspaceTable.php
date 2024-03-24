@@ -4,6 +4,7 @@ namespace Modules\Social\Http\Livewire;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Modules\Workspace\Models\WorkspaceModel;
 use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\Exportable;
 use PowerComponents\LivewirePowerGrid\Footer;
@@ -26,7 +27,7 @@ final class SocialWorkspaceTable extends PowerGridComponent
     */
     public function datasource(): ?Collection
     {
-        return collect(auth()->user()->workspaces());
+        return WorkspaceModel::byUserId(auth()->user()->id)->get();
     }
 
     /*
