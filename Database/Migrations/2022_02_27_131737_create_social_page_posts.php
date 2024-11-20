@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialPagePost\SocialPagePostEntityModel;
+use Nwidart\Modules\Facades\Module;
 
 return new class extends Migration
 {
@@ -14,7 +15,7 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!collect(\Nwidart\Modules\Facades\Module::allEnabled())->contains('Post')) {
+        if (!Module::isEnabled('Post')) {
             return;
         }
 
