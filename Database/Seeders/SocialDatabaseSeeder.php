@@ -4,11 +4,11 @@ namespace Modules\Social\Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use Modules\App\Database\Seeders\MessageTableSeeder;
-use Modules\App\Models\RecordModel;
 use Modules\Base\Database\Seeders\BaseSeeder;
+use Modules\Base\Models\RecordModel;
 use Modules\DBMap\Domains\ScanTableDomain;
 use Modules\Permission\Database\Seeders\PermissionTableSeeder;
+use Modules\Post\Database\Seeders\MessageTableSeeder;
 use Modules\Post\Models\PostModel;
 use Modules\Project\Models\ProjectModuleModel;
 use Modules\Social\Models\SocialGroupModel;
@@ -86,7 +86,7 @@ class SocialDatabaseSeeder extends BaseSeeder
 
     function createGroups(User $user, WorkspaceModel $workspace): void
     {
-        $seed_total = config('app.SEED_MODULE_COUNT');
+        $seed_total = config('social.SEED_SOCIAL_GROUPS_COUNT');
         SocialGroupModel::factory()
             ->afterCreating(function (SocialGroupModel $group) use ($user, $workspace, $seed_total, &$seeded) {
                 $this->createPosts($group, $user);
@@ -106,7 +106,7 @@ class SocialDatabaseSeeder extends BaseSeeder
         if (!collect(Module::allEnabled())->contains('Post')) {
             return;
         }
-        $seed_total = config('app.SEED_MODULE_COUNT');
+        $seed_total = config('post.SEED_POSTS_COUNT');
 
         $entities = RecordModel::factory($seed_total)->create()->all()->map(fn($m) => ['record_id' => $m->id]);
         PostModel::factory($seed_total)
@@ -180,7 +180,7 @@ class SocialDatabaseSeeder extends BaseSeeder
 
     public function createSocialPollModel(User $user): void
     {
-        $seed_total = config('app.SEED_MODULE_COUNT');
+        $seed_total = config('social.SEED_SOCIAL_POLLS_COUNT');
         SocialPollModel::factory()
             ->afterCreating(function (SocialPollModel $poll) use ($user, $seed_total) {
                 $this->createSocialPollItem($poll, $user);
@@ -191,7 +191,7 @@ class SocialDatabaseSeeder extends BaseSeeder
     public function createSocialPollItem(SocialPollModel $poll, User $user): void
     {
         SocialPollItemModel::factory()
-            ->count(config('app.SEED_MODULE_COUNT'))
+            ->count(config('social.SEED_SOCIAL_POLL_ITEMS_COUNT'))
             ->for($poll)
             ->afterCreating(function (SocialPollItemModel $item) use ($user) {
                 SocialPollItemVoteModel::factory()
