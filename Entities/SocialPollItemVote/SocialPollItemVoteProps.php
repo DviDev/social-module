@@ -10,7 +10,4 @@ namespace Modules\Social\Entities\SocialPollItemVote;
  * @property $updated_at
  * @property $deleted_at
  */
-trait SocialPollItemVoteProps
-{
-
-}
+trait SocialPollItemVoteProps {}

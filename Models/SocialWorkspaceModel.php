@@ -13,7 +13,9 @@ use Modules\Workspace\Models\WorkspaceModel;
 
 /**
  * @author Davi Menezes (davimenezes.dev@gmail.com)
+ *
  * @link https://github.com/DaviMenezes
+ *
  * @method SocialWorkspaceEntityModel toEntity()
  */
 class SocialWorkspaceModel extends BaseModel
@@ -28,10 +30,12 @@ class SocialWorkspaceModel extends BaseModel
 
     protected static function newFactory(): BaseFactory
     {
-        return new class extends BaseFactory {
+        return new class extends BaseFactory
+        {
             protected $model = SocialWorkspaceModel::class;
         };
     }
+
     public static function table($alias = null): string
     {
         return self::dbTable('social_workspaces', $alias);

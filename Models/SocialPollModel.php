@@ -13,7 +13,9 @@ use Modules\Social\Entities\SocialPoll\SocialPollProps;
 
 /**
  * @author Davi Menezes (davimenezes.dev@gmail.com)
+ *
  * @link https://github.com/DaviMenezes
+ *
  * @method SocialPollEntityModel toEntity()
  */
 class SocialPollModel extends BaseModel
@@ -28,10 +30,12 @@ class SocialPollModel extends BaseModel
 
     protected static function newFactory(): BaseFactory
     {
-        return new class extends BaseFactory {
+        return new class extends BaseFactory
+        {
             protected $model = SocialPollModel::class;
         };
     }
+
     public static function table($alias = null): string
     {
         return self::dbTable('social_polls', $alias);

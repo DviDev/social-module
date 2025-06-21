@@ -8,7 +8,9 @@ use Modules\Social\Models\SocialWorkspaceModel;
 
 /**
  * @author Davi Menezes(davimenezes.dev@gmail.com)
+ *
  * @link https://github.com/DaviMenezes
+ *
  * @method self obj()
  * @method SocialWorkspaceModel model()
  * @method SocialWorkspaceEntityModel find($id)
@@ -20,7 +22,7 @@ use Modules\Social\Models\SocialWorkspaceModel;
 class SocialWorkspaceRepository extends BaseRepository
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function modelClass(): string
     {

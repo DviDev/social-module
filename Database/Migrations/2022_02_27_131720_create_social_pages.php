@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialPage\SocialPageEntityModel;
 use Nwidart\Modules\Facades\Module;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public function up()
     {
         Schema::create('social_pages', function (Blueprint $table) {
@@ -21,7 +22,7 @@ return new class extends Migration {
             $table->foreignId($p->user_id)
                 ->references('id')->on('users')
                 ->cascadeOnUpdate()->restrictOnDelete();
-            $table->char($p->visibility)->default('public'); //SocialPageVisibilityEnum::toArray()
+            $table->char($p->visibility)->default('public'); // SocialPageVisibilityEnum::toArray()
             $table->string($p->name, 150);
             $table->string($p->image_cover_path, 150)->nullable();
 

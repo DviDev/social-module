@@ -13,9 +13,12 @@ use Modules\Social\Entities\SocialGroupUser\SocialGroupUserProps;
 
 /**
  * @author Davi Menezes (davimenezes.dev@gmail.com)
+ *
  * @link https://github.com/DaviMenezes
+ *
  * @property-read SocialGroupModel $group
  * @property-read User $user
+ *
  * @method SocialGroupUserEntityModel toEntity()
  */
 class SocialGroupUserModel extends BaseModel
@@ -31,10 +34,12 @@ class SocialGroupUserModel extends BaseModel
 
     protected static function newFactory(): BaseFactory
     {
-        return new class extends BaseFactory {
+        return new class extends BaseFactory
+        {
             protected $model = SocialGroupUserModel::class;
         };
     }
+
     public static function table($alias = null): string
     {
         return self::dbTable('social_group_users', $alias);

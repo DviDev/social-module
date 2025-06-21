@@ -12,9 +12,12 @@ use Modules\Social\Entities\SocialGroupPost\SocialGroupPostProps;
 
 /**
  * @author Davi Menezes (davimenezes.dev@gmail.com)
+ *
  * @link https://github.com/DaviMenezes
+ *
  * @property-read SocialGroupModel $group
  * @property-read PostModel $post
+ *
  * @method SocialGroupPostEntityModel toEntity()
  */
 class SocialGroupPostModel extends BaseModel
@@ -29,10 +32,12 @@ class SocialGroupPostModel extends BaseModel
 
     protected static function newFactory(): BaseFactory
     {
-        return new class extends BaseFactory {
+        return new class extends BaseFactory
+        {
             protected $model = SocialGroupPostModel::class;
         };
     }
+
     public static function table($alias = null): string
     {
         return self::dbTable('social_group_posts', $alias);

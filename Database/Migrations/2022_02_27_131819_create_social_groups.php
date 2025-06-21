@@ -27,7 +27,7 @@ return new class extends Migration
             $table->foreignId($p->user_id)->references('id')->on('users')
                 ->cascadeOnUpdate()->restrictOnDelete();
 
-            $table->char($p->visibility)->default('public'); //, SocialGroupVisibilityEnum::toArray())
+            $table->char($p->visibility)->default('public'); // , SocialGroupVisibilityEnum::toArray())
             $table->string($p->name, 100);
             $table->string($p->cover_image_path)->nullable();
 

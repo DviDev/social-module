@@ -8,7 +8,9 @@ use Modules\Social\Models\SocialPollModel;
 
 /**
  * @author Davi Menezes(davimenezes.dev@gmail.com)
+ *
  * @link https://github.com/DaviMenezes
+ *
  * @method self obj()
  * @method SocialPollModel model()
  * @method SocialPollEntityModel find($id)
@@ -20,7 +22,7 @@ use Modules\Social\Models\SocialPollModel;
 class SocialPollRepository extends BaseRepository
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function modelClass(): string
     {

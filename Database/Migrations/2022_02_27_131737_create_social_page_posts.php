@@ -15,7 +15,7 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!Module::isEnabled('Post')) {
+        if (! Module::isEnabled('Post')) {
             return;
         }
 

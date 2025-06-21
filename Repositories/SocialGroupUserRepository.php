@@ -8,7 +8,9 @@ use Modules\Social\Models\SocialGroupUserModel;
 
 /**
  * @author Davi Menezes(davimenezes.dev@gmail.com)
+ *
  * @link https://github.com/DaviMenezes
+ *
  * @method self obj()
  * @method SocialGroupUserModel model()
  * @method SocialGroupUserEntityModel find($id)
@@ -20,7 +22,7 @@ use Modules\Social\Models\SocialGroupUserModel;
 class SocialGroupUserRepository extends BaseRepository
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function modelClass(): string
     {

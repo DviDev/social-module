@@ -13,7 +13,4 @@ namespace Modules\Social\Entities\SocialPage;
  * @property $updated_at
  * @property $deleted_at
  */
-trait SocialPageProps
-{
-
-}
+trait SocialPageProps {}

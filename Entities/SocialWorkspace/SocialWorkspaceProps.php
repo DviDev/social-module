@@ -8,7 +8,4 @@ namespace Modules\Social\Entities\SocialWorkspace;
  * @property $visibility
  * @property $owner_user_id
  */
-trait SocialWorkspaceProps
-{
-
-}
+trait SocialWorkspaceProps {}

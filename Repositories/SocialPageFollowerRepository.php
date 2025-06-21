@@ -8,7 +8,9 @@ use Modules\Social\Models\SocialPageFollowerModel;
 
 /**
  * @author Davi Menezes(davimenezes.dev@gmail.com)
+ *
  * @link https://github.com/DaviMenezes
+ *
  * @method self obj()
  * @method SocialPageFollowerModel model()
  * @method SocialPageFollowerEntityModel find($id)
@@ -20,7 +22,7 @@ use Modules\Social\Models\SocialPageFollowerModel;
 class SocialPageFollowerRepository extends BaseRepository
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function modelClass(): string
     {

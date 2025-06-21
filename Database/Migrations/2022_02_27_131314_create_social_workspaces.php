@@ -15,7 +15,7 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!collect(Module::allEnabled())->contains('Workspace')) {
+        if (! collect(Module::allEnabled())->contains('Workspace')) {
             return;
         }
         Schema::create('social_workspaces', function (Blueprint $table) {
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->foreignId($prop->workspace_id)
                 ->references('id')->on('workspaces')
                 ->cascadeOnUpdate()->restrictOnDelete();
-            $table->char($prop->visibility)->default('public');// SocialWorkspaceVisibilityEnum::toArray())
+            $table->char($prop->visibility)->default('public'); // SocialWorkspaceVisibilityEnum::toArray())
             $table->foreignId($prop->owner_user_id)
                 ->references('id')->on('users')
                 ->cascadeOnUpdate()->restrictOnDelete();
@@ -34,7 +34,7 @@ return new class extends Migration
 
     public function down()
     {
-        if (!collect(Module::allEnabled())->contains('Workspace')) {
+        if (! collect(Module::allEnabled())->contains('Workspace')) {
             return;
         }
         Schema::dropIfExists('social_workspaces');

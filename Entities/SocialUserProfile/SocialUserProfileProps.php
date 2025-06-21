@@ -13,7 +13,4 @@ namespace Modules\Social\Entities\SocialUserProfile;
  * @property $updated_at
  * @property $deleted_at
  */
-trait SocialUserProfileProps
-{
-
-}
+trait SocialUserProfileProps {}

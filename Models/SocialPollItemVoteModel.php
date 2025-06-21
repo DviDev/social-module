@@ -12,7 +12,9 @@ use Modules\Social\Entities\SocialPollItemVote\SocialPollItemVoteProps;
 
 /**
  * @author Davi Menezes (davimenezes.dev@gmail.com)
+ *
  * @link https://github.com/DaviMenezes
+ *
  * @method SocialPollItemVoteEntityModel toEntity()
  */
 class SocialPollItemVoteModel extends BaseModel
@@ -27,10 +29,12 @@ class SocialPollItemVoteModel extends BaseModel
 
     protected static function newFactory(): BaseFactory
     {
-        return new class extends BaseFactory {
+        return new class extends BaseFactory
+        {
             protected $model = SocialPollItemVoteModel::class;
         };
     }
+
     public static function table($alias = null): string
     {
         return self::dbTable('social_poll_item_votes', $alias);

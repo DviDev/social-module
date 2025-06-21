@@ -5,17 +5,17 @@ namespace Modules\Social\Http\Livewire;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Modules\Social\Models\SocialPollModel;
-use PowerComponents\LivewirePowerGrid\{Button,
-    Column,
-    Detail,
-    Exportable,
-    Footer,
-    Header,
-    PowerGrid,
-    PowerGridComponent,
-    PowerGridEloquent};
+use PowerComponents\LivewirePowerGrid\Button;
+use PowerComponents\LivewirePowerGrid\Column;
+use PowerComponents\LivewirePowerGrid\Detail;
+use PowerComponents\LivewirePowerGrid\Exportable;
 use PowerComponents\LivewirePowerGrid\Filters\Filter;
-use PowerComponents\LivewirePowerGrid\Rules\{RuleActions};
+use PowerComponents\LivewirePowerGrid\Footer;
+use PowerComponents\LivewirePowerGrid\Header;
+use PowerComponents\LivewirePowerGrid\PowerGrid;
+use PowerComponents\LivewirePowerGrid\PowerGridComponent;
+use PowerComponents\LivewirePowerGrid\PowerGridEloquent;
+use PowerComponents\LivewirePowerGrid\Rules\RuleActions;
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 
 final class SocialPollTable extends PowerGridComponent
@@ -41,7 +41,7 @@ final class SocialPollTable extends PowerGridComponent
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
-            Detail::make()->view('social::components.poll_row_detail')->showCollapseIcon()
+            Detail::make()->view('social::components.poll_row_detail')->showCollapseIcon(),
         ];
     }
 
@@ -97,9 +97,9 @@ final class SocialPollTable extends PowerGridComponent
         return PowerGrid::eloquent()
             ->addColumn('id')
             ->addColumn('name')
-            ->addColumn('name_lower', fn(SocialPollModel $model) => strtolower(e($model->name)))
+            ->addColumn('name_lower', fn (SocialPollModel $model) => strtolower(e($model->name)))
             ->addColumn('created_at')
-            ->addColumn('created_at_formatted', fn(SocialPollModel $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
+            ->addColumn('created_at_formatted', fn (SocialPollModel $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
     }
 
     /*
@@ -131,7 +131,7 @@ final class SocialPollTable extends PowerGridComponent
                 ->hidden(),
 
             Column::make('Created at', 'created_at_formatted', 'created_at')
-                ->searchable()
+                ->searchable(),
         ];
     }
 
