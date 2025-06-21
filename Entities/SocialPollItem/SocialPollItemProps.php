@@ -7,7 +7,4 @@ namespace Modules\Social\Entities\SocialPollItem;
  * @property $poll_id
  * @property $name
  */
-trait SocialPollItemProps
-{
-
-}
+trait SocialPollItemProps {}

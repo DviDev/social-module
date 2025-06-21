@@ -10,7 +10,4 @@ namespace Modules\Social\Entities\SocialPageFollower;
  * @property $updated_at
  * @property $deleted_at
  */
-trait SocialPageFollowerProps
-{
-
-}
+trait SocialPageFollowerProps {}

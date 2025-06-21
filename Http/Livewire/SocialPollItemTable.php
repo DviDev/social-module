@@ -52,7 +52,7 @@ final class SocialPollItemTable extends PowerGridComponent
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
-            Detail::make()->view('social::components.poll_item_row_detail')->showCollapseIcon()
+            Detail::make()->view('social::components.poll_item_row_detail')->showCollapseIcon(),
         ];
     }
 

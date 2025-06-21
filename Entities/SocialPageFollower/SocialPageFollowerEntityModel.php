@@ -8,8 +8,11 @@ use Modules\Social\Repositories\SocialPageFollowerRepository;
 
 /**
  * @author Davi Menezes (davimenezes.dev@gmail.com)
+ *
  * @link https://github.com/DaviMenezes
+ *
  * @property-read SocialPageFollowerModel $model
+ *
  * @method self save()
  * @method static self new()
  * @method static self props($alias = null, $force = null)

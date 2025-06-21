@@ -12,7 +12,9 @@ use Modules\Social\Entities\SocialUserProfile\SocialUserProfileProps;
 
 /**
  * @author Davi Menezes (davimenezes.dev@gmail.com)
+ *
  * @link https://github.com/DaviMenezes
+ *
  * @method SocialUserProfileEntityModel toEntity()
  */
 class SocialUserProfileModel extends BaseModel
@@ -27,10 +29,12 @@ class SocialUserProfileModel extends BaseModel
 
     protected static function newFactory(): BaseFactory
     {
-        return new class extends BaseFactory {
+        return new class extends BaseFactory
+        {
             protected $model = SocialUserProfileModel::class;
         };
     }
+
     public static function table($alias = null): string
     {
         return self::dbTable('social_user_profiles', $alias);
@@ -39,8 +43,9 @@ class SocialUserProfileModel extends BaseModel
     public function getGuarded(): array
     {
         $p = SocialUserProfileEntityModel::props();
+
         return collect($p->toArray())->except([
-            $p->id
+            $p->id,
         ])->toArray();
     }
 

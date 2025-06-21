@@ -10,7 +10,4 @@ namespace Modules\Social\Entities\SocialGroupUser;
  * @property $updated_at
  * @property $deleted_at
  */
-trait SocialGroupUserProps
-{
-
-}
+trait SocialGroupUserProps {}

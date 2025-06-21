@@ -8,7 +8,9 @@ use Modules\Social\Models\SocialPollItemVoteModel;
 
 /**
  * @author Davi Menezes(davimenezes.dev@gmail.com)
+ *
  * @link https://github.com/DaviMenezes
+ *
  * @method self obj()
  * @method SocialPollItemVoteModel model()
  * @method SocialPollItemVoteEntityModel find($id)
@@ -20,7 +22,7 @@ use Modules\Social\Models\SocialPollItemVoteModel;
 class SocialPollItemVoteRepository extends BaseRepository
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function modelClass(): string
     {

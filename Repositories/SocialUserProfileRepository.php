@@ -8,7 +8,9 @@ use Modules\Social\Models\SocialUserProfileModel;
 
 /**
  * @author Davi Menezes(davimenezes.dev@gmail.com)
+ *
  * @link https://github.com/DaviMenezes
+ *
  * @method self obj()
  * @method SocialUserProfileModel model()
  * @method SocialUserProfileEntityModel find($id)
@@ -20,7 +22,7 @@ use Modules\Social\Models\SocialUserProfileModel;
 class SocialUserProfileRepository extends BaseRepository
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function modelClass(): string
     {

@@ -8,8 +8,11 @@ use Modules\Social\Repositories\SocialPollRepository;
 
 /**
  * @author Davi Menezes (davimenezes.dev@gmail.com)
+ *
  * @link https://github.com/DaviMenezes
+ *
  * @property-read SocialPollModel $model
+ *
  * @method self save()
  * @method static self new()
  * @method static self props($alias = null, $force = null)

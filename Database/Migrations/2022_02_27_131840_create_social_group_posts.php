@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!collect(\Nwidart\Modules\Facades\Module::allEnabled())->contains('Post')) {
+        if (! collect(\Nwidart\Modules\Facades\Module::allEnabled())->contains('Post')) {
             return;
         }
         Schema::create('social_group_posts', function (Blueprint $table) {

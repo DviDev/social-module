@@ -7,7 +7,4 @@ namespace Modules\Social\Entities\SocialPagePost;
  * @property $page_id
  * @property $post_id
  */
-trait SocialPagePostProps
-{
-
-}
+trait SocialPagePostProps {}

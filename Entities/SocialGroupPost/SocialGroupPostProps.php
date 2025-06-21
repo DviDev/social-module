@@ -7,7 +7,4 @@ namespace Modules\Social\Entities\SocialGroupPost;
  * @property $group_id
  * @property $post_id
  */
-trait SocialGroupPostProps
-{
-
-}
+trait SocialGroupPostProps {}

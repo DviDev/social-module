@@ -12,9 +12,12 @@ use Modules\Social\Entities\SocialPageFollower\SocialPageFollowerProps;
 
 /**
  * @author Davi Menezes (davimenezes.dev@gmail.com)
+ *
  * @link https://github.com/DaviMenezes
+ *
  * @property-read SocialPageModel $page
  * @property-read User $user
+ *
  * @method SocialPageFollowerEntityModel toEntity()
  */
 class SocialPageFollowerModel extends BaseModel
@@ -29,10 +32,12 @@ class SocialPageFollowerModel extends BaseModel
 
     protected static function newFactory(): BaseFactory
     {
-        return new class extends BaseFactory {
+        return new class extends BaseFactory
+        {
             protected $model = SocialPageFollowerModel::class;
         };
     }
+
     public static function table($alias = null): string
     {
         return self::dbTable('social_page_followers', $alias);

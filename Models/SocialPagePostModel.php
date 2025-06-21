@@ -12,9 +12,12 @@ use Modules\Social\Entities\SocialPagePost\SocialPagePostProps;
 
 /**
  * @author Davi Menezes (davimenezes.dev@gmail.com)
+ *
  * @link https://github.com/DaviMenezes
+ *
  * @property-read SocialPageModel $page
  * @property-read PostModel $post
+ *
  * @method SocialPagePostEntityModel toEntity()
  */
 class SocialPagePostModel extends BaseModel
@@ -29,10 +32,12 @@ class SocialPagePostModel extends BaseModel
 
     protected static function newFactory(): BaseFactory
     {
-        return new class extends BaseFactory {
+        return new class extends BaseFactory
+        {
             protected $model = SocialPagePostModel::class;
         };
     }
+
     public static function table($alias = null): string
     {
         return self::dbTable('social_page_posts', $alias);

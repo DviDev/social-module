@@ -16,9 +16,12 @@ use Modules\Workspace\Models\WorkspaceModel;
 
 /**
  * @author Davi Menezes (davimenezes.dev@gmail.com)
+ *
  * @link https://github.com/DaviMenezes
+ *
  * @property-read User $user
  * @property-read WorkspaceModel $workspace
+ *
  * @method SocialPageEntityModel toEntity()
  */
 class SocialPageModel extends BaseModel
@@ -34,10 +37,12 @@ class SocialPageModel extends BaseModel
 
     protected static function newFactory(): BaseFactory
     {
-        return new class extends BaseFactory {
+        return new class extends BaseFactory
+        {
             protected $model = SocialPageModel::class;
         };
     }
+
     public static function table($alias = null): string
     {
         return self::dbTable('social_pages', $alias);
