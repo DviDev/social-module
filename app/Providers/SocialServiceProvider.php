@@ -37,6 +37,9 @@ class SocialServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
+
+        $this->registerComponents();
+
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
     }
 
@@ -47,17 +50,6 @@ class SocialServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        \Livewire::component('social::group-post-table', SocialGroupPostTable::class);
-        \Livewire::component('social::group-table', SocialGroupTable::class);
-        \Livewire::component('social::group-user-table', SocialGroupUsertable::class);
-        \Livewire::component('social::page-follower-table', SocialPageFollowerTable::class);
-        \Livewire::component('social::page-post-table', SocialPagePostTable::class);
-        \Livewire::component('social::poll-item-table', SocialPollItemTable::class);
-        \Livewire::component('social::poll-item-vote-table', SocialPollItemVoteTable::class);
-        \Livewire::component('social::poll-table', SocialPollTable::class);
-        \Livewire::component('social::user-follower-table', SocialUserFollowerTable::class);
-        \Livewire::component('social::workspace-page-table', SocialWorkspacePageTable::class);
-        \Livewire::component('social::workspace--table', SocialWorkspaceTable::class);
 
         $this->app->register(RouteServiceProvider::class);
     }
@@ -131,5 +123,20 @@ class SocialServiceProvider extends ServiceProvider
         }
 
         return $paths;
+    }
+
+    protected function registerComponents(): void
+    {
+        \Livewire::component('social::group-post-table', SocialGroupPostTable::class);
+        \Livewire::component('social::group-table', SocialGroupTable::class);
+        \Livewire::component('social::group-user-table', SocialGroupUsertable::class);
+        \Livewire::component('social::page-follower-table', SocialPageFollowerTable::class);
+        \Livewire::component('social::page-post-table', SocialPagePostTable::class);
+        \Livewire::component('social::poll-item-table', SocialPollItemTable::class);
+        \Livewire::component('social::poll-item-vote-table', SocialPollItemVoteTable::class);
+        \Livewire::component('social::poll-table', SocialPollTable::class);
+        \Livewire::component('social::user-follower-table', SocialUserFollowerTable::class);
+        \Livewire::component('social::workspace-page-table', SocialWorkspacePageTable::class);
+        \Livewire::component('social::workspace--table', SocialWorkspaceTable::class);
     }
 }
