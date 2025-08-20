@@ -40,7 +40,7 @@ class SocialDatabaseSeeder extends BaseSeeder
         $modules = collect(Module::allEnabled());
         if ($modules->contains(['DBMap', 'Project'])) {
             (new ScanTableDomain)->scan('social');
-            $module = ProjectModuleModel::byName('Social');
+            $module = ProjectModuleModel::byNameOrFactory('Social');
 
             // Todo ligar o projeto com a rede social atraves da app_record_id
 
