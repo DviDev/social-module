@@ -6,8 +6,8 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Base\Contracts\BaseModel;
 use Modules\Base\Factories\BaseFactory;
-use Modules\Base\Models\BaseModel;
 use Modules\Social\Entities\SocialGroupUser\SocialGroupUserEntityModel;
 use Modules\Social\Entities\SocialGroupUser\SocialGroupUserProps;
 

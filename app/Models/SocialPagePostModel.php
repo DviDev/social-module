@@ -4,8 +4,8 @@ namespace Modules\Social\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Base\Contracts\BaseModel;
 use Modules\Base\Factories\BaseFactory;
-use Modules\Base\Models\BaseModel;
 use Modules\Post\Models\PostModel;
 use Modules\Social\Entities\SocialPagePost\SocialPagePostEntityModel;
 use Modules\Social\Entities\SocialPagePost\SocialPagePostProps;

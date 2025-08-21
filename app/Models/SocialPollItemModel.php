@@ -5,8 +5,8 @@ namespace Modules\Social\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Base\Contracts\BaseModel;
 use Modules\Base\Factories\BaseFactory;
-use Modules\Base\Models\BaseModel;
 use Modules\Social\Entities\SocialPollItem\SocialPollItemEntityModel;
 use Modules\Social\Entities\SocialPollItem\SocialPollItemProps;
 
