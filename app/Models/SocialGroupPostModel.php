@@ -40,7 +40,7 @@ class SocialGroupPostModel extends BaseModel
 
     public static function table($alias = null): string
     {
-        return self::dbTable('social_group_posts', $alias);
+        return self::dbTable('social_group_threads', $alias);
     }
 
     public function group(): BelongsTo

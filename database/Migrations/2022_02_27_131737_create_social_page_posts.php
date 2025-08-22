@@ -19,7 +19,7 @@ return new class extends Migration
             return;
         }
 
-        Schema::create('social_page_posts', function (Blueprint $table) {
+        Schema::create('social_page_threads', function (Blueprint $table) {
             $table->id();
 
             $prop = SocialPagePostEntityModel::props(null, true);
@@ -27,7 +27,7 @@ return new class extends Migration
                 ->references('id')->on('social_pages')
                 ->cascadeOnUpdate()->restrictOnDelete();
             $table->foreignId($prop->post_id)
-                ->references('id')->on('posts')
+                ->references('id')->on('threads')
                 ->cascadeOnUpdate()->restrictOnDelete();
         });
     }
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('social_page_posts');
+        Schema::dropIfExists('social_page_threads');
     }
 };

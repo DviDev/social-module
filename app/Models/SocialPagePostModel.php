@@ -40,7 +40,7 @@ class SocialPagePostModel extends BaseModel
 
     public static function table($alias = null): string
     {
-        return self::dbTable('social_page_posts', $alias);
+        return self::dbTable('social_page_threads', $alias);
     }
 
     public function page(): BelongsTo

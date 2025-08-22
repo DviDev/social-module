@@ -32,7 +32,7 @@ class SocialServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerTranslations();
         $this->registerConfig();
@@ -50,7 +50,6 @@ class SocialServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
         $this->app->register(RouteServiceProvider::class);
     }
 

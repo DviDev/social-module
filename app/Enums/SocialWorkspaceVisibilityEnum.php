@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\Entities\SocialWorkspace;
+namespace Modules\Social\Enums;
 
 enum SocialWorkspaceVisibilityEnum
 {

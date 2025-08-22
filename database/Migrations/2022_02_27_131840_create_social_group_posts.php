@@ -17,7 +17,7 @@ return new class extends Migration
         if (! collect(\Nwidart\Modules\Facades\Module::allEnabled())->contains('Post')) {
             return;
         }
-        Schema::create('social_group_posts', function (Blueprint $table) {
+        Schema::create('social_group_threads', function (Blueprint $table) {
             $table->id();
 
             $prop = SocialGroupPostEntityModel::props(null, true);
@@ -25,7 +25,7 @@ return new class extends Migration
                 ->references('id')->on('social_groups')
                 ->cascadeOnUpdate()->restrictOnDelete();
             $table->foreignId($prop->post_id)
-                ->references('id')->on('posts')
+                ->references('id')->on('threads')
                 ->cascadeOnUpdate()->restrictOnDelete();
         });
     }
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('social_group_posts');
+        Schema::dropIfExists('social_group_threads');
     }
 };
