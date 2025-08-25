@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Social\Entities\SocialPage;
+namespace Modules\Social\Enums;
 
-enum SocialPageVisibilityEnum
+enum SocialGroupVisibilityEnum
 {
     case public;
     case private;
 
-    public static function toArray()
+    public static function toArray(): array
     {
         return collect(self::cases())->pluck('name')->toArray();
     }

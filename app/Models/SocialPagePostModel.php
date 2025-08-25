@@ -4,8 +4,8 @@ namespace Modules\Social\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Base\Contracts\BaseModel;
 use Modules\Base\Factories\BaseFactory;
-use Modules\Base\Models\BaseModel;
 use Modules\Post\Models\PostModel;
 use Modules\Social\Entities\SocialPagePost\SocialPagePostEntityModel;
 use Modules\Social\Entities\SocialPagePost\SocialPagePostProps;
@@ -40,7 +40,7 @@ class SocialPagePostModel extends BaseModel
 
     public static function table($alias = null): string
     {
-        return self::dbTable('social_page_posts', $alias);
+        return self::dbTable('social_page_threads', $alias);
     }
 
     public function page(): BelongsTo

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Social\App\Events;
+namespace Modules\Social\Events;
 
 use Illuminate\Queue\SerializesModels;
 
