@@ -3,7 +3,6 @@
 namespace Modules\Social\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Base\Contracts\BaseModel;
@@ -20,7 +19,6 @@ use Modules\Social\Entities\SocialPoll\SocialPollProps;
  */
 class SocialPollModel extends BaseModel
 {
-    use HasFactory;
     use SocialPollProps;
 
     public function modelEntity(): string
@@ -30,8 +28,7 @@ class SocialPollModel extends BaseModel
 
     protected static function newFactory(): BaseFactory
     {
-        return new class extends BaseFactory
-        {
+        return new class extends BaseFactory {
             protected $model = SocialPollModel::class;
         };
     }

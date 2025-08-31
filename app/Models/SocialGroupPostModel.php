@@ -2,7 +2,6 @@
 
 namespace Modules\Social\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Base\Contracts\BaseModel;
 use Modules\Base\Factories\BaseFactory;
@@ -22,7 +21,6 @@ use Modules\Social\Entities\SocialGroupPost\SocialGroupPostProps;
  */
 class SocialGroupPostModel extends BaseModel
 {
-    use HasFactory;
     use SocialGroupPostProps;
 
     public function modelEntity(): string
@@ -32,8 +30,7 @@ class SocialGroupPostModel extends BaseModel
 
     protected static function newFactory(): BaseFactory
     {
-        return new class extends BaseFactory
-        {
+        return new class extends BaseFactory {
             protected $model = SocialGroupPostModel::class;
         };
     }

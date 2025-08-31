@@ -3,7 +3,6 @@
 namespace Modules\Social\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Base\Contracts\BaseModel;
 use Modules\Base\Factories\BaseFactory;
@@ -19,7 +18,6 @@ use Modules\Social\Entities\SocialPollItemVote\SocialPollItemVoteProps;
  */
 class SocialPollItemVoteModel extends BaseModel
 {
-    use HasFactory;
     use SocialPollItemVoteProps;
 
     public function modelEntity(): string
@@ -29,8 +27,7 @@ class SocialPollItemVoteModel extends BaseModel
 
     protected static function newFactory(): BaseFactory
     {
-        return new class extends BaseFactory
-        {
+        return new class extends BaseFactory {
             protected $model = SocialPollItemVoteModel::class;
         };
     }

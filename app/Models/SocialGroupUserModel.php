@@ -3,7 +3,6 @@
 namespace Modules\Social\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Base\Contracts\BaseModel;
@@ -23,7 +22,6 @@ use Modules\Social\Entities\SocialGroupUser\SocialGroupUserProps;
  */
 class SocialGroupUserModel extends BaseModel
 {
-    use HasFactory;
     use SocialGroupUserProps;
     use SoftDeletes;
 
@@ -34,8 +32,7 @@ class SocialGroupUserModel extends BaseModel
 
     protected static function newFactory(): BaseFactory
     {
-        return new class extends BaseFactory
-        {
+        return new class extends BaseFactory {
             protected $model = SocialGroupUserModel::class;
         };
     }
