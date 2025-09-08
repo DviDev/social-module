@@ -35,7 +35,8 @@ class SocialDatabaseSeeder extends BaseSeeder
     public function run()
     {
         Model::unguard();
-        $this->commandWarn(__CLASS__, '💦🌱 seeding');
+        
+        $this->seeding();
 
         $modules = collect(Module::allEnabled());
         if ($modules->contains(['DBMap', 'Project'])) {
@@ -81,7 +82,7 @@ class SocialDatabaseSeeder extends BaseSeeder
             });
         }
 
-        $this->commandInfo(__CLASS__, '🟢 done');
+        $this->done();
     }
 
     public function createGroups(User $user, WorkspaceModel $workspace): void
