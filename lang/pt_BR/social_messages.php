@@ -7,5 +7,5 @@ return [
     'content' => 'mensagem',
     'is_read' => 'foi lida',
     'created_at' => 'data de envio',
-    'deleted_at' => 'data de remoção'
+    'deleted_at' => 'data de remoção',
 ];
