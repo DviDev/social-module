@@ -35,7 +35,7 @@ class SocialUserFollowerModel extends BaseModel
 
     public static function table($alias = null): string
     {
-        return self::dbTable('social_user_followers', $alias);
+        return self::dbTable('social_followers', $alias);
     }
 
     public function user(): BelongsTo
