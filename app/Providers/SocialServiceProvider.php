@@ -2,7 +2,10 @@
 
 namespace Modules\Social\Providers;
 
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Modules\DBMap\Events\ScanTableEvent;
+use Modules\Project\Events\CreateMenuItemsEvent;
 use Modules\Social\Http\Livewire\SocialGroupPostTable;
 use Modules\Social\Http\Livewire\SocialGroupTable;
 use Modules\Social\Http\Livewire\SocialGroupUsertable;
@@ -14,6 +17,12 @@ use Modules\Social\Http\Livewire\SocialPollTable;
 use Modules\Social\Http\Livewire\SocialUserFollowerTable;
 use Modules\Social\Http\Livewire\SocialWorkspacePageTable;
 use Modules\Social\Http\Livewire\SocialWorkspaceTable;
+use Modules\Social\Listeners\CreateMenuItemsSocialListener;
+use Modules\Social\Listeners\DefineSearchableSocialAttributes;
+use Modules\Social\Listeners\ScanTableSocialListener;
+use Modules\Social\Listeners\TranslateViewElementPropertiesSocialListener;
+use Modules\View\Events\DefineSearchableAttributesEvent;
+use Modules\View\Events\ElementPropertyCreatingEvent;
 
 class SocialServiceProvider extends ServiceProvider
 {
@@ -49,6 +58,11 @@ class SocialServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+
+        Event::listen(CreateMenuItemsEvent::class, CreateMenuItemsSocialListener::class);
+        Event::listen(DefineSearchableAttributesEvent::class, DefineSearchableSocialAttributes::class);
+        Event::listen(ScanTableEvent::class, ScanTableSocialListener::class);
+        Event::listen(ElementPropertyCreatingEvent::class, TranslateViewElementPropertiesSocialListener::class);
     }
 
     /**
