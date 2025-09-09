@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('social_user_followers', function (Blueprint $table) {
+        Schema::create('social_followers', function (Blueprint $table) {
             $table->id();
 
             $p = SocialUserFollowerEntityModel::props(null, true);
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('social_user_followers');
+        Schema::dropIfExists('social_followers');
     }
 };
