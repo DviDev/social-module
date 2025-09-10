@@ -8,7 +8,6 @@ use Nwidart\Modules\Facades\Module;
 
 return new class extends Migration
 {
-
     public function up()
     {
         if (Module::isDisabled('Post')) {
@@ -27,7 +26,6 @@ return new class extends Migration
                 ->cascadeOnUpdate()->restrictOnDelete();
         });
     }
-
 
     public function down()
     {

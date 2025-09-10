@@ -7,7 +7,6 @@ use Modules\Social\Entities\SocialUserProfile\SocialUserProfileEntityModel;
 
 return new class extends Migration
 {
-
     public function up()
     {
         Schema::create('social_user_profiles', function (Blueprint $table) {
@@ -26,7 +25,6 @@ return new class extends Migration
 
         });
     }
-
 
     public function down()
     {

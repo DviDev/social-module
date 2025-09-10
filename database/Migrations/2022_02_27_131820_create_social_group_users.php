@@ -7,7 +7,6 @@ use Modules\Social\Entities\SocialGroupUser\SocialGroupUserEntityModel;
 
 return new class extends Migration
 {
-
     public function up()
     {
         Schema::create('social_group_users', function (Blueprint $table) {
@@ -28,7 +27,6 @@ return new class extends Migration
             $table->unique([$p->group_id, $p->user_id]);
         });
     }
-
 
     public function down()
     {

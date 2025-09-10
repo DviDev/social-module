@@ -7,7 +7,6 @@ use Modules\Social\Entities\SocialPollItemVote\SocialPollItemVoteEntityModel;
 
 return new class extends Migration
 {
-
     public function up()
     {
         Schema::create('social_poll_item_votes', function (Blueprint $table) {
@@ -26,7 +25,6 @@ return new class extends Migration
 
         });
     }
-
 
     public function down()
     {

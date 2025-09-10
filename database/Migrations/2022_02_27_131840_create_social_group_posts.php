@@ -7,7 +7,6 @@ use Modules\Social\Entities\SocialGroupPost\SocialGroupPostEntityModel;
 
 return new class extends Migration
 {
-
     public function up()
     {
         if (! collect(\Nwidart\Modules\Facades\Module::allEnabled())->contains('Post')) {
@@ -25,7 +24,6 @@ return new class extends Migration
                 ->cascadeOnUpdate()->restrictOnDelete();
         });
     }
-
 
     public function down()
     {

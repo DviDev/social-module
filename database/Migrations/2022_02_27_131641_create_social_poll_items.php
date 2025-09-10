@@ -7,7 +7,6 @@ use Modules\Social\Entities\SocialPollItem\SocialPollItemEntityModel;
 
 return new class extends Migration
 {
-
     public function up()
     {
         Schema::create('social_poll_items', function (Blueprint $table) {
@@ -20,7 +19,6 @@ return new class extends Migration
             $table->string($prop->name, 80);
         });
     }
-
 
     public function down()
     {

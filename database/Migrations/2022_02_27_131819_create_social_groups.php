@@ -8,7 +8,6 @@ use Nwidart\Modules\Facades\Module;
 
 return new class extends Migration
 {
-
     public function up()
     {
         Schema::create('social_groups', function (Blueprint $table) {
@@ -33,7 +32,6 @@ return new class extends Migration
 
         });
     }
-
 
     public function down()
     {

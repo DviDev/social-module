@@ -7,7 +7,6 @@ use Modules\Social\Entities\SocialPoll\SocialPollEntityModel;
 
 return new class extends Migration
 {
-
     public function up()
     {
         Schema::create('social_polls', function (Blueprint $table) {
@@ -24,7 +23,6 @@ return new class extends Migration
 
         });
     }
-
 
     public function down()
     {
