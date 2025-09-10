@@ -8,11 +8,7 @@ use Nwidart\Modules\Facades\Module;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         if (! collect(Module::allEnabled())->contains('Workspace')) {

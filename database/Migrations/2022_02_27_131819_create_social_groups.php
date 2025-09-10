@@ -8,11 +8,7 @@ use Nwidart\Modules\Facades\Module;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('social_groups', function (Blueprint $table) {
@@ -38,11 +34,7 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('social_groups');

@@ -8,11 +8,7 @@ use Nwidart\Modules\Facades\Module;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         if (Module::isDisabled('Post')) {
@@ -32,11 +28,7 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('social_page_threads');

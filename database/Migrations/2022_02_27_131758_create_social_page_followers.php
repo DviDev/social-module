@@ -7,11 +7,7 @@ use Modules\Social\Entities\SocialPageFollower\SocialPageFollowerEntityModel;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('social_page_followers', function (Blueprint $table) {
@@ -31,11 +27,7 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('social_page_followers');
