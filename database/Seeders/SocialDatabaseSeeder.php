@@ -35,7 +35,7 @@ class SocialDatabaseSeeder extends BaseSeeder
     public function run()
     {
         Model::unguard();
-        
+
         $this->seeding();
 
         $modules = collect(Module::allEnabled());

@@ -7,11 +7,6 @@ use Modules\Social\Entities\SocialGroupPost\SocialGroupPostEntityModel;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         if (! collect(\Nwidart\Modules\Facades\Module::allEnabled())->contains('Post')) {
@@ -30,11 +25,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('social_group_threads');

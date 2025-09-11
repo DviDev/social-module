@@ -7,11 +7,6 @@ use Modules\Social\Entities\SocialGroupUser\SocialGroupUserEntityModel;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('social_group_users', function (Blueprint $table) {
@@ -33,11 +28,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('social_group_users');

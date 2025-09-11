@@ -2,8 +2,6 @@
 
 namespace Modules\Social\Listeners;
 
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Modules\Project\Contracts\CreateMenuItemsListenerContract;
 
 class CreateMenuItemsSocialListener extends CreateMenuItemsListenerContract

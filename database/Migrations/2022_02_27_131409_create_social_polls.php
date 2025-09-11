@@ -7,11 +7,6 @@ use Modules\Social\Entities\SocialPoll\SocialPollEntityModel;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('social_polls', function (Blueprint $table) {
@@ -29,11 +24,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('social_polls');

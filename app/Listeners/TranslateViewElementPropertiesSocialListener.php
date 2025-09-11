@@ -2,8 +2,6 @@
 
 namespace Modules\Social\Listeners;
 
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Modules\Base\Contracts\BaseTranslateViewElementPropertiesListener;
 
 class TranslateViewElementPropertiesSocialListener extends BaseTranslateViewElementPropertiesListener
