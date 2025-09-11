@@ -8,6 +8,6 @@ class ScanTableSocialListener
 {
     public function handle($event): void
     {
-        new ScanTableDomain()->scan('social');
+        (new ScanTableDomain)->scan('social');
     }
 }
