@@ -22,5 +22,10 @@
             "Modules\\Social\\Database\\Seeders\\": "database/Seeders/",
             "Modules\\Social\\Database\\Migrations\\": "database/Migrations/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Builder\\Tests\\": "tests/"
+        }
     }
 }
