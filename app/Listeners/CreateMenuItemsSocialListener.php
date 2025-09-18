@@ -6,7 +6,7 @@ use Modules\Project\Contracts\CreateMenuItemsListenerContract;
 
 class CreateMenuItemsSocialListener extends CreateMenuItemsListenerContract
 {
-    public function moduleName(): string
+    protected function moduleName(): string
     {
         return config('social.name');
     }
