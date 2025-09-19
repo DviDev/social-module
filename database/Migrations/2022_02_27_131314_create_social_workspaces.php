@@ -15,7 +15,7 @@ return new class extends Migration
         if (! collect(Module::allEnabled())->contains('Workspace')) {
             return;
         }
-        Schema::create('social_workspaces', function (Blueprint $table) {
+        Schema::create('social_workspaces', function (Blueprint $table): void {
             $table->id();
 
             $prop = SocialWorkspaceEntityModel::props(null, true);

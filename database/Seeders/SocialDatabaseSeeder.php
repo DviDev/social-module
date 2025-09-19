@@ -60,7 +60,7 @@ final class SocialDatabaseSeeder extends BaseSeeder
             /** @var WorkspaceModel $workspace */
             $me = User::find(1);
             $workspaces = WorkspaceModel::byUserId(1);
-            $workspaces->each(function (WorkspaceModel $workspace) {
+            $workspaces->each(function (WorkspaceModel $workspace): void {
                 SocialWorkspaceModel::factory()
                     ->for($workspace, 'workspace')
                     ->for($workspace->user, 'owner')
@@ -73,7 +73,7 @@ final class SocialDatabaseSeeder extends BaseSeeder
 
             $workspace = $workspaces->first() ?: WorkspaceModel::factory()->for($me)->create();
 
-            $workspace->participants->each(function (User $user) use ($workspace) {
+            $workspace->participants->each(function (User $user) use ($workspace): void {
                 SocialUserProfileModel::factory()->for($user)->create();
 
                 $this->createGroups($user, $workspace);
@@ -91,7 +91,7 @@ final class SocialDatabaseSeeder extends BaseSeeder
     {
         $seed_total = config('social.SEED_SOCIAL_GROUPS_COUNT');
         SocialGroupModel::factory()
-            ->afterCreating(function (SocialGroupModel $group) use ($user, $workspace, &$seeded) {
+            ->afterCreating(function (SocialGroupModel $group) use ($user, $workspace, &$seeded): void {
                 $this->createPosts($group, $user);
 
                 $group->participants()->attach($workspace->participants->modelKeys());
@@ -115,7 +115,7 @@ final class SocialDatabaseSeeder extends BaseSeeder
         PostModel::factory($seed_total)
             ->for($user, 'user')
             ->sequence(...$entities)
-            ->afterCreating(function (PostModel $post) use ($group, $user, $seed_total, &$seeded) {
+            ->afterCreating(function (PostModel $post) use ($group, $user, $seed_total, &$seeded): void {
                 $entity = RecordModel::factory()->create();
                 $post->record_id = $entity->id;
                 SocialGroupPostModel::factory()
@@ -129,9 +129,9 @@ final class SocialDatabaseSeeder extends BaseSeeder
 
     public function createSocialPage(User $user): void
     {
-        WorkspaceModel::byUserId($user->id)->with('participants')->each(function (WorkspaceModel $workspace) use ($user) {
+        WorkspaceModel::byUserId($user->id)->with('participants')->each(function (WorkspaceModel $workspace) use ($user): void {
             SocialPageModel::factory(config('social.SEED_SOCIAL_PAGES_COUNT'))
-                ->afterCreating(function (SocialPageModel $page) use ($user, $workspace) {
+                ->afterCreating(function (SocialPageModel $page) use ($user, $workspace): void {
                     $this->createPagePosts($page, $user, $workspace);
 
                     $page->followers()->sync(User::get()->modelKeys());
@@ -150,7 +150,7 @@ final class SocialDatabaseSeeder extends BaseSeeder
         $seed_total = config('social.SEED_SOCIAL_PAGE_POSTS_COUNT');
         PostModel::factory($seed_total)
             ->for($user)
-            ->afterCreating(function (PostModel $post) use ($page, $workspace) {
+            ->afterCreating(function (PostModel $post) use ($page, $workspace): void {
                 SocialPagePostModel::factory()->for($page)->for($post)->create();
 
                 $this->socialPageFollowed($workspace, $page);
@@ -160,7 +160,7 @@ final class SocialDatabaseSeeder extends BaseSeeder
 
     public function socialPageFollowed(WorkspaceModel $workspace, SocialPageModel $page): void
     {
-        $workspace->participants->each(function (User $user) use ($page) {
+        $workspace->participants->each(function (User $user) use ($page): void {
             SocialPageFollowerModel::factory()->for($page)->for($user)->create();
         });
     }
@@ -168,7 +168,7 @@ final class SocialDatabaseSeeder extends BaseSeeder
     public function createUserFollowers(WorkspaceModel $workspace, User $user): void
     {
         $workspace->participants()->whereNot('user_id', $user->id)
-            ->each(function (User $follower) use ($user) {
+            ->each(function (User $follower) use ($user): void {
                 SocialUserFollowerModel::factory()
                     ->for($user, 'user')
                     ->for($follower, 'follower')
@@ -180,7 +180,7 @@ final class SocialDatabaseSeeder extends BaseSeeder
     {
         $seed_total = config('social.SEED_SOCIAL_POLLS_COUNT');
         SocialPollModel::factory()
-            ->afterCreating(function (SocialPollModel $poll) use ($user) {
+            ->afterCreating(function (SocialPollModel $poll) use ($user): void {
                 $this->createSocialPollItem($poll, $user);
             })
             ->count($seed_total)->for($user, 'user')->create();
@@ -189,9 +189,9 @@ final class SocialDatabaseSeeder extends BaseSeeder
     public function createSocialPollItem(SocialPollModel $poll, User $user): void
     {
         SocialPollItemModel::factory()
-            ->count(config('social.SEED_SOCIAL_POLL_ITEMS_COUNT'))
             ->for($poll)
-            ->afterCreating(function (SocialPollItemModel $item) use ($user) {
+            ->count(config('social.SEED_SOCIAL_POLL_ITEMS_COUNT'))
+            ->afterCreating(function (SocialPollItemModel $item) use ($user): void {
                 SocialPollItemVoteModel::factory()
                     ->for($item)
                     ->for($user)

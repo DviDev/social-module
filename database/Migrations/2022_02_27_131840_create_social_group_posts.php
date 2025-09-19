@@ -14,7 +14,7 @@ return new class extends Migration
         if (! collect(Nwidart\Modules\Facades\Module::allEnabled())->contains('Post')) {
             return;
         }
-        Schema::create('social_group_threads', function (Blueprint $table) {
+        Schema::create('social_group_threads', function (Blueprint $table): void {
             $table->id();
 
             $prop = SocialGroupPostEntityModel::props(null, true);

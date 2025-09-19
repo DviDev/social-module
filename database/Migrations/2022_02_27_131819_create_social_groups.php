@@ -12,7 +12,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('social_groups', function (Blueprint $table) {
+        Schema::create('social_groups', function (Blueprint $table): void {
             $table->id();
 
             $p = SocialGroupEntityModel::props(null, true);

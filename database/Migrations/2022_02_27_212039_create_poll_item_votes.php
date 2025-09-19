@@ -11,7 +11,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('social_poll_item_votes', function (Blueprint $table) {
+        Schema::create('social_poll_item_votes', function (Blueprint $table): void {
             $table->id();
 
             $p = SocialPollItemVoteEntityModel::props(null, true);

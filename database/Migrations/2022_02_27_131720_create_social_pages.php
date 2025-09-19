@@ -12,7 +12,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('social_pages', function (Blueprint $table) {
+        Schema::create('social_pages', function (Blueprint $table): void {
             $table->id();
 
             $p = SocialPageEntityModel::props(null, true);

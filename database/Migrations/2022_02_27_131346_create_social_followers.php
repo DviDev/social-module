@@ -11,7 +11,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('social_followers', function (Blueprint $table) {
+        Schema::create('social_followers', function (Blueprint $table): void {
             $table->id();
 
             $p = SocialUserFollowerEntityModel::props(null, true);

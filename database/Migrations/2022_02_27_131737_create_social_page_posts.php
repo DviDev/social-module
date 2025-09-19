@@ -16,7 +16,7 @@ return new class extends Migration
             return;
         }
 
-        Schema::create('social_page_threads', function (Blueprint $table) {
+        Schema::create('social_page_threads', function (Blueprint $table): void {
             $table->id();
 
             $prop = SocialPagePostEntityModel::props(null, true);
