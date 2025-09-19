@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Database\Seeders;
 
 use App\Models\User;
@@ -25,7 +27,7 @@ use Modules\Social\Models\SocialWorkspaceModel;
 use Modules\Workspace\Models\WorkspaceModel;
 use Nwidart\Modules\Facades\Module;
 
-class SocialDatabaseSeeder extends BaseSeeder
+final class SocialDatabaseSeeder extends BaseSeeder
 {
     /**
      * Run the database seeds.

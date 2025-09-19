@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Models;
 
 use App\Models\User;
@@ -16,26 +18,18 @@ use Modules\Social\Entities\SocialUserProfile\SocialUserProfileProps;
  *
  * @method SocialUserProfileEntityModel toEntity()
  */
-class SocialUserProfileModel extends BaseModel
+final class SocialUserProfileModel extends BaseModel
 {
     use SocialUserProfileProps;
-
-    public function modelEntity(): string
-    {
-        return SocialUserProfileEntityModel::class;
-    }
-
-    protected static function newFactory(): BaseFactory
-    {
-        return new class extends BaseFactory
-        {
-            protected $model = SocialUserProfileModel::class;
-        };
-    }
 
     public static function table($alias = null): string
     {
         return self::dbTable('social_user_profiles', $alias);
+    }
+
+    public function modelEntity(): string
+    {
+        return SocialUserProfileEntityModel::class;
     }
 
     public function getGuarded(): array
@@ -50,5 +44,13 @@ class SocialUserProfileModel extends BaseModel
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    protected static function newFactory(): BaseFactory
+    {
+        return new class extends BaseFactory
+        {
+            protected $model = SocialUserProfileModel::class;
+        };
     }
 }

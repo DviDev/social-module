@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Models;
 
 use App\Models\User;
@@ -23,27 +25,19 @@ use Modules\Workspace\Models\WorkspaceModel;
  *
  * @method SocialPageEntityModel toEntity()
  */
-class SocialPageModel extends BaseModel
+final class SocialPageModel extends BaseModel
 {
     use SocialPageProps;
     use SoftDeletes;
 
-    public function modelEntity(): string
-    {
-        return SocialPageEntityModel::class;
-    }
-
-    protected static function newFactory(): BaseFactory
-    {
-        return new class extends BaseFactory
-        {
-            protected $model = SocialPageModel::class;
-        };
-    }
-
     public static function table($alias = null): string
     {
         return self::dbTable('social_pages', $alias);
+    }
+
+    public function modelEntity(): string
+    {
+        return SocialPageEntityModel::class;
     }
 
     public function user(): BelongsTo
@@ -64,5 +58,13 @@ class SocialPageModel extends BaseModel
     public function posts(): BelongsToMany
     {
         return $this->belongsToMany(PostModel::class, SocialPagePostModel::class, 'page_id', 'post_id');
+    }
+
+    protected static function newFactory(): BaseFactory
+    {
+        return new class extends BaseFactory
+        {
+            protected $model = SocialPageModel::class;
+        };
     }
 }

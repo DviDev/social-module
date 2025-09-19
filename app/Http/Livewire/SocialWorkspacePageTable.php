@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Http\Livewire;
 
 use Illuminate\Support\Carbon;
@@ -23,18 +25,6 @@ final class SocialWorkspacePageTable extends PowerGridComponent
 
     /*
     |--------------------------------------------------------------------------
-    |  Datasource
-    |--------------------------------------------------------------------------
-    | Provides data to your Table using a Model or Collection
-    |
-    */
-    public function datasource(): ?Collection
-    {
-        return $this->workspace->pages()->get();
-    }
-
-    /*
-    |--------------------------------------------------------------------------
     |  Relationship Search
     |--------------------------------------------------------------------------
     | Configure here relationships to be used by the Search and Table Filters.
@@ -55,6 +45,18 @@ final class SocialWorkspacePageTable extends PowerGridComponent
             Detail::make()->view('social::components.page_row_detail')->showCollapseIcon(),
 
         ];
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    |  Datasource
+    |--------------------------------------------------------------------------
+    | Provides data to your Table using a Model or Collection
+    |
+    */
+    public function datasource(): ?Collection
+    {
+        return $this->workspace->pages()->get();
     }
 
     /*

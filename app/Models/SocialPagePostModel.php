@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,26 +21,18 @@ use Modules\Social\Entities\SocialPagePost\SocialPagePostProps;
  *
  * @method SocialPagePostEntityModel toEntity()
  */
-class SocialPagePostModel extends BaseModel
+final class SocialPagePostModel extends BaseModel
 {
     use SocialPagePostProps;
-
-    public function modelEntity(): string
-    {
-        return SocialPagePostEntityModel::class;
-    }
-
-    protected static function newFactory(): BaseFactory
-    {
-        return new class extends BaseFactory
-        {
-            protected $model = SocialPagePostModel::class;
-        };
-    }
 
     public static function table($alias = null): string
     {
         return self::dbTable('social_page_threads', $alias);
+    }
+
+    public function modelEntity(): string
+    {
+        return SocialPagePostEntityModel::class;
     }
 
     public function page(): BelongsTo
@@ -49,5 +43,13 @@ class SocialPagePostModel extends BaseModel
     public function post(): BelongsTo
     {
         return $this->belongsTo(PostModel::class, 'post_id');
+    }
+
+    protected static function newFactory(): BaseFactory
+    {
+        return new class extends BaseFactory
+        {
+            protected $model = SocialPagePostModel::class;
+        };
     }
 }

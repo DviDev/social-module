@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Events;
 
 use Illuminate\Queue\SerializesModels;
 
-class PageCreatedEvent
+final class PageCreatedEvent
 {
     use SerializesModels;
 
