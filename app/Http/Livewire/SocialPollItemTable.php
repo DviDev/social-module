@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Http\Livewire;
 
 use Illuminate\Support\Carbon;
@@ -23,18 +25,6 @@ final class SocialPollItemTable extends PowerGridComponent
 
     /*
     |--------------------------------------------------------------------------
-    |  Datasource
-    |--------------------------------------------------------------------------
-    | Provides data to your Table using a Model or Collection
-    |
-    */
-    public function datasource(): ?Collection
-    {
-        return $this->poll->items()->get();
-    }
-
-    /*
-    |--------------------------------------------------------------------------
     |  Relationship Search
     |--------------------------------------------------------------------------
     | Configure here relationships to be used by the Search and Table Filters.
@@ -54,6 +44,18 @@ final class SocialPollItemTable extends PowerGridComponent
                 ->showRecordCount(),
             Detail::make()->view('social::components.poll_item_row_detail')->showCollapseIcon(),
         ];
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    |  Datasource
+    |--------------------------------------------------------------------------
+    | Provides data to your Table using a Model or Collection
+    |
+    */
+    public function datasource(): ?Collection
+    {
+        return $this->poll->items()->get();
     }
 
     /*

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Http\Livewire;
 
 use Illuminate\Support\Carbon;
@@ -17,18 +19,6 @@ use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 final class SocialWorkspaceTable extends PowerGridComponent
 {
     use ActionButton;
-
-    /*
-    |--------------------------------------------------------------------------
-    |  Datasource
-    |--------------------------------------------------------------------------
-    | Provides data to your Table using a Model or Collection
-    |
-    */
-    public function datasource(): ?Collection
-    {
-        return WorkspaceModel::byUserId(auth()->user()->id)->get();
-    }
 
     /*
     |--------------------------------------------------------------------------
@@ -50,6 +40,18 @@ final class SocialWorkspaceTable extends PowerGridComponent
                 ->showPerPage()
                 ->showRecordCount(),
         ];
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    |  Datasource
+    |--------------------------------------------------------------------------
+    | Provides data to your Table using a Model or Collection
+    |
+    */
+    public function datasource(): ?Collection
+    {
+        return WorkspaceModel::byUserId(auth()->user()->id)->get();
     }
 
     /*

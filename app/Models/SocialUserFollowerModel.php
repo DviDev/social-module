@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Models;
 
 use App\Models\User;
@@ -16,26 +18,18 @@ use Modules\Social\Entities\SocialUserFollower\SocialUserFollowerProps;
  *
  * @method SocialUserFollowerEntityModel toEntity()
  */
-class SocialUserFollowerModel extends BaseModel
+final class SocialUserFollowerModel extends BaseModel
 {
     use SocialUserFollowerProps;
-
-    public function modelEntity(): string
-    {
-        return SocialUserFollowerEntityModel::class;
-    }
-
-    protected static function newFactory(): BaseFactory
-    {
-        return new class extends BaseFactory
-        {
-            protected $model = SocialUserFollowerModel::class;
-        };
-    }
 
     public static function table($alias = null): string
     {
         return self::dbTable('social_followers', $alias);
+    }
+
+    public function modelEntity(): string
+    {
+        return SocialUserFollowerEntityModel::class;
     }
 
     public function user(): BelongsTo
@@ -46,5 +40,13 @@ class SocialUserFollowerModel extends BaseModel
     public function follower(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    protected static function newFactory(): BaseFactory
+    {
+        return new class extends BaseFactory
+        {
+            protected $model = SocialUserFollowerModel::class;
+        };
     }
 }

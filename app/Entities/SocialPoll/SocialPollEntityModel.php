@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Entities\SocialPoll;
 
 use Modules\Base\Entities\BaseEntityModel;
@@ -16,7 +18,7 @@ use Modules\Social\Models\SocialPollModel;
  * @method static self new()
  * @method static self props($alias = null, $force = null)
  */
-class SocialPollEntityModel extends BaseEntityModel
+final class SocialPollEntityModel extends BaseEntityModel
 {
     use SocialPollProps;
 }

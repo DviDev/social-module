@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,26 +21,18 @@ use Modules\Social\Entities\SocialGroupPost\SocialGroupPostProps;
  *
  * @method SocialGroupPostEntityModel toEntity()
  */
-class SocialGroupPostModel extends BaseModel
+final class SocialGroupPostModel extends BaseModel
 {
     use SocialGroupPostProps;
-
-    public function modelEntity(): string
-    {
-        return SocialGroupPostEntityModel::class;
-    }
-
-    protected static function newFactory(): BaseFactory
-    {
-        return new class extends BaseFactory
-        {
-            protected $model = SocialGroupPostModel::class;
-        };
-    }
 
     public static function table($alias = null): string
     {
         return self::dbTable('social_group_threads', $alias);
+    }
+
+    public function modelEntity(): string
+    {
+        return SocialGroupPostEntityModel::class;
     }
 
     public function group(): BelongsTo
@@ -49,5 +43,13 @@ class SocialGroupPostModel extends BaseModel
     public function post(): BelongsTo
     {
         return $this->belongsTo(PostModel::class, 'post_id');
+    }
+
+    protected static function newFactory(): BaseFactory
+    {
+        return new class extends BaseFactory
+        {
+            protected $model = SocialGroupPostModel::class;
+        };
     }
 }

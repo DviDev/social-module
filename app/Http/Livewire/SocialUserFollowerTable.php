@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Http\Livewire;
 
 use App\Models\User;
@@ -22,18 +24,6 @@ final class SocialUserFollowerTable extends PowerGridComponent
 
     /*
     |--------------------------------------------------------------------------
-    |  Datasource
-    |--------------------------------------------------------------------------
-    | Provides data to your Table using a Model or Collection
-    |
-    */
-    public function datasource(): ?Collection
-    {
-        return $this->user->followers()->get();
-    }
-
-    /*
-    |--------------------------------------------------------------------------
     |  Relationship Search
     |--------------------------------------------------------------------------
     | Configure here relationships to be used by the Search and Table Filters.
@@ -52,6 +42,18 @@ final class SocialUserFollowerTable extends PowerGridComponent
                 ->showPerPage()
                 ->showRecordCount(),
         ];
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    |  Datasource
+    |--------------------------------------------------------------------------
+    | Provides data to your Table using a Model or Collection
+    |
+    */
+    public function datasource(): ?Collection
+    {
+        return $this->user->followers()->get();
     }
 
     /*

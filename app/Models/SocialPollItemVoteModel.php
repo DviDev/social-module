@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Models;
 
 use App\Models\User;
@@ -16,26 +18,18 @@ use Modules\Social\Entities\SocialPollItemVote\SocialPollItemVoteProps;
  *
  * @method SocialPollItemVoteEntityModel toEntity()
  */
-class SocialPollItemVoteModel extends BaseModel
+final class SocialPollItemVoteModel extends BaseModel
 {
     use SocialPollItemVoteProps;
-
-    public function modelEntity(): string
-    {
-        return SocialPollItemVoteEntityModel::class;
-    }
-
-    protected static function newFactory(): BaseFactory
-    {
-        return new class extends BaseFactory
-        {
-            protected $model = SocialPollItemVoteModel::class;
-        };
-    }
 
     public static function table($alias = null): string
     {
         return self::dbTable('social_poll_item_votes', $alias);
+    }
+
+    public function modelEntity(): string
+    {
+        return SocialPollItemVoteEntityModel::class;
     }
 
     public function item(): BelongsTo
@@ -46,5 +40,13 @@ class SocialPollItemVoteModel extends BaseModel
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    protected static function newFactory(): BaseFactory
+    {
+        return new class extends BaseFactory
+        {
+            protected $model = SocialPollItemVoteModel::class;
+        };
     }
 }

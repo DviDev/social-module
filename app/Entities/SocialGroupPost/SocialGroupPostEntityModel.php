@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Entities\SocialGroupPost;
 
 use Modules\Base\Entities\BaseEntityModel;
@@ -16,7 +18,7 @@ use Modules\Social\Models\SocialGroupPostModel;
  * @method static self new()
  * @method static self props($alias = null, $force = null)
  */
-class SocialGroupPostEntityModel extends BaseEntityModel
+final class SocialGroupPostEntityModel extends BaseEntityModel
 {
     use SocialGroupPostProps;
 }

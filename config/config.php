@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'name' => 'Social',
     'SEED_SOCIAL_GROUP_POSTS_COUNT' => env('SEEDER_DEFAULT', 3),

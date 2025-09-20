@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Listeners;
 
 use Modules\DBMap\Domains\ScanTableDomain;
 
-class ScanTableSocialListener
+final class ScanTableSocialListener
 {
     public function handle($event): void
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Models;
 
 use App\Models\User;
@@ -23,27 +25,19 @@ use Modules\Workspace\Models\WorkspaceModel;
  *
  * @method SocialGroupEntityModel toEntity()
  */
-class SocialGroupModel extends BaseModel
+final class SocialGroupModel extends BaseModel
 {
     use SocialGroupProps;
     use SoftDeletes;
 
-    public function modelEntity(): string
-    {
-        return SocialGroupEntityModel::class;
-    }
-
-    protected static function newFactory(): BaseFactory
-    {
-        return new class extends BaseFactory
-        {
-            protected $model = SocialGroupModel::class;
-        };
-    }
-
     public static function table($alias = null): string
     {
         return self::dbTable('social_groups', $alias);
+    }
+
+    public function modelEntity(): string
+    {
+        return SocialGroupEntityModel::class;
     }
 
     public function user(): BelongsTo
@@ -69,5 +63,13 @@ class SocialGroupModel extends BaseModel
     public function participants(): BelongsToMany
     {
         return $this->belongsToMany(User::class, SocialGroupUserModel::table(), 'group_id', 'user_id');
+    }
+
+    protected static function newFactory(): BaseFactory
+    {
+        return new class extends BaseFactory
+        {
+            protected $model = SocialGroupModel::class;
+        };
     }
 }

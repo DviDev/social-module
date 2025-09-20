@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Entities\SocialPageFollower;
 
 use Modules\Base\Entities\BaseEntityModel;
@@ -16,7 +18,7 @@ use Modules\Social\Models\SocialPageFollowerModel;
  * @method static self new()
  * @method static self props($alias = null, $force = null)
  */
-class SocialPageFollowerEntityModel extends BaseEntityModel
+final class SocialPageFollowerEntityModel extends BaseEntityModel
 {
     use SocialPageFollowerProps;
 }

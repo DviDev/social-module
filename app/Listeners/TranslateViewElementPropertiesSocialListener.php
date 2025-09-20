@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Listeners;
 
 use Modules\Base\Contracts\BaseTranslateViewElementPropertiesListener;
 
-class TranslateViewElementPropertiesSocialListener extends BaseTranslateViewElementPropertiesListener
+final class TranslateViewElementPropertiesSocialListener extends BaseTranslateViewElementPropertiesListener
 {
     protected function moduleName(): string
     {
@@ -13,6 +15,6 @@ class TranslateViewElementPropertiesSocialListener extends BaseTranslateViewElem
 
     protected function moduleNameLower(): string
     {
-        return strtolower(config('social.name'));
+        return mb_strtolower(config('social.name'));
     }
 }

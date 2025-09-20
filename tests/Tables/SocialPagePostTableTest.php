@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Tests\Tables;
 
 use Modules\Base\Contracts\BaseModel;
 use Modules\Base\Services\Tests\BaseTest;
 use Modules\Social\Models\SocialPagePostModel;
 
-class SocialPagePostTableTest extends BaseTest
+final class SocialPagePostTableTest extends BaseTest
 {
     public function getModelClass(): string|BaseModel
     {

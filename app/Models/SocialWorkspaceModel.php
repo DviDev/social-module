@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Models;
 
 use App\Models\User;
@@ -17,26 +19,18 @@ use Modules\Workspace\Models\WorkspaceModel;
  *
  * @method SocialWorkspaceEntityModel toEntity()
  */
-class SocialWorkspaceModel extends BaseModel
+final class SocialWorkspaceModel extends BaseModel
 {
     use SocialWorkspaceProps;
-
-    public function modelEntity(): string
-    {
-        return SocialWorkspaceEntityModel::class;
-    }
-
-    protected static function newFactory(): BaseFactory
-    {
-        return new class extends BaseFactory
-        {
-            protected $model = SocialWorkspaceModel::class;
-        };
-    }
 
     public static function table($alias = null): string
     {
         return self::dbTable('social_workspaces', $alias);
+    }
+
+    public function modelEntity(): string
+    {
+        return SocialWorkspaceEntityModel::class;
     }
 
     public function workspace(): BelongsTo
@@ -47,5 +41,13 @@ class SocialWorkspaceModel extends BaseModel
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'owner_user_id');
+    }
+
+    protected static function newFactory(): BaseFactory
+    {
+        return new class extends BaseFactory
+        {
+            protected $model = SocialWorkspaceModel::class;
+        };
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,26 +18,18 @@ use Modules\Social\Entities\SocialPollItem\SocialPollItemProps;
  *
  * @method SocialPollItemEntityModel toEntity()
  */
-class SocialPollItemModel extends BaseModel
+final class SocialPollItemModel extends BaseModel
 {
     use SocialPollItemProps;
-
-    public function modelEntity(): string
-    {
-        return SocialPollItemEntityModel::class;
-    }
-
-    protected static function newFactory(): BaseFactory
-    {
-        return new class extends BaseFactory
-        {
-            protected $model = SocialPollItemModel::class;
-        };
-    }
 
     public static function table($alias = null): string
     {
         return self::dbTable('social_poll_items', $alias);
+    }
+
+    public function modelEntity(): string
+    {
+        return SocialPollItemEntityModel::class;
     }
 
     public function poll(): BelongsTo
@@ -46,5 +40,13 @@ class SocialPollItemModel extends BaseModel
     public function votes(): HasMany
     {
         return $this->hasMany(SocialPollItemVoteModel::class, 'item_id');
+    }
+
+    protected static function newFactory(): BaseFactory
+    {
+        return new class extends BaseFactory
+        {
+            protected $model = SocialPollItemModel::class;
+        };
     }
 }

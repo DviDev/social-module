@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Social\Http\Livewire;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -56,7 +58,7 @@ final class SocialPollTable extends PowerGridComponent
     /**
      * PowerGrid datasource.
      *
-     * @return Builder<\Modules\Social\Models\SocialPollModel>
+     * @return Builder<SocialPollModel>
      */
     public function datasource(): Builder
     {
@@ -97,7 +99,7 @@ final class SocialPollTable extends PowerGridComponent
         return PowerGrid::eloquent()
             ->addColumn('id')
             ->addColumn('name')
-            ->addColumn('name_lower', fn (SocialPollModel $model) => strtolower(e($model->name)))
+            ->addColumn('name_lower', fn (SocialPollModel $model) => mb_strtolower(e($model->name)))
             ->addColumn('created_at')
             ->addColumn('created_at_formatted', fn (SocialPollModel $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
     }
