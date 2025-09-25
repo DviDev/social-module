@@ -12,7 +12,7 @@ use Modules\DBMap\Domains\ScanTableDomain;
 use Modules\Permission\Database\Seeders\PermissionTableSeeder;
 use Modules\Post\Database\Seeders\MessageTableSeeder;
 use Modules\Post\Models\PostModel;
-use Modules\Schema\Models\ProjectModuleModel;
+use Modules\Schema\Models\ModuleModel;
 use Modules\Social\Models\SocialGroupModel;
 use Modules\Social\Models\SocialGroupPostModel;
 use Modules\Social\Models\SocialPageFollowerModel;
@@ -43,7 +43,7 @@ final class SocialDatabaseSeeder extends BaseSeeder
         $modules = collect(Module::allEnabled());
         if ($modules->contains(['DBMap', 'Project'])) {
             (new ScanTableDomain)->scan('social');
-            $module = ProjectModuleModel::byNameOrFactory('Social');
+            $module = ModuleModel::byNameOrFactory('Social');
 
             // Todo ligar o projeto com a rede social atraves da app_record_id
 
