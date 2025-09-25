@@ -12,7 +12,7 @@ use Modules\DBMap\Domains\ScanTableDomain;
 use Modules\Permission\Database\Seeders\PermissionTableSeeder;
 use Modules\Post\Database\Seeders\MessageTableSeeder;
 use Modules\Post\Models\PostModel;
-use Modules\Project\Models\ProjectModuleModel;
+use Modules\Schema\Models\ProjectModuleModel;
 use Modules\Social\Models\SocialGroupModel;
 use Modules\Social\Models\SocialGroupPostModel;
 use Modules\Social\Models\SocialPageFollowerModel;
