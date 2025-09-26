@@ -6,7 +6,7 @@ namespace Modules\Social\Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Base\Database\Seeders\BaseSeeder;
+use Modules\Base\Contracts\BaseSeeder;
 use Modules\Base\Models\RecordModel;
 use Modules\DBMap\Domains\ScanTableDomain;
 use Modules\Permission\Database\Seeders\PermissionTableSeeder;
