@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Base\Contracts\BaseModel;
-use Modules\Base\Factories\BaseFactory;
+use Modules\Base\Contracts\BaseFactory;
 use Modules\Post\Models\PostModel;
 use Modules\Social\Entities\SocialGroup\SocialGroupEntityModel;
 use Modules\Social\Entities\SocialGroup\SocialGroupProps;

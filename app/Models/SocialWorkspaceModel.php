@@ -7,7 +7,7 @@ namespace Modules\Social\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Base\Contracts\BaseModel;
-use Modules\Base\Factories\BaseFactory;
+use Modules\Base\Contracts\BaseFactory;
 use Modules\Social\Entities\SocialWorkspace\SocialWorkspaceEntityModel;
 use Modules\Social\Entities\SocialWorkspace\SocialWorkspaceProps;
 use Modules\Workspace\Models\WorkspaceModel;
