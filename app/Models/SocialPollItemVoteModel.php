@@ -6,8 +6,8 @@ namespace Modules\Social\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Modules\Base\Contracts\BaseModel;
 use Modules\Base\Contracts\BaseFactory;
+use Modules\Base\Contracts\BaseModel;
 use Modules\Social\Entities\SocialPollItemVote\SocialPollItemVoteEntityModel;
 use Modules\Social\Entities\SocialPollItemVote\SocialPollItemVoteProps;
 
