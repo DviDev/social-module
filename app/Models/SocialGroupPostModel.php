@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Modules\Social\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Base\Contracts\BaseFactory;
 use Modules\Base\Contracts\BaseModel;
-use Modules\Base\Factories\BaseFactory;
 use Modules\Post\Models\PostModel;
 use Modules\Social\Entities\SocialGroupPost\SocialGroupPostEntityModel;
 use Modules\Social\Entities\SocialGroupPost\SocialGroupPostProps;

@@ -7,8 +7,8 @@ namespace Modules\Social\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Base\Contracts\BaseFactory;
 use Modules\Base\Contracts\BaseModel;
-use Modules\Base\Factories\BaseFactory;
 use Modules\Social\Entities\SocialPoll\SocialPollEntityModel;
 use Modules\Social\Entities\SocialPoll\SocialPollProps;
 

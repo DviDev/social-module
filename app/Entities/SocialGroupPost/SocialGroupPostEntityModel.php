@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Social\Entities\SocialGroupPost;
 
-use Modules\Base\Entities\BaseEntityModel;
+use Modules\Base\Contracts\BaseEntityModel;
 use Modules\Social\Models\SocialGroupPostModel;
 
 /**
