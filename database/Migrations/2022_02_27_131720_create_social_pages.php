@@ -6,7 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialPage\SocialPageEntityModel;
-use Nwidart\Modules\Facades\Module;
 
 return new class extends Migration
 {
@@ -17,7 +16,7 @@ return new class extends Migration
 
             $p = SocialPageEntityModel::props(null, true);
             $table->unsignedBigInteger($p->workspace_id);
-            if (collect(Module::allEnabled())->contains('Workspace')) {
+            if (moduleIsEnabled('Workspace')) {
                 $table->foreign($p->workspace_id)->references('id')->on('workspaces')
                     ->cascadeOnUpdate()->restrictOnDelete();
             }

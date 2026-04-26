@@ -106,7 +106,7 @@ final class SocialDatabaseSeeder extends BaseSeeder
 
     public function createPosts(SocialGroupModel $group, User $user): void
     {
-        if (! collect(Module::allEnabled())->contains('Post')) {
+        if (! moduleIsEnabled('Post')) {
             return;
         }
         $seed_total = config('post.SEED_POSTS_COUNT');
@@ -144,7 +144,7 @@ final class SocialDatabaseSeeder extends BaseSeeder
 
     public function createPagePosts(SocialPageModel $page, User $user, WorkspaceModel $workspace)
     {
-        if (! collect(Module::allEnabled())->contains('Post')) {
+        if (! moduleIsEnabled('Post')) {
             return;
         }
         $seed_total = config('social.SEED_SOCIAL_PAGE_POSTS_COUNT');
