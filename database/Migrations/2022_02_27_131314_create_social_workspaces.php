@@ -6,13 +6,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Modules\Social\Entities\SocialWorkspace\SocialWorkspaceEntityModel;
-use Nwidart\Modules\Facades\Module;
 
 return new class extends Migration
 {
     public function up()
     {
-        if (! collect(Module::allEnabled())->contains('Workspace')) {
+        if (! moduleIsEnabled('Workspace')) {
             return;
         }
         Schema::create('social_workspaces', function (Blueprint $table): void {
@@ -31,7 +30,7 @@ return new class extends Migration
 
     public function down()
     {
-        if (! collect(Module::allEnabled())->contains('Workspace')) {
+        if (! moduleIsEnabled('Workspace')) {
             return;
         }
         Schema::dropIfExists('social_workspaces');

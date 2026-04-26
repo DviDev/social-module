@@ -11,7 +11,7 @@ return new class extends Migration
 {
     public function up()
     {
-        if (! collect(Nwidart\Modules\Facades\Module::allEnabled())->contains('Post')) {
+        if (! moduleIsEnabled('Post')) {
             return;
         }
         Schema::create('social_group_threads', function (Blueprint $table): void {
