@@ -1,5 +1,5 @@
 # Social Module
-### Simple management of Social
+### Simple Social communities management
 
 #### Module Dependencies
 
